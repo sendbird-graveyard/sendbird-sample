@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sendbird.android.sample.MainActivity"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/sendbird_img_bg_default"
+        android:scaleType="centerCrop"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <EditText
+            android:id="@+id/etxt_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minWidth="200dp"
+            android:text=""
+            android:hint="Nickname"
+            android:singleLine="true"
+            android:textColor="@android:color/darker_gray"
+            android:gravity="center"
+            />
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btn_start_chat"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:minWidth="220dp"
+        android:layout_height="wrap_content"
+        android:text="Join Lobby Channel"
+        android:textColor="#ffffff"
+        android:background="#824096"
+        android:gravity="center"
+        />
+
+    <Button
+        android:layout_below="@+id/btn_start_chat"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:id="@+id/btn_start_channel_list"
+        android:layout_width="wrap_content"
+        android:minWidth="220dp"
+        android:layout_height="wrap_content"
+        android:text="Channel List"
+        android:textColor="#ffffff"
+        android:background="#824096"
+        android:gravity="center"
+        />
+
+    <Button
+        android:layout_below="@+id/btn_start_channel_list"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:id="@+id/btn_start_messaging"
+        android:layout_width="wrap_content"
+        android:minWidth="220dp"
+        android:layout_height="wrap_content"
+        android:text="Start a Messaging"
+        android:textColor="#ffffff"
+        android:background="#824096"
+        android:gravity="center"
+        />
+
+    <Button
+        android:layout_below="@+id/btn_start_messaging"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:id="@+id/btn_start_messaging_channel_list"
+        android:layout_width="wrap_content"
+        android:minWidth="220dp"
+        android:layout_height="wrap_content"
+        android:text="Messaging Channel List"
+        android:textColor="#ffffff"
+        android:background="#824096"
+        android:gravity="center"
+        />
+
+</RelativeLayout>
