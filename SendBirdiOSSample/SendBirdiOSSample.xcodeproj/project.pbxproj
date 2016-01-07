@@ -63,7 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5A893AF61C33B09700BA290C /* SendBirdiOSSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SendBirdiOSSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A893AF61C33B09700BA290C /* SendBird Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SendBird Sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A893AFA1C33B09700BA290C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5A893AFC1C33B09700BA290C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5A893AFD1C33B09700BA290C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -187,7 +187,7 @@
 		5A893AF71C33B09700BA290C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5A893AF61C33B09700BA290C /* SendBirdiOSSample.app */,
+				5A893AF61C33B09700BA290C /* SendBird Sample.app */,
 				5A893B0F1C33B09700BA290C /* SendBirdiOSSampleTests.xctest */,
 				5A893B1A1C33B09700BA290C /* SendBirdiOSSampleUITests.xctest */,
 			);
@@ -358,9 +358,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5A893AF51C33B09700BA290C /* SendBirdiOSSample */ = {
+		5A893AF51C33B09700BA290C /* SendBird Sample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5A893B231C33B09700BA290C /* Build configuration list for PBXNativeTarget "SendBirdiOSSample" */;
+			buildConfigurationList = 5A893B231C33B09700BA290C /* Build configuration list for PBXNativeTarget "SendBird Sample" */;
 			buildPhases = (
 				BED01AB14691B12C8326016B /* Check Pods Manifest.lock */,
 				5A893AF21C33B09700BA290C /* Sources */,
@@ -373,9 +373,9 @@
 			);
 			dependencies = (
 			);
-			name = SendBirdiOSSample;
+			name = "SendBird Sample";
 			productName = SendBirdiOSSample;
-			productReference = 5A893AF61C33B09700BA290C /* SendBirdiOSSample.app */;
+			productReference = 5A893AF61C33B09700BA290C /* SendBird Sample.app */;
 			productType = "com.apple.product-type.application";
 		};
 		5A893B0E1C33B09700BA290C /* SendBirdiOSSampleTests */ = {
@@ -449,7 +449,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5A893AF51C33B09700BA290C /* SendBirdiOSSample */,
+				5A893AF51C33B09700BA290C /* SendBird Sample */,
 				5A893B0E1C33B09700BA290C /* SendBirdiOSSampleTests */,
 				5A893B191C33B09700BA290C /* SendBirdiOSSampleUITests */,
 			);
@@ -590,12 +590,12 @@
 /* Begin PBXTargetDependency section */
 		5A893B111C33B09700BA290C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5A893AF51C33B09700BA290C /* SendBirdiOSSample */;
+			target = 5A893AF51C33B09700BA290C /* SendBird Sample */;
 			targetProxy = 5A893B101C33B09700BA290C /* PBXContainerItemProxy */;
 		};
 		5A893B1C1C33B09700BA290C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5A893AF51C33B09700BA290C /* SendBirdiOSSample */;
+			target = 5A893AF51C33B09700BA290C /* SendBird Sample */;
 			targetProxy = 5A893B1B1C33B09700BA290C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -788,7 +788,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5A893B231C33B09700BA290C /* Build configuration list for PBXNativeTarget "SendBirdiOSSample" */ = {
+		5A893B231C33B09700BA290C /* Build configuration list for PBXNativeTarget "SendBird Sample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5A893B241C33B09700BA290C /* Debug */,

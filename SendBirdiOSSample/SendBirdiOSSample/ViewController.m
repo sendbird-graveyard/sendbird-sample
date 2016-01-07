@@ -68,6 +68,7 @@
     [self.inteageLabel setFont:[UIFont boldSystemFontOfSize:28.0]];
     [self.inteageLabel setFont:[UIFont fontWithName:@"AmericanTypewriter-Bold" size:28]];
     [self.view addSubview:self.inteageLabel];
+    [self.inteageLabel setHidden:YES];
     
     // SendBird User Nickname Label
     self.inteageUserNicknameLabel = [[UILabel alloc] init];
