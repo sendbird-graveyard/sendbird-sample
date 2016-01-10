@@ -63,7 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5A893AF61C33B09700BA290C /* SendBirdiOSSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SendBirdiOSSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A893AF61C33B09700BA290C /* SendBird Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SendBird Sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A893AFA1C33B09700BA290C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5A893AFC1C33B09700BA290C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5A893AFD1C33B09700BA290C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -175,19 +175,19 @@
 		5A893AED1C33B09700BA290C = {
 			isa = PBXGroup;
 			children = (
+				099A91AD3B469773706293F0 /* Frameworks */,
+				93796376978EDEC7FF6E5337 /* Pods */,
+				5A893AF71C33B09700BA290C /* Products */,
 				5A893AF81C33B09700BA290C /* SendBirdiOSSample */,
 				5A893B121C33B09700BA290C /* SendBirdiOSSampleTests */,
 				5A893B1D1C33B09700BA290C /* SendBirdiOSSampleUITests */,
-				5A893AF71C33B09700BA290C /* Products */,
-				93796376978EDEC7FF6E5337 /* Pods */,
-				099A91AD3B469773706293F0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		5A893AF71C33B09700BA290C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5A893AF61C33B09700BA290C /* SendBirdiOSSample.app */,
+				5A893AF61C33B09700BA290C /* SendBird Sample.app */,
 				5A893B0F1C33B09700BA290C /* SendBirdiOSSampleTests.xctest */,
 				5A893B1A1C33B09700BA290C /* SendBirdiOSSampleUITests.xctest */,
 			);
@@ -198,15 +198,15 @@
 			isa = PBXGroup;
 			children = (
 				5A893B2C1C33B8F500BA290C /* SendBird */,
+				5A893AF91C33B09700BA290C /* Supporting Files */,
 				5A893AFC1C33B09700BA290C /* AppDelegate.h */,
 				5A893AFD1C33B09700BA290C /* AppDelegate.m */,
+				5A893B051C33B09700BA290C /* Assets.xcassets */,
+				5A893B0A1C33B09700BA290C /* Info.plist */,
+				5A893B071C33B09700BA290C /* LaunchScreen.storyboard */,
+				5A893B021C33B09700BA290C /* Main.storyboard */,
 				5A893AFF1C33B09700BA290C /* ViewController.h */,
 				5A893B001C33B09700BA290C /* ViewController.m */,
-				5A893B021C33B09700BA290C /* Main.storyboard */,
-				5A893B051C33B09700BA290C /* Assets.xcassets */,
-				5A893B071C33B09700BA290C /* LaunchScreen.storyboard */,
-				5A893B0A1C33B09700BA290C /* Info.plist */,
-				5A893AF91C33B09700BA290C /* Supporting Files */,
 			);
 			path = SendBirdiOSSample;
 			sourceTree = "<group>";
@@ -216,14 +216,14 @@
 			children = (
 				5A893AFA1C33B09700BA290C /* main.m */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		5A893B121C33B09700BA290C /* SendBirdiOSSampleTests */ = {
 			isa = PBXGroup;
 			children = (
-				5A893B131C33B09700BA290C /* SendBirdiOSSampleTests.m */,
 				5A893B151C33B09700BA290C /* Info.plist */,
+				5A893B131C33B09700BA290C /* SendBirdiOSSampleTests.m */,
 			);
 			path = SendBirdiOSSampleTests;
 			sourceTree = "<group>";
@@ -231,8 +231,8 @@
 		5A893B1D1C33B09700BA290C /* SendBirdiOSSampleUITests */ = {
 			isa = PBXGroup;
 			children = (
-				5A893B1E1C33B09700BA290C /* SendBirdiOSSampleUITests.m */,
 				5A893B201C33B09700BA290C /* Info.plist */,
+				5A893B1E1C33B09700BA290C /* SendBirdiOSSampleUITests.m */,
 			);
 			path = SendBirdiOSSampleUITests;
 			sourceTree = "<group>";
@@ -240,12 +240,12 @@
 		5A893B2C1C33B8F500BA290C /* SendBird */ = {
 			isa = PBXGroup;
 			children = (
+				5A893B2D1C33B8FF00BA290C /* SendBirdChat */,
+				5A893B2E1C33B90400BA290C /* SendBirdMessaging */,
 				5A893B361C33BB9200BA290C /* SendBirdCommon.h */,
 				5A893B371C33BB9200BA290C /* SendBirdCommon.m */,
-				5A893B2E1C33B90400BA290C /* SendBirdMessaging */,
-				5A893B2D1C33B8FF00BA290C /* SendBirdChat */,
 			);
-			name = SendBird;
+			path = SendBird;
 			sourceTree = "<group>";
 		};
 		5A893B2D1C33B8FF00BA290C /* SendBirdChat */ = {
@@ -254,7 +254,7 @@
 				5A893B321C33BB3E00BA290C /* View */,
 				5A893B301C33B91A00BA290C /* ViewController */,
 			);
-			name = SendBirdChat;
+			path = SendBirdChat;
 			sourceTree = "<group>";
 		};
 		5A893B2E1C33B90400BA290C /* SendBirdMessaging */ = {
@@ -263,7 +263,7 @@
 				5A893B311C33BB3500BA290C /* View */,
 				5A893B2F1C33B90E00BA290C /* ViewController */,
 			);
-			name = SendBirdMessaging;
+			path = SendBirdMessaging;
 			sourceTree = "<group>";
 		};
 		5A893B2F1C33B90E00BA290C /* ViewController */ = {
@@ -272,7 +272,7 @@
 				5A893B571C33C08600BA290C /* MessagingTableViewController.h */,
 				5A893B581C33C08600BA290C /* MessagingTableViewController.m */,
 			);
-			name = ViewController;
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		5A893B301C33B91A00BA290C /* ViewController */ = {
@@ -281,12 +281,14 @@
 				5A893B331C33BB5600BA290C /* ChattingTableViewController.h */,
 				5A893B341C33BB5600BA290C /* ChattingTableViewController.m */,
 			);
-			name = ViewController;
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		5A893B311C33BB3500BA290C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5A893B471C33BC5700BA290C /* MemberTableViewCell.h */,
+				5A893B481C33BC5700BA290C /* MemberTableViewCell.m */,
 				5A893B661C33C17B00BA290C /* MessageInputView.h */,
 				5A893B671C33C17B00BA290C /* MessageInputView.m */,
 				5A893B681C33C17B00BA290C /* MessagingBroadcastMessageTableViewCell.h */,
@@ -301,29 +303,25 @@
 				5A893B711C33C17B00BA290C /* MessagingIndicatorView.m */,
 				5A893B721C33C17B00BA290C /* MessagingMessageTableViewCell.h */,
 				5A893B731C33C17B00BA290C /* MessagingMessageTableViewCell.m */,
+				5A893B601C33C10C00BA290C /* MessagingMyFileLinkTableViewCell.h */,
+				5A893B611C33C10C00BA290C /* MessagingMyFileLinkTableViewCell.m */,
+				5A893B5D1C33C10200BA290C /* MessagingMyMessageTableViewCell.h */,
+				5A893B5E1C33C10200BA290C /* MessagingMyMessageTableViewCell.m */,
 				5A893B741C33C17B00BA290C /* MessagingMyStructuredMessageTableViewCell.h */,
 				5A893B751C33C17B00BA290C /* MessagingMyStructuredMessageTableViewCell.m */,
 				5A893B761C33C17B00BA290C /* MessagingStructuredMessageTableViewCell.h */,
 				5A893B771C33C17B00BA290C /* MessagingStructuredMessageTableViewCell.m */,
 				5A893B781C33C17B00BA290C /* MessagingSystemMessageTableViewCell.h */,
 				5A893B791C33C17B00BA290C /* MessagingSystemMessageTableViewCell.m */,
-				5A893B601C33C10C00BA290C /* MessagingMyFileLinkTableViewCell.h */,
-				5A893B611C33C10C00BA290C /* MessagingMyFileLinkTableViewCell.m */,
-				5A893B5D1C33C10200BA290C /* MessagingMyMessageTableViewCell.h */,
-				5A893B5E1C33C10200BA290C /* MessagingMyMessageTableViewCell.m */,
 				5A893B5A1C33C0F700BA290C /* TypingNowView.h */,
 				5A893B5B1C33C0F700BA290C /* TypingNowView.m */,
-				5A893B471C33BC5700BA290C /* MemberTableViewCell.h */,
-				5A893B481C33BC5700BA290C /* MemberTableViewCell.m */,
 			);
-			name = View;
+			path = View;
 			sourceTree = "<group>";
 		};
 		5A893B321C33BB3E00BA290C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				5A893B631C33C13E00BA290C /* MessageTableViewCell.h */,
-				5A893B641C33C13E00BA290C /* MessageTableViewCell.m */,
 				5A893B391C33BC5700BA290C /* BroadcastMessageTableViewCell.h */,
 				5A893B3A1C33BC5700BA290C /* BroadcastMessageTableViewCell.m */,
 				5A893B3B1C33BC5700BA290C /* ChannelListTableView.h */,
@@ -338,12 +336,14 @@
 				5A893B441C33BC5700BA290C /* FileMessageTableViewCell.m */,
 				5A893B451C33BC5700BA290C /* IndicatorView.h */,
 				5A893B461C33BC5700BA290C /* IndicatorView.m */,
+				5A893B631C33C13E00BA290C /* MessageTableViewCell.h */,
+				5A893B641C33C13E00BA290C /* MessageTableViewCell.m */,
 				5A893B491C33BC5700BA290C /* StructuredMessageTableViewCell.h */,
 				5A893B4A1C33BC5700BA290C /* StructuredMessageTableViewCell.m */,
 				5A893B4B1C33BC5700BA290C /* SystemMessageTableViewCell.h */,
 				5A893B4C1C33BC5700BA290C /* SystemMessageTableViewCell.m */,
 			);
-			name = View;
+			path = View;
 			sourceTree = "<group>";
 		};
 		93796376978EDEC7FF6E5337 /* Pods */ = {
@@ -358,9 +358,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5A893AF51C33B09700BA290C /* SendBirdiOSSample */ = {
+		5A893AF51C33B09700BA290C /* SendBird Sample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5A893B231C33B09700BA290C /* Build configuration list for PBXNativeTarget "SendBirdiOSSample" */;
+			buildConfigurationList = 5A893B231C33B09700BA290C /* Build configuration list for PBXNativeTarget "SendBird Sample" */;
 			buildPhases = (
 				BED01AB14691B12C8326016B /* Check Pods Manifest.lock */,
 				5A893AF21C33B09700BA290C /* Sources */,
@@ -373,9 +373,9 @@
 			);
 			dependencies = (
 			);
-			name = SendBirdiOSSample;
+			name = "SendBird Sample";
 			productName = SendBirdiOSSample;
-			productReference = 5A893AF61C33B09700BA290C /* SendBirdiOSSample.app */;
+			productReference = 5A893AF61C33B09700BA290C /* SendBird Sample.app */;
 			productType = "com.apple.product-type.application";
 		};
 		5A893B0E1C33B09700BA290C /* SendBirdiOSSampleTests */ = {
@@ -449,7 +449,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5A893AF51C33B09700BA290C /* SendBirdiOSSample */,
+				5A893AF51C33B09700BA290C /* SendBird Sample */,
 				5A893B0E1C33B09700BA290C /* SendBirdiOSSampleTests */,
 				5A893B191C33B09700BA290C /* SendBirdiOSSampleUITests */,
 			);
@@ -590,12 +590,12 @@
 /* Begin PBXTargetDependency section */
 		5A893B111C33B09700BA290C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5A893AF51C33B09700BA290C /* SendBirdiOSSample */;
+			target = 5A893AF51C33B09700BA290C /* SendBird Sample */;
 			targetProxy = 5A893B101C33B09700BA290C /* PBXContainerItemProxy */;
 		};
 		5A893B1C1C33B09700BA290C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5A893AF51C33B09700BA290C /* SendBirdiOSSample */;
+			target = 5A893AF51C33B09700BA290C /* SendBird Sample */;
 			targetProxy = 5A893B1B1C33B09700BA290C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -607,6 +607,7 @@
 				5A893B031C33B09700BA290C /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		5A893B071C33B09700BA290C /* LaunchScreen.storyboard */ = {
@@ -615,6 +616,7 @@
 				5A893B081C33B09700BA290C /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -788,7 +790,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5A893B231C33B09700BA290C /* Build configuration list for PBXNativeTarget "SendBirdiOSSample" */ = {
+		5A893B231C33B09700BA290C /* Build configuration list for PBXNativeTarget "SendBird Sample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5A893B241C33B09700BA290C /* Debug */,

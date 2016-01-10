@@ -55,100 +55,116 @@
     [self.view addSubview:self.backgroundImageView];
     
     // SendBird Logo
-    self.inteageLogoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"_sendbird_icon_sendbird"]];
-    [self.inteageLogoImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.view addSubview:self.inteageLogoImageView];
+    self.sendbirdLogoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"_sendbird_icon_sendbird"]];
+    [self.sendbirdLogoImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.view addSubview:self.sendbirdLogoImageView];
     
     // SendBird Label
     NSLog(@"Version: %@", [SendBird VERSION]);
-    self.inteageLabel = [[UILabel alloc] init];
-    [self.inteageLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.inteageLabel setText:[NSString stringWithFormat:@"SendBird v%@", [SendBird VERSION]]];
-    [self.inteageLabel setTextColor:[UIColor whiteColor]];
-    [self.inteageLabel setFont:[UIFont boldSystemFontOfSize:28.0]];
-    [self.inteageLabel setFont:[UIFont fontWithName:@"AmericanTypewriter-Bold" size:28]];
-    [self.view addSubview:self.inteageLabel];
+    self.sendbirdLabel = [[UILabel alloc] init];
+    [self.sendbirdLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.sendbirdLabel setText:[NSString stringWithFormat:@"SendBird v%@", [SendBird VERSION]]];
+    [self.sendbirdLabel setTextColor:[UIColor whiteColor]];
+    [self.sendbirdLabel setFont:[UIFont boldSystemFontOfSize:28.0]];
+    [self.sendbirdLabel setFont:[UIFont fontWithName:@"AmericanTypewriter-Bold" size:28]];
+    [self.view addSubview:self.sendbirdLabel];
+    [self.sendbirdLabel setHidden:YES];
     
     // SendBird User Nickname Label
-    self.inteageUserNicknameLabel = [[UILabel alloc] init];
-    [self.inteageUserNicknameLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.inteageUserNicknameLabel setText:@"Enter your nickname."];
-    [self.inteageUserNicknameLabel setTextColor:[UIColor whiteColor]];
-    [self.inteageUserNicknameLabel setFont:[UIFont boldSystemFontOfSize:16]];
-    [self.view addSubview:self.inteageUserNicknameLabel];
+    self.sendbirdUserNicknameLabel = [[UILabel alloc] init];
+    [self.sendbirdUserNicknameLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.sendbirdUserNicknameLabel setText:@"Enter your nickname."];
+    [self.sendbirdUserNicknameLabel setTextColor:[UIColor whiteColor]];
+    [self.sendbirdUserNicknameLabel setFont:[UIFont boldSystemFontOfSize:16]];
+    [self.view addSubview:self.sendbirdUserNicknameLabel];
     
     // SendBird User Nickname
-    self.inteageUserNicknameTextField = [[UITextField alloc] init];
-    [self.inteageUserNicknameTextField setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.inteageUserNicknameTextField setBackground:[self imageFromColor:UIColorFromRGB(0xE8EAF6)]];
-    [self.inteageUserNicknameTextField setClipsToBounds:YES];
-    [[self.inteageUserNicknameTextField layer] setCornerRadius:4];
+    self.sendbirdUserNicknameTextField = [[UITextField alloc] init];
+    [self.sendbirdUserNicknameTextField setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.sendbirdUserNicknameTextField setBackground:[self imageFromColor:UIColorFromRGB(0xE8EAF6)]];
+    [self.sendbirdUserNicknameTextField setClipsToBounds:YES];
+    [[self.sendbirdUserNicknameTextField layer] setCornerRadius:4];
     UIView *leftPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 12, 0)];
     UIView *rightPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 12, 0)];
-    self.inteageUserNicknameTextField.leftView = leftPaddingView;
-    self.inteageUserNicknameTextField.leftViewMode = UITextFieldViewModeAlways;
-    self.inteageUserNicknameTextField.rightView = rightPaddingView;
-    self.inteageUserNicknameTextField.rightViewMode = UITextFieldViewModeAlways;
-    [self.inteageUserNicknameTextField setPlaceholder:@"Nickname."];
-    [self.inteageUserNicknameTextField setFont:[UIFont systemFontOfSize:16]];
-    [self.inteageUserNicknameTextField setReturnKeyType:UIReturnKeyDone];
-    [self.inteageUserNicknameTextField setDelegate:self];
+    self.sendbirdUserNicknameTextField.leftView = leftPaddingView;
+    self.sendbirdUserNicknameTextField.leftViewMode = UITextFieldViewModeAlways;
+    self.sendbirdUserNicknameTextField.rightView = rightPaddingView;
+    self.sendbirdUserNicknameTextField.rightViewMode = UITextFieldViewModeAlways;
+    [self.sendbirdUserNicknameTextField setPlaceholder:@"Nickname."];
+    [self.sendbirdUserNicknameTextField setFont:[UIFont systemFontOfSize:16]];
+    [self.sendbirdUserNicknameTextField setReturnKeyType:UIReturnKeyDone];
+    [self.sendbirdUserNicknameTextField setDelegate:self];
     
     // Set Default User Nickname
     NSString *USER_ID = [SendBirdUtils deviceUniqueID];
     NSString *USER_NAME = [NSString stringWithFormat:@"User-%@", [USER_ID substringToIndex:5]];
-    [self.inteageUserNicknameTextField setText:USER_NAME];
+    [self.sendbirdUserNicknameTextField setText:USER_NAME];
     
-    [self.view addSubview:self.inteageUserNicknameTextField];
+    [self.view addSubview:self.sendbirdUserNicknameTextField];
     
-    // SendBird Open Lobby Channel for Sample
-    self.inteageChatStartButton = [[UIButton alloc] init];
-    [self.inteageChatStartButton setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.inteageChatStartButton setBackgroundImage:[self imageFromColor:UIColorFromRGB(0xAB47BC)] forState:UIControlStateNormal];
-    [self.inteageChatStartButton setClipsToBounds:YES];
-    [[self.inteageChatStartButton layer] setCornerRadius:4];
-    [self.inteageChatStartButton addTarget:self action:@selector(clickSendBirdChatStartButton:) forControlEvents:UIControlEventTouchUpInside];
-    [self.inteageChatStartButton setTitle:@"Join Lobby Channel" forState:UIControlStateNormal];
-    [self.inteageChatStartButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.inteageChatStartButton.titleLabel setFont:[UIFont boldSystemFontOfSize:16]];
-    [self.view addSubview:self.inteageChatStartButton];
+    // Start Open Chat Button
+    self.sendbirdStartOpenChatButton = [[UIButton alloc] init];
+    [self.sendbirdStartOpenChatButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.sendbirdStartOpenChatButton setBackgroundImage:[self imageFromColor:UIColorFromRGB(0xAB47BC)] forState:UIControlStateNormal];
+    [self.sendbirdStartOpenChatButton setClipsToBounds:YES];
+    [[self.sendbirdStartOpenChatButton layer] setCornerRadius:4];
+    [self.sendbirdStartOpenChatButton addTarget:self action:@selector(clickSendBirdStartOpenChatButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self.sendbirdStartOpenChatButton setTitle:@"Start Open Chat" forState:UIControlStateNormal];
+    [self.sendbirdStartOpenChatButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.sendbirdStartOpenChatButton.titleLabel setFont:[UIFont boldSystemFontOfSize:16]];
+    [self.view addSubview:self.sendbirdStartOpenChatButton];
     
-    // SendBird Open Channel List for Sample
-    self.inteageChannelListButton = [[UIButton alloc] init];
-    [self.inteageChannelListButton setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.inteageChannelListButton setBackgroundImage:[self imageFromColor:UIColorFromRGB(0xAB47BC)] forState:UIControlStateNormal];
-    [self.inteageChannelListButton setClipsToBounds:YES];
-    [[self.inteageChannelListButton layer] setCornerRadius:4];
-    [self.inteageChannelListButton addTarget:self action:@selector(clickSendBirdChannelListButton:) forControlEvents:UIControlEventTouchUpInside];
-    [self.inteageChannelListButton setTitle:@"Channel List" forState:UIControlStateNormal];
-    [self.inteageChannelListButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.inteageChannelListButton.titleLabel setFont:[UIFont boldSystemFontOfSize:16]];
-    [self.view addSubview:self.inteageChannelListButton];
+    // Start Messaging Button
+    self.sendbirdStartMessaging = [[UIButton alloc] init];
+    [self.sendbirdStartMessaging setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.sendbirdStartMessaging setBackgroundImage:[self imageFromColor:UIColorFromRGB(0xAB47BC)] forState:UIControlStateNormal];
+    [self.sendbirdStartMessaging setClipsToBounds:YES];
+    [[self.sendbirdStartMessaging layer] setCornerRadius:4];
+    [self.sendbirdStartMessaging addTarget:self action:@selector(clickSendBirdStartMessagingButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self.sendbirdStartMessaging setTitle:@"Start Messaging" forState:UIControlStateNormal];
+    [self.sendbirdStartMessaging setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.sendbirdStartMessaging.titleLabel setFont:[UIFont boldSystemFontOfSize:16]];
+    [self.view addSubview:self.sendbirdStartMessaging];
+
+    // Member List Button
+    self.sendbirdMemberListButton = [[UIButton alloc] init];
+    [self.sendbirdMemberListButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.sendbirdMemberListButton setBackgroundImage:[self imageFromColor:UIColorFromRGB(0xAB47BC)] forState:UIControlStateNormal];
+    [self.sendbirdMemberListButton setClipsToBounds:YES];
+    [[self.sendbirdMemberListButton layer] setCornerRadius:4];
+    [self.sendbirdMemberListButton addTarget:self action:@selector(clickSendBirdMemberListButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self.sendbirdMemberListButton setTitle:@"Member List" forState:UIControlStateNormal];
+    [self.sendbirdMemberListButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.sendbirdMemberListButton.titleLabel setFont:[UIFont boldSystemFontOfSize:16]];
+    [self.sendbirdMemberListButton setHidden:YES];
+    [self.view addSubview:self.sendbirdMemberListButton];
     
-    // SendBird Open Member list of Lobby Channel
-    self.inteageLobbyMemberListButton = [[UIButton alloc] init];
-    [self.inteageLobbyMemberListButton setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.inteageLobbyMemberListButton setBackgroundImage:[self imageFromColor:UIColorFromRGB(0xAB47BC)] forState:UIControlStateNormal];
-    [self.inteageLobbyMemberListButton setClipsToBounds:YES];
-    [[self.inteageLobbyMemberListButton layer] setCornerRadius:4];
-    [self.inteageLobbyMemberListButton addTarget:self action:@selector(clickSendBirdLobbyMemberListButton:) forControlEvents:UIControlEventTouchUpInside];
-    [self.inteageLobbyMemberListButton setTitle:@"Start a Messaging" forState:UIControlStateNormal];
-    [self.inteageLobbyMemberListButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.inteageLobbyMemberListButton.titleLabel setFont:[UIFont boldSystemFontOfSize:16]];
-    [self.view addSubview:self.inteageLobbyMemberListButton];
+    // Messaging Channel List Button
+    self.sendbirdMessagingChannelListButton = [[UIButton alloc] init];
+    [self.sendbirdMessagingChannelListButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.sendbirdMessagingChannelListButton setBackgroundImage:[self imageFromColor:UIColorFromRGB(0xAB47BC)] forState:UIControlStateNormal];
+    [self.sendbirdMessagingChannelListButton setClipsToBounds:YES];
+    [[self.sendbirdMessagingChannelListButton layer] setCornerRadius:4];
+    [self.sendbirdMessagingChannelListButton addTarget:self action:@selector(clickSendBirdMessagingChannelListButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self.sendbirdMessagingChannelListButton setTitle:@"Messaging Channel List" forState:UIControlStateNormal];
+    [self.sendbirdMessagingChannelListButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.sendbirdMessagingChannelListButton.titleLabel setFont:[UIFont boldSystemFontOfSize:16]];
+    [self.sendbirdMessagingChannelListButton setHidden:YES];
+    [self.view addSubview:self.sendbirdMessagingChannelListButton];
     
-    // SendBird Open Messaging Channel List
-    self.inteageMessagingChannelListButton = [[UIButton alloc] init];
-    [self.inteageMessagingChannelListButton setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.inteageMessagingChannelListButton setBackgroundImage:[self imageFromColor:UIColorFromRGB(0xAB47BC)] forState:UIControlStateNormal];
-    [self.inteageMessagingChannelListButton setClipsToBounds:YES];
-    [[self.inteageMessagingChannelListButton layer] setCornerRadius:4];
-    [self.inteageMessagingChannelListButton addTarget:self action:@selector(clickSendBirdMessagingChannelListButton:) forControlEvents:UIControlEventTouchUpInside];
-    [self.inteageMessagingChannelListButton setTitle:@"Messaging Channel List" forState:UIControlStateNormal];
-    [self.inteageMessagingChannelListButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.inteageMessagingChannelListButton.titleLabel setFont:[UIFont boldSystemFontOfSize:16]];
-    [self.view addSubview:self.inteageMessagingChannelListButton];
-    
+    // Back From Messaging Button
+    self.sendbirdBackFromMessaging = [[UIButton alloc] init];
+    [self.sendbirdBackFromMessaging setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.sendbirdBackFromMessaging setBackgroundImage:[self imageFromColor:UIColorFromRGB(0x43A047)] forState:UIControlStateNormal];
+    [self.sendbirdBackFromMessaging setClipsToBounds:YES];
+    [[self.sendbirdBackFromMessaging layer] setCornerRadius:4];
+    [self.sendbirdBackFromMessaging addTarget:self action:@selector(clickSendBirdBackFromMessaging:) forControlEvents:UIControlEventTouchUpInside];
+    [self.sendbirdBackFromMessaging setTitle:@"Back" forState:UIControlStateNormal];
+    [self.sendbirdBackFromMessaging setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.sendbirdBackFromMessaging.titleLabel setFont:[UIFont boldSystemFontOfSize:16]];
+    [self.sendbirdBackFromMessaging setHidden:YES];
+    [self.view addSubview:self.sendbirdBackFromMessaging];
+
     // Background Image
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.backgroundImageView
                                                           attribute:NSLayoutAttributeTop
@@ -176,25 +192,25 @@
                                                          multiplier:1 constant:0]];
     
     // SendBird Logo
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageLogoImageView
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdLogoImageView
                                                           attribute:NSLayoutAttributeCenterX
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
                                                           attribute:NSLayoutAttributeCenterX
                                                          multiplier:1 constant:0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageLogoImageView
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdLogoImageView
                                                           attribute:NSLayoutAttributeTop
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
                                                           attribute:NSLayoutAttributeTop
                                                          multiplier:1 constant:48]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageLogoImageView
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdLogoImageView
                                                           attribute:NSLayoutAttributeWidth
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:nil
                                                           attribute:NSLayoutAttributeNotAnAttribute
                                                          multiplier:1 constant:80]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageLogoImageView
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdLogoImageView
                                                           attribute:NSLayoutAttributeHeight
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:nil
@@ -202,13 +218,13 @@
                                                          multiplier:1 constant:80]];
     
     // SendBird Label
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageLabel
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdLabel
                                                           attribute:NSLayoutAttributeTop
                                                           relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.inteageLogoImageView
+                                                             toItem:self.sendbirdLogoImageView
                                                           attribute:NSLayoutAttributeBottom
                                                          multiplier:1 constant:8]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageLabel
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdLabel
                                                           attribute:NSLayoutAttributeCenterX
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
@@ -216,25 +232,25 @@
                                                          multiplier:1 constant:0]];
     
     // SendBird User Nickname Label
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageUserNicknameLabel
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdUserNicknameLabel
                                                           attribute:NSLayoutAttributeCenterX
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
                                                           attribute:NSLayoutAttributeCenterX
                                                          multiplier:1 constant:0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageUserNicknameLabel
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdUserNicknameLabel
                                                           attribute:NSLayoutAttributeTop
                                                           relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.inteageLabel
+                                                             toItem:self.sendbirdLabel
                                                           attribute:NSLayoutAttributeBottom
                                                          multiplier:1 constant:20]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageUserNicknameLabel
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdUserNicknameLabel
                                                           attribute:NSLayoutAttributeWidth
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:nil
                                                           attribute:NSLayoutAttributeNotAnAttribute
                                                          multiplier:1 constant:220]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageUserNicknameLabel
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdUserNicknameLabel
                                                           attribute:NSLayoutAttributeHeight
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:nil
@@ -243,128 +259,155 @@
     
     
     // SendBird User Nickname TextField
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageUserNicknameTextField
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdUserNicknameTextField
                                                           attribute:NSLayoutAttributeCenterX
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
                                                           attribute:NSLayoutAttributeCenterX
                                                          multiplier:1 constant:0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageUserNicknameTextField
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdUserNicknameTextField
                                                           attribute:NSLayoutAttributeTop
                                                           relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.inteageUserNicknameLabel
+                                                             toItem:self.sendbirdUserNicknameLabel
                                                           attribute:NSLayoutAttributeBottom
                                                          multiplier:1 constant:4]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageUserNicknameTextField
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdUserNicknameTextField
                                                           attribute:NSLayoutAttributeWidth
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:nil
                                                           attribute:NSLayoutAttributeNotAnAttribute
                                                          multiplier:1 constant:220]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageUserNicknameTextField
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdUserNicknameTextField
                                                           attribute:NSLayoutAttributeHeight
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:nil
                                                           attribute:NSLayoutAttributeNotAnAttribute
                                                          multiplier:1 constant:36]];
     
-    // SendBird Open Lobby Button.
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageChatStartButton
+    // SendBird Start Open Chat Button
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdStartOpenChatButton
                                                           attribute:NSLayoutAttributeCenterX
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
                                                           attribute:NSLayoutAttributeCenterX
                                                          multiplier:1 constant:0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageChatStartButton
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdStartOpenChatButton
                                                           attribute:NSLayoutAttributeTop
                                                           relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.inteageUserNicknameTextField
+                                                             toItem:self.sendbirdUserNicknameTextField
                                                           attribute:NSLayoutAttributeBottom
                                                          multiplier:1 constant:40]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageChatStartButton
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdStartOpenChatButton
                                                           attribute:NSLayoutAttributeWidth
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:nil
                                                           attribute:NSLayoutAttributeNotAnAttribute
                                                          multiplier:1 constant:220]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageChatStartButton
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdStartOpenChatButton
                                                           attribute:NSLayoutAttributeHeight
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:nil
                                                           attribute:NSLayoutAttributeNotAnAttribute
                                                          multiplier:1 constant:36]];
     
-    // SendBird Open Lobby Button.
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageChannelListButton
+    // SendBird Start Messaging Button.
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdStartMessaging
                                                           attribute:NSLayoutAttributeCenterX
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
                                                           attribute:NSLayoutAttributeCenterX
                                                          multiplier:1 constant:0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageChannelListButton
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdStartMessaging
                                                           attribute:NSLayoutAttributeTop
                                                           relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.inteageChatStartButton
+                                                             toItem:self.sendbirdStartOpenChatButton
                                                           attribute:NSLayoutAttributeBottom
                                                          multiplier:1 constant:12]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageChannelListButton
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdStartMessaging
                                                           attribute:NSLayoutAttributeWidth
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:nil
                                                           attribute:NSLayoutAttributeNotAnAttribute
                                                          multiplier:1 constant:220]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageChannelListButton
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdStartMessaging
                                                           attribute:NSLayoutAttributeHeight
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:nil
                                                           attribute:NSLayoutAttributeNotAnAttribute
                                                          multiplier:1 constant:36]];
-    // SendBird Member List at Lobby.
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageLobbyMemberListButton
+
+    // SendBird Start Open Chat Button
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdMemberListButton
                                                           attribute:NSLayoutAttributeCenterX
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
                                                           attribute:NSLayoutAttributeCenterX
                                                          multiplier:1 constant:0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageLobbyMemberListButton
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdMemberListButton
                                                           attribute:NSLayoutAttributeTop
                                                           relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.inteageChannelListButton
+                                                             toItem:self.sendbirdUserNicknameTextField
                                                           attribute:NSLayoutAttributeBottom
-                                                         multiplier:1 constant:12]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageLobbyMemberListButton
+                                                         multiplier:1 constant:40]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdMemberListButton
                                                           attribute:NSLayoutAttributeWidth
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:nil
                                                           attribute:NSLayoutAttributeNotAnAttribute
                                                          multiplier:1 constant:220]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageLobbyMemberListButton
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdMemberListButton
                                                           attribute:NSLayoutAttributeHeight
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:nil
                                                           attribute:NSLayoutAttributeNotAnAttribute
                                                          multiplier:1 constant:36]];
-    
+
     // SendBird Messaging Channel List.
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageMessagingChannelListButton
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdMessagingChannelListButton
                                                           attribute:NSLayoutAttributeCenterX
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
                                                           attribute:NSLayoutAttributeCenterX
                                                          multiplier:1 constant:0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageMessagingChannelListButton
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdMessagingChannelListButton
                                                           attribute:NSLayoutAttributeTop
                                                           relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.inteageLobbyMemberListButton
+                                                             toItem:self.sendbirdMemberListButton
                                                           attribute:NSLayoutAttributeBottom
                                                          multiplier:1 constant:12]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageMessagingChannelListButton
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdMessagingChannelListButton
                                                           attribute:NSLayoutAttributeWidth
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:nil
                                                           attribute:NSLayoutAttributeNotAnAttribute
                                                          multiplier:1 constant:220]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.inteageMessagingChannelListButton
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdMessagingChannelListButton
+                                                          attribute:NSLayoutAttributeHeight
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:nil
+                                                          attribute:NSLayoutAttributeNotAnAttribute
+                                                         multiplier:1 constant:36]];
+    
+    // Back From Messaging Button
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdBackFromMessaging
+                                                          attribute:NSLayoutAttributeCenterX
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeCenterX
+                                                         multiplier:1 constant:0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdBackFromMessaging
+                                                          attribute:NSLayoutAttributeTop
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.sendbirdMessagingChannelListButton
+                                                          attribute:NSLayoutAttributeBottom
+                                                         multiplier:1 constant:12]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdBackFromMessaging
+                                                          attribute:NSLayoutAttributeWidth
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:nil
+                                                          attribute:NSLayoutAttributeNotAnAttribute
+                                                         multiplier:1 constant:220]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdBackFromMessaging
                                                           attribute:NSLayoutAttributeHeight
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:nil
@@ -375,7 +418,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //    startMessagingFromOpenChat = NO;
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startMessagingWithUser:) name:@"open_messaging" object:nil];
 }
@@ -391,16 +433,9 @@
         [viewController setUserName:messagingUserName];
         [viewController setUserId:messagingUserId];
         [viewController setTargetUserId:messagingTargetUserId];
-        
-#if 0
-        [self.navigationController setModalPresentationStyle:UIModalPresentationCurrentContext];
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-        [navController setModalPresentationStyle:UIModalPresentationCurrentContext];
-        [self.navigationController presentViewController:navController animated:YES completion:nil];
-#else
+
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
         [self presentViewController:navigationController animated:YES completion: nil];
-#endif
     }
     
     startMessagingFromOpenChat = NO;
@@ -411,32 +446,44 @@
     startMessagingFromOpenChat = YES;
 }
 
-- (void)clickSendBirdChatStartButton:(id)sender
+- (void)clickSendBirdStartOpenChatButton:(id)sender
 {
-    if ([[self.inteageUserNicknameTextField text] length] > 0) {
-        [self startSendBirdWithUserName:[self.inteageUserNicknameTextField text] andChatMode:kChatModeChatting andViewMode:(int)kChattingViewMode];
+    if ([[self.sendbirdUserNicknameTextField text] length] > 0) {
+        [self startSendBirdWithUserName:[self.sendbirdUserNicknameTextField text] andChatMode:kChatModeChatting andViewMode:(int)kChannelListViewMode];
     }
 }
 
-- (void)clickSendBirdChannelListButton:(id)sender
+- (void)clickSendBirdStartMessagingButton:(id)sender
 {
-    if ([[self.inteageUserNicknameTextField text] length] > 0) {
-        [self startSendBirdWithUserName:[self.inteageUserNicknameTextField text] andChatMode:kChatModeChatting andViewMode:(int)kChannelListViewMode];
-    }
+    [self.sendbirdStartOpenChatButton setHidden:YES];
+    [self.sendbirdStartMessaging setHidden:YES];
+    [self.sendbirdMemberListButton setHidden:NO];
+    [self.sendbirdMessagingChannelListButton setHidden:NO];
+    [self.sendbirdBackFromMessaging setHidden:NO];
 }
 
-- (void)clickSendBirdLobbyMemberListButton:(id)sender
+- (void)clickSendBirdMemberListButton:(id)sender
 {
-    if ([[self.inteageUserNicknameTextField text] length] > 0) {
-        [self startSendBirdWithUserName:[self.inteageUserNicknameTextField text] andChatMode:kChatModeMessaging andViewMode:(int)kMessagingMemberViewMode];
+    if ([[self.sendbirdUserNicknameTextField text] length] > 0) {
+        [self startSendBirdWithUserName:[self.sendbirdUserNicknameTextField text] andChatMode:kChatModeMessaging andViewMode:(int)kMessagingMemberViewMode];
     }
 }
 
 - (void)clickSendBirdMessagingChannelListButton:(id)sender
 {
-    if ([[self.inteageUserNicknameTextField text] length] > 0) {
-        [self startSendBirdWithUserName:[self.inteageUserNicknameTextField text] andChatMode:kChatModeMessaging andViewMode:(int)kMessagingChannelListViewMode];
+    if ([[self.sendbirdUserNicknameTextField text] length] > 0) {
+        [self startSendBirdWithUserName:[self.sendbirdUserNicknameTextField text] andChatMode:kChatModeMessaging andViewMode:(int)kMessagingChannelListViewMode];
     }
+}
+
+///
+- (void)clickSendBirdBackFromMessaging:(id)sender
+{
+    [self.sendbirdStartOpenChatButton setHidden:NO];
+    [self.sendbirdStartMessaging setHidden:NO];
+    [self.sendbirdMemberListButton setHidden:YES];
+    [self.sendbirdMessagingChannelListButton setHidden:YES];
+    [self.sendbirdBackFromMessaging setHidden:YES];
 }
 
 - (void) startSendBirdWithUserName:(NSString *)userName andChatMode:(int)chatMode andViewMode:(int)viewMode
@@ -460,14 +507,7 @@
         [viewController setUserName:USER_NAME];
         [viewController setUserId:USER_ID];
         
-#if 0
-        [self.navigationController setModalPresentationStyle:UIModalPresentationCurrentContext];
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-        [navController setModalPresentationStyle:UIModalPresentationCurrentContext];
-        [self.navigationController presentViewController:navController animated:YES completion:nil];
-#else
         [self.navigationController pushViewController:viewController animated:NO];
-#endif
     }
     else if (chatMode == kChatModeMessaging) {
         MessagingTableViewController *viewController = [[MessagingTableViewController alloc] init];
@@ -480,14 +520,7 @@
         [viewController setUserName:USER_NAME];
         [viewController setUserId:USER_ID];
         
-#if 0
-        [self.navigationController setModalPresentationStyle:UIModalPresentationCurrentContext];
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-        [navController setModalPresentationStyle:UIModalPresentationCurrentContext];
-        [self.navigationController presentViewController:navController animated:YES completion:nil];
-#else
         [self.navigationController pushViewController:viewController animated:NO];
-#endif
     }
 }
 
