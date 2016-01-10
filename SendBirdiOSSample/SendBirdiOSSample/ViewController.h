@@ -11,16 +11,22 @@
 
 @interface ViewController : UIViewController
 
-@property UIImageView *inteageLogoImageView;
-@property UILabel *inteageLabel;
+@property UIImageView *sendbirdLogoImageView;
+@property UILabel *sendbirdLabel;
 
 @property UIImageView *backgroundImageView;
-@property UIButton *inteageChatStartButton;
-@property UIButton *inteageChannelListButton;
-@property UIButton *inteageLobbyMemberListButton;
-@property UIButton *inteageMessagingChannelListButton;
-@property UILabel *inteageUserNicknameLabel;
-@property UITextField *inteageUserNicknameTextField;
+@property UIButton *sendbirdStartOpenChatButton;
+@property UIButton *sendbirdStartMessaging;
+@property UIButton *sendbirdMemberListButton;
+@property UIButton *sendbirdMessagingChannelList;
+@property UIButton *sendbirdBackFromMessaging;
+
+
+@property UIButton *sendbirdChannelListButton;
+@property UIButton *sendbirdLobbyMemberListButton;
+@property UIButton *sendbirdMessagingChannelListButton;
+@property UILabel *sendbirdUserNicknameLabel;
+@property UITextField *sendbirdUserNicknameTextField;
 
 - (UIImage *) imageFromColor:(UIColor *)color;
 
