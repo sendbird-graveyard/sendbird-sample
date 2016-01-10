@@ -18,7 +18,7 @@ public class MainActivity extends FragmentActivity {
     private static final int REQUEST_SENDBIRD_MESSAGING_CHANNEL_LIST_ACTIVITY = 201;
     private static final int REQUEST_SENDBIRD_MEMBER_LIST_ACTIVITY = 300;
 
-    public static String VERSION = "2.0.0.0";
+    public static String VERSION = "2.0.0.1";
 
     final String appId = "A7A2672C-AD11-11E4-8DAA-0A18B21C2D82"; /* Sample SendBird Application */
     final String channelUrl = "jia_test.Lobby"; /* Sample SendBird Channel */
@@ -34,43 +34,65 @@ public class MainActivity extends FragmentActivity {
 
         ((EditText)findViewById(R.id.etxt_nickname)).addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
             @Override
             public void afterTextChanged(Editable s) {
                 userName = s.toString();
-
             }
         });
 
-        findViewById(R.id.btn_start_chat).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_start_open_chat).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                startChat(channelUrl);
-            }
-        });
-
-        findViewById(R.id.btn_start_channel_list).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 startChannelList();
             }
         });
 
+        findViewById(R.id.main_container).setVisibility(View.VISIBLE);
+        findViewById(R.id.messaging_container).setVisibility(View.GONE);
         findViewById(R.id.btn_start_messaging).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findViewById(R.id.main_container).setVisibility(View.GONE);
+                findViewById(R.id.messaging_container).setVisibility(View.VISIBLE);
+            }
+        });
+
+        findViewById(R.id.btn_messaging_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findViewById(R.id.main_container).setVisibility(View.VISIBLE);
+                findViewById(R.id.messaging_container).setVisibility(View.GONE);
+            }
+        });
+
+//        findViewById(R.id.btn_start_chat).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startChat(channelUrl);
+//            }
+//        });
+
+        findViewById(R.id.btn_select_member).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startMemberList();
             }
         });
 
-        findViewById(R.id.btn_start_messaging_channel_list).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_start_messaging_list).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startMessagingChannelList();
             }
         });
+
     }
 
     private void startChat(String channelUrl) {

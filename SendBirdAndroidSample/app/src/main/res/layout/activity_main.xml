@@ -29,61 +29,86 @@
             />
 
     </LinearLayout>
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/sendbird_img_logo"
+        android:layout_marginTop="60dp"
+        android:layout_centerHorizontal="true"
+        />
 
 
-    <Button
-        android:id="@+id/btn_start_chat"
+    <LinearLayout
+        android:id="@+id/main_container"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
-        android:minWidth="220dp"
-        android:layout_height="wrap_content"
-        android:text="Join Lobby Channel"
-        android:textColor="#ffffff"
-        android:background="#824096"
-        android:gravity="center"
-        />
+        android:orientation="vertical"
+        >
+        <Button
+            android:id="@+id/btn_start_open_chat"
+            android:layout_width="wrap_content"
+            android:minWidth="220dp"
+            android:layout_height="wrap_content"
+            android:text="Open Chat"
+            android:textColor="#ffffff"
+            android:background="#824096"
+            />
 
-    <Button
-        android:layout_below="@+id/btn_start_chat"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:id="@+id/btn_start_channel_list"
-        android:layout_width="wrap_content"
-        android:minWidth="220dp"
-        android:layout_height="wrap_content"
-        android:text="Channel List"
-        android:textColor="#ffffff"
-        android:background="#824096"
-        android:gravity="center"
-        />
+        <Button
+            android:id="@+id/btn_start_messaging"
+            android:layout_width="wrap_content"
+            android:minWidth="220dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Messaging"
+            android:textColor="#ffffff"
+            android:background="#824096"
+            />
+    </LinearLayout>
 
-    <Button
-        android:layout_below="@+id/btn_start_channel_list"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:id="@+id/btn_start_messaging"
+    <LinearLayout
+        android:id="@+id/messaging_container"
         android:layout_width="wrap_content"
-        android:minWidth="220dp"
         android:layout_height="wrap_content"
-        android:text="Start a Messaging"
-        android:textColor="#ffffff"
-        android:background="#824096"
-        android:gravity="center"
-        />
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        >
+        <Button
+            android:id="@+id/btn_select_member"
+            android:layout_below="@+id/btn_start_messaging"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:minWidth="220dp"
+            android:layout_height="wrap_content"
+            android:text="Start Messaging"
+            android:textColor="#ffffff"
+            android:background="#824096"
+            />
 
-    <Button
-        android:layout_below="@+id/btn_start_messaging"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:id="@+id/btn_start_messaging_channel_list"
-        android:layout_width="wrap_content"
-        android:minWidth="220dp"
-        android:layout_height="wrap_content"
-        android:text="Messaging Channel List"
-        android:textColor="#ffffff"
-        android:background="#824096"
-        android:gravity="center"
-        />
+        <Button
+            android:id="@+id/btn_start_messaging_list"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:minWidth="220dp"
+            android:layout_height="wrap_content"
+            android:text="Messaging Channel List"
+            android:textColor="#ffffff"
+            android:background="#824096"
+            />
+
+        <Button
+            android:id="@+id/btn_messaging_back"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:minWidth="220dp"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:textColor="#ffffff"
+            android:background="#824096"
+            />
+    </LinearLayout>
 
 </RelativeLayout>

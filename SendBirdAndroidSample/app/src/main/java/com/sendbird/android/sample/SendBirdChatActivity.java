@@ -175,7 +175,7 @@ public class SendBirdChatActivity extends FragmentActivity {
 
             @Override
             public void onChannelListClicked() {
-                Intent intent = new Intent(SendBirdChatActivity.this, SendBirdMessagingChannelListActivity.class);
+                Intent intent = new Intent(SendBirdChatActivity.this, SendBirdChannelListActivity.class);
                 intent.putExtras(getIntent().getExtras());
                 startActivityForResult(intent, REQUEST_CHANNEL_LIST);
             }

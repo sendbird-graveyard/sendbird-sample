@@ -41,7 +41,7 @@
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="#ffffff"
-                    android:text="Loading"
+                    android:text="Channels"
                     />
             </RelativeLayout>
             <ImageButton
