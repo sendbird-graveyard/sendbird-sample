@@ -109,7 +109,7 @@
     [self.sendbirdStartOpenChatButton setClipsToBounds:YES];
     [[self.sendbirdStartOpenChatButton layer] setCornerRadius:4];
     [self.sendbirdStartOpenChatButton addTarget:self action:@selector(clickSendBirdStartOpenChatButton:) forControlEvents:UIControlEventTouchUpInside];
-    [self.sendbirdStartOpenChatButton setTitle:@"Start Open Chat" forState:UIControlStateNormal];
+    [self.sendbirdStartOpenChatButton setTitle:@"Open Chat" forState:UIControlStateNormal];
     [self.sendbirdStartOpenChatButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.sendbirdStartOpenChatButton.titleLabel setFont:[UIFont boldSystemFontOfSize:16]];
     [self.view addSubview:self.sendbirdStartOpenChatButton];
@@ -121,7 +121,7 @@
     [self.sendbirdStartMessaging setClipsToBounds:YES];
     [[self.sendbirdStartMessaging layer] setCornerRadius:4];
     [self.sendbirdStartMessaging addTarget:self action:@selector(clickSendBirdStartMessagingButton:) forControlEvents:UIControlEventTouchUpInside];
-    [self.sendbirdStartMessaging setTitle:@"Start Messaging" forState:UIControlStateNormal];
+    [self.sendbirdStartMessaging setTitle:@"Messaging" forState:UIControlStateNormal];
     [self.sendbirdStartMessaging setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.sendbirdStartMessaging.titleLabel setFont:[UIFont boldSystemFontOfSize:16]];
     [self.view addSubview:self.sendbirdStartMessaging];
@@ -133,7 +133,7 @@
     [self.sendbirdMemberListButton setClipsToBounds:YES];
     [[self.sendbirdMemberListButton layer] setCornerRadius:4];
     [self.sendbirdMemberListButton addTarget:self action:@selector(clickSendBirdMemberListButton:) forControlEvents:UIControlEventTouchUpInside];
-    [self.sendbirdMemberListButton setTitle:@"Member List" forState:UIControlStateNormal];
+    [self.sendbirdMemberListButton setTitle:@"Start Messaging" forState:UIControlStateNormal];
     [self.sendbirdMemberListButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.sendbirdMemberListButton.titleLabel setFont:[UIFont boldSystemFontOfSize:16]];
     [self.sendbirdMemberListButton setHidden:YES];
