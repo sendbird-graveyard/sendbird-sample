@@ -785,7 +785,7 @@
 {
     [self clearPreviousChatting];
     if ([self.channelListTableView isHidden]) {
-        [self.titleLabel setText:@"Open Chat Channels"];
+        [self.titleLabel setText:@"Channels"];
         [self.channelListTableView setHidden:NO];
         [self.channelListTableView reloadChannels];
         [self.messageInputView setInputEnable:NO];
