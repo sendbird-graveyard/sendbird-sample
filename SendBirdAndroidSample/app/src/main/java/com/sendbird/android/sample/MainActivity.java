@@ -18,7 +18,7 @@ public class MainActivity extends FragmentActivity {
     private static final int REQUEST_SENDBIRD_MESSAGING_CHANNEL_LIST_ACTIVITY = 201;
     private static final int REQUEST_SENDBIRD_MEMBER_LIST_ACTIVITY = 300;
 
-    public static String VERSION = "2.0.0.1";
+    public static String VERSION = "2.0.1.0";
 
     final String appId = "A7A2672C-AD11-11E4-8DAA-0A18B21C2D82"; /* Sample SendBird Application */
     final String channelUrl = "jia_test.Lobby"; /* Sample SendBird Channel */
@@ -72,13 +72,6 @@ public class MainActivity extends FragmentActivity {
             }
         });
 
-//        findViewById(R.id.btn_start_chat).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startChat(channelUrl);
-//            }
-//        });
-
         findViewById(R.id.btn_select_member).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,8 +107,8 @@ public class MainActivity extends FragmentActivity {
     }
 
     private void startMemberList() {
-        Intent intent = new Intent(MainActivity.this, SendBirdMemberListActivity.class);
-        Bundle args = SendBirdMemberListActivity.makeSendBirdArgs(appId, userId, userName, channelUrl);
+        Intent intent = new Intent(MainActivity.this, SendBirdUserListActivity.class);
+        Bundle args = SendBirdUserListActivity.makeSendBirdArgs(appId, userId, userName, channelUrl);
         intent.putExtras(args);
 
         startActivityForResult(intent, REQUEST_SENDBIRD_MEMBER_LIST_ACTIVITY);
