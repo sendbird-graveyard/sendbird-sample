@@ -1,3 +1,6 @@
+- 2.0.1 (Jan, 10, 2016)
+Added UserListQuery which returns all users of application.
+
 - 2.0.0 (Jan, 1, 2016)
 Changed JIVER to SendBird.
 

@@ -36,7 +36,7 @@
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="#ffffff"
-                    android:text="Members"
+                    android:text="Users"
                     />
                 <Button
                     android:id="@+id/btn_ok"
