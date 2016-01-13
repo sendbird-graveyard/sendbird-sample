@@ -18,6 +18,6 @@
 @property (retain) UIImageView *checkImageView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
-- (void) setModel:(SendBirdMember *)model withCheckMark:(BOOL)check;
+- (void) setModel:(SendBirdAppUser *)model withCheckMark:(BOOL)check;
 
 @end
