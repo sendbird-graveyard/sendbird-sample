@@ -34,3 +34,5 @@ FOUNDATION_EXPORT const unsigned char SendBirdSDKVersionString[];
 #import <SendBirdSDK/SendBirdMessageListQuery.h>
 #import <SendBirdSDK/SendBirdMessagingUnreadCountQuery.h>
 #import <SendBirdSDK/SendBirdMessagingChannelUpdate.h>
+#import <SendBirdSDK/SendBirdAppUser.h>
+#import <SendBirdSDK/SendBirdUserListQuery.h>

@@ -1,0 +1,14 @@
+/Users/jacob/projects/SendBird-SDK-dotNET/Sample.Droid/obj/Debug/assemblies/Sample.Droid.dll
+/Users/jacob/projects/SendBird-SDK-dotNET/Sample.Droid/obj/Debug/assemblies/System.dll
+/Users/jacob/projects/SendBird-SDK-dotNET/Sample.Droid/obj/Debug/assemblies/System.Xml.dll
+/Users/jacob/projects/SendBird-SDK-dotNET/Sample.Droid/obj/Debug/assemblies/Mono.Android.dll
+/Users/jacob/projects/SendBird-SDK-dotNET/Sample.Droid/obj/Debug/assemblies/Xamarin.Android.Support.v13.dll
+/Users/jacob/projects/SendBird-SDK-dotNET/Sample.Droid/obj/Debug/assemblies/Xamarin.Android.Support.v4.dll
+/Users/jacob/projects/SendBird-SDK-dotNET/Sample.Droid/obj/Debug/assemblies/Xamarin.Android.Support.v7.AppCompat.dll
+/Users/jacob/projects/SendBird-SDK-dotNET/Sample.Droid/obj/Debug/assemblies/System.Web.Services.dll
+/Users/jacob/projects/SendBird-SDK-dotNET/Sample.Droid/obj/Debug/assemblies/websocket-sharp.dll
+/Users/jacob/projects/SendBird-SDK-dotNET/Sample.Droid/obj/Debug/assemblies/SendBird.Droid.dll
+/Users/jacob/projects/SendBird-SDK-dotNET/Sample.Droid/obj/Debug/assemblies/System.Core.dll
+/Users/jacob/projects/SendBird-SDK-dotNET/Sample.Droid/obj/Debug/assemblies/mscorlib.dll
+/Users/jacob/projects/SendBird-SDK-dotNET/Sample.Droid/obj/Debug/assemblies/System.Runtime.Serialization.dll
+/Users/jacob/projects/SendBird-SDK-dotNET/Sample.Droid/obj/Debug/assemblies/System.ServiceModel.Internals.dll

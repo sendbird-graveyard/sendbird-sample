@@ -1,10 +1,10 @@
 PODS:
-  - SendBirdSDK (2.0.2)
+  - SendBirdSDK (2.0.5)
 
 DEPENDENCIES:
   - SendBirdSDK
 
 SPEC CHECKSUMS:
-  SendBirdSDK: ea30a0330add31a6daa94a83d1042d9a3e663d5c
+  SendBirdSDK: ff37abdf25bc695cfc8e8174cbec8042c18aa950
 
 COCOAPODS: 0.39.0

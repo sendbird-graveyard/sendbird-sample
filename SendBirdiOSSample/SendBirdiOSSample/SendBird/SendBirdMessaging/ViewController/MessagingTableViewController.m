@@ -71,6 +71,8 @@
     
     long long mMaxMessageTs;
     long long mMinMessageTs;
+    
+    SendBirdUserListQuery *userListQuery;
 }
 
 - (id) init
@@ -176,7 +178,7 @@
     NSMutableArray *userIds = [[NSMutableArray alloc] init];
     for (int i = 0; i < [membersInChannel count]; i++) {
         if ([[self.channelMemberListTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] isSelected]) {
-            SendBirdMember *member = (SendBirdMember *)[membersInChannel objectAtIndex:i];
+            SendBirdAppUser *member = (SendBirdAppUser *)[membersInChannel objectAtIndex:i];
             [userIds addObject:[member guestId]];
         }
     }
@@ -298,6 +300,7 @@
     };
     
     [super viewDidLoad];
+    
     [ImageCache initImageCache];
     [[[SendBird sharedInstance] taskQueue] cancelAllOperations];
     
@@ -406,11 +409,11 @@
         [self.messageInputView setInputEnable:NO];
     }
     else if (viewMode == kMessagingMemberViewMode) {
-        [self setTitle:@"Members at Lobby"];
+        [self setTitle:@"Users"];
         [self.messageInputView setInputEnable:NO];
     }
     else if (viewMode == kMessagingMemberForGroupChatViewMode) {
-        [self setTitle:@"Members at Lobby"];
+        [self setTitle:@"Users"];
         [self.messageInputView setInputEnable:NO];
     }
     
@@ -460,23 +463,6 @@
         
         [self updateMessagingChannel:channel];
         [self.messageInputView setInputEnable:YES];
-        
-//        [[SendBird queryMessageListInChannel:[channel getUrl]] loadWithMessageTs:LLONG_MAX prevLimit:30 andNextLimit:10 resultBlock:^(NSMutableArray *queryResult) {
-//            for (SendBirdMessageModel *model in queryResult) {
-//                [messageArray addSendBirdMessage:model updateMessageTsBlock:updateMessageTs];
-//            }
-//            [self.tableView reloadData];
-//            
-//            NSUInteger pos = [queryResult count] > 30 ? 30 : [queryResult count];
-//            if (pos > 0) {
-//                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(pos - 1) inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-//            }
-//            
-//            [SendBird joinChannel:[channel getUrl]];
-//            [SendBird connectWithMessageTs:mMaxMessageTs];
-//        } endBlock:^(NSError *error) {
-//            
-//        }];
         
         [[SendBird queryMessageListInChannel:[channel getUrl]] prevWithMessageTs:LLONG_MAX andLimit:30 resultBlock:^(NSMutableArray *queryResult) {
             for (SendBirdMessageModel *model in queryResult) {
@@ -552,19 +538,17 @@
     
     if (viewMode == kMessagingMemberViewMode) {
         [self.channelMemberListTableView setHidden:NO];
-        memberListQuery = [SendBird queryMemberListInChannel:self.channelUrl];
-        [memberListQuery nextWithResultBlock:^(NSMutableArray *queryResult) {
-            if ([memberListQuery getCurrentPage] == 1) {
-                [membersInChannel removeAllObjects];
-            }
-            for (int i = 0; i < [queryResult count]; i++) {
-                SendBirdMember *mimc = [queryResult objectAtIndex:i];
-                if (![[mimc guestId] isEqualToString:[SendBird getUserId]] && [[mimc guestId] length] > 0) {
-                    [membersInChannel addObject:mimc];
+
+        userListQuery = [SendBird queryUserList];
+        [userListQuery nextWithResultBlock:^(NSMutableArray *queryResult) {
+            for (SendBirdAppUser *user in queryResult) {
+                if ([[user guestId] isEqualToString:[SendBird getUserId]]) {
+                    continue;
                 }
+                [membersInChannel addObject:user];
             }
             [self.channelMemberListTableView reloadData];
-        } endBlock:^(NSError *error) {
+        } endBlock:^(NSInteger code) {
             
         }];
     }
@@ -588,6 +572,21 @@
     else if (viewMode == kMessagingViewMode) {
         [self startMessagingWithUser:self.targetUserId];
     }
+}
+
+- (void)loadNextUserList
+{
+    [userListQuery nextWithResultBlock:^(NSMutableArray *queryResult) {
+        for (SendBirdAppUser *user in queryResult) {
+            if ([[user guestId] isEqualToString:[SendBird getUserId]]) {
+                continue;
+            }
+            [membersInChannel addObject:user];
+        }
+        [self.channelMemberListTableView reloadData];
+    } endBlock:^(NSInteger code) {
+        
+    }];
 }
 
 - (void) updateMessagingChannel:(SendBirdMessagingChannel *)channel
@@ -622,19 +621,23 @@
     viewMode = kMessagingMemberForGroupChatViewMode;
     [self setNavigationButton];
     [self.channelMemberListTableView setHidden:NO];
-    memberListQuery = [SendBird queryMemberListInChannel:@"jia_test.Lobby"];
-    [memberListQuery nextWithResultBlock:^(NSMutableArray *queryResult) {
-        if ([memberListQuery getCurrentPage] == 1) {
-            [membersInChannel removeAllObjects];
-        }
-        for (int i = 0; i < [queryResult count]; i++) {
-            SendBirdMember *mimc = [queryResult objectAtIndex:i];
-            if (![[mimc guestId] isEqualToString:[SendBird getUserId]] && [[mimc guestId] length] > 0) {
-                [membersInChannel addObject:mimc];
+
+    if (membersInChannel) {
+        [membersInChannel removeAllObjects];
+    }
+    else {
+        membersInChannel = [[NSMutableArray alloc] init];
+    }
+    userListQuery = [SendBird queryUserList];
+    [userListQuery nextWithResultBlock:^(NSMutableArray *queryResult) {
+        for (SendBirdAppUser *user in queryResult) {
+            if ([[user guestId] isEqualToString:[SendBird getUserId]]) {
+                continue;
             }
+            [membersInChannel addObject:user];
         }
         [self.channelMemberListTableView reloadData];
-    } endBlock:^(NSError *error) {
+    } endBlock:^(NSInteger code) {
         
     }];
 }
@@ -998,19 +1001,8 @@
     endDragging = NO;
 }
 
-//- (void) showTyping:(MessagingChannel *)channel
 - (void) showTyping
 {
-    //    MemberInMessagingChannel *member;
-    //    if ([[channel members] count] > 0) {
-    //        member = (MemberInMessagingChannel *)[[channel members] objectAtIndex:0];
-    //    }
-    //    for (int i = 0; i < [[channel members] count]; i++) {
-    //        if (![[[[channel members] objectAtIndex:i] guestId] isEqualToString:[SendBird getUserId]]) {
-    //            member = [[channel members] objectAtIndex:i];
-    //            break;
-    //        }
-    //    }
     if ([typeStatus count] == 0) {
         [self hideTyping];
     }
@@ -1222,22 +1214,27 @@
 {
     if (tableView == self.channelMemberListTableView) {
         UITableViewCell *cell = nil;
-        if ([[membersInChannel objectAtIndex:indexPath.row] isKindOfClass:[SendBirdMember class]]) {
+        
+        if ([[membersInChannel objectAtIndex:indexPath.row] isKindOfClass:[SendBirdAppUser class]]) {
             cell = [tableView dequeueReusableCellWithIdentifier:kMemberCellIdentifier];
         }
         
         if (cell == nil) {
-            if ([[membersInChannel objectAtIndex:indexPath.row] isKindOfClass:[SendBirdMember class]]) {
+            if ([[membersInChannel objectAtIndex:indexPath.row] isKindOfClass:[SendBirdAppUser class]]) {
                 cell = [[MemberTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kMemberCellIdentifier];
             }
         }
         
-        SendBirdMember *member = [membersInChannel objectAtIndex:indexPath.row];
+        SendBirdAppUser *member = [membersInChannel objectAtIndex:indexPath.row];
         if (viewMode == kMessagingMemberForGroupChatViewMode) {
             [(MemberTableViewCell *)cell setModel:member withCheckMark:YES];
         }
         else {
             [(MemberTableViewCell *)cell setModel:member withCheckMark:NO];
+        }
+        
+        if ([indexPath row] + 1 == [membersInChannel count]) {
+            [self loadNextUserList];
         }
         
         return cell;

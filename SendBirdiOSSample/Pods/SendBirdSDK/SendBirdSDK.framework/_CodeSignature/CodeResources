@@ -6,11 +6,15 @@
 	<dict>
 		<key>Headers/SendBird.h</key>
 		<data>
-		bIV7XlOF0tqewhzEXv2c/9LAsvo=
+		cRcmAMQzCP51qJ170eeKSixxr4Q=
 		</data>
 		<key>Headers/SendBirdAPIClient.h</key>
 		<data>
-		coLZjtPYqb66EhtRKXHDagWOYTg=
+		h1hjA+ou7E4Mag1u0mO89XCqsic=
+		</data>
+		<key>Headers/SendBirdAppUser.h</key>
+		<data>
+		Cgt8RxI+f26haVLGPtWa/txKu2Q=
 		</data>
 		<key>Headers/SendBirdBlockedUser.h</key>
 		<data>
@@ -30,7 +34,7 @@
 		</data>
 		<key>Headers/SendBirdClient.h</key>
 		<data>
-		ReH73Z+vDwNfiAJVUBJl0598Us0=
+		PwhGYsrB3m9jos7A/XsuQpe5wOk=
 		</data>
 		<key>Headers/SendBirdCommand.h</key>
 		<data>
@@ -98,7 +102,7 @@
 		</data>
 		<key>Headers/SendBirdSDK.h</key>
 		<data>
-		+lt1p9y1Tu9vDsYMXlD5SiFrCp8=
+		wzFrV3xiHRywOy4xzx5pYoRQy/M=
 		</data>
 		<key>Headers/SendBirdSDKUtils.h</key>
 		<data>
@@ -128,13 +132,17 @@
 		<data>
 		aRPRUizKZ4GdJ+WopAwug05Pshc=
 		</data>
+		<key>Headers/SendBirdUserListQuery.h</key>
+		<data>
+		b02Bz8urz4q3+pYbfK1pNUh7mJ4=
+		</data>
 		<key>Headers/SendBirdWSClient.h</key>
 		<data>
 		b5gFMHAycSZEnpDwRl8C8z2nYIk=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		t3GOKnfVDenXxjsbBOMzf+qAoaQ=
+		YL8HEhedYhJyRAlT/4bMSFAd4RE=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -145,11 +153,15 @@
 	<dict>
 		<key>Headers/SendBird.h</key>
 		<data>
-		bIV7XlOF0tqewhzEXv2c/9LAsvo=
+		cRcmAMQzCP51qJ170eeKSixxr4Q=
 		</data>
 		<key>Headers/SendBirdAPIClient.h</key>
 		<data>
-		coLZjtPYqb66EhtRKXHDagWOYTg=
+		h1hjA+ou7E4Mag1u0mO89XCqsic=
+		</data>
+		<key>Headers/SendBirdAppUser.h</key>
+		<data>
+		Cgt8RxI+f26haVLGPtWa/txKu2Q=
 		</data>
 		<key>Headers/SendBirdBlockedUser.h</key>
 		<data>
@@ -169,7 +181,7 @@
 		</data>
 		<key>Headers/SendBirdClient.h</key>
 		<data>
-		ReH73Z+vDwNfiAJVUBJl0598Us0=
+		PwhGYsrB3m9jos7A/XsuQpe5wOk=
 		</data>
 		<key>Headers/SendBirdCommand.h</key>
 		<data>
@@ -237,7 +249,7 @@
 		</data>
 		<key>Headers/SendBirdSDK.h</key>
 		<data>
-		+lt1p9y1Tu9vDsYMXlD5SiFrCp8=
+		wzFrV3xiHRywOy4xzx5pYoRQy/M=
 		</data>
 		<key>Headers/SendBirdSDKUtils.h</key>
 		<data>
@@ -266,6 +278,10 @@
 		<key>Headers/SendBirdUser.h</key>
 		<data>
 		aRPRUizKZ4GdJ+WopAwug05Pshc=
+		</data>
+		<key>Headers/SendBirdUserListQuery.h</key>
+		<data>
+		b02Bz8urz4q3+pYbfK1pNUh7mJ4=
 		</data>
 		<key>Headers/SendBirdWSClient.h</key>
 		<data>
