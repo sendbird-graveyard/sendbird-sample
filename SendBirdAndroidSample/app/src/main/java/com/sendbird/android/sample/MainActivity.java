@@ -18,7 +18,7 @@ public class MainActivity extends FragmentActivity {
     private static final int REQUEST_SENDBIRD_MESSAGING_CHANNEL_LIST_ACTIVITY = 201;
     private static final int REQUEST_SENDBIRD_MEMBER_LIST_ACTIVITY = 300;
 
-    public static String VERSION = "2.0.1.0";
+    public static String VERSION = "2.0.1.1";
 
     final String appId = "A7A2672C-AD11-11E4-8DAA-0A18B21C2D82"; /* Sample SendBird Application */
     final String channelUrl = "jia_test.Lobby"; /* Sample SendBird Channel */

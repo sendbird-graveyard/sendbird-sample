@@ -59,12 +59,11 @@ public class SendBirdUserListActivity extends FragmentActivity {
 
     private List<User> mSelectedUsers;
 
-    public static Bundle makeSendBirdArgs(String appKey, String uuid, String nickname, String channelUrl) {
+    public static Bundle makeSendBirdArgs(String appKey, String uuid, String nickname) {
         Bundle args = new Bundle();
         args.putString("appKey", appKey);
         args.putString("uuid", uuid);
         args.putString("nickname", nickname);
-        args.putString("channelUrl", channelUrl);
         return args;
     }
 
@@ -76,7 +75,7 @@ public class SendBirdUserListActivity extends FragmentActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         initSendBird(getIntent().getExtras());
-        initFragment(getIntent().getExtras().getString("channelUrl"));
+        initFragment();
         initUIComponents();
     }
 
@@ -132,7 +131,7 @@ public class SendBirdUserListActivity extends FragmentActivity {
     }
 
 
-    private void initFragment(String channelUrl) {
+    private void initFragment() {
         mSelectedUsers = new ArrayList<User>();
         mSendBirdUserListFragment = new SendBirdUserListFragment();
         mSendBirdUserListFragment.setChannelUrl(channelUrl);
@@ -191,7 +190,6 @@ public class SendBirdUserListActivity extends FragmentActivity {
 
 
     public static class SendBirdUserListFragment extends Fragment {
-        private String mChannelUrl;
         private SendBirdUserListHandler mHandler;
         private ListView mListView;
         private UserListQuery mUserListQuery;
@@ -207,10 +205,6 @@ public class SendBirdUserListActivity extends FragmentActivity {
         }
 
         public SendBirdUserListFragment() {
-        }
-
-        public void setChannelUrl(String channelUrl) {
-            mChannelUrl = channelUrl;
         }
 
         @Override
