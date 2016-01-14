@@ -72,9 +72,7 @@
     long long mMaxMessageTs;
     long long mMinMessageTs;
     
-    NSString *token;
-    long nextPage;
-    BOOL isLoadingUser;
+    SendBirdUserListQuery *userListQuery;
 }
 
 - (id) init
@@ -302,10 +300,6 @@
     };
     
     [super viewDidLoad];
-    
-    isLoadingUser = NO;
-    token = @"";
-    nextPage = 0;
     
     [ImageCache initImageCache];
     [[[SendBird sharedInstance] taskQueue] cancelAllOperations];
@@ -544,23 +538,18 @@
     
     if (viewMode == kMessagingMemberViewMode) {
         [self.channelMemberListTableView setHidden:NO];
-        
-        isLoadingUser = YES;
-        [SendBird userListWithToken:token page:1 withLimit:20 resultBlock:^(NSDictionary *response, NSError *error) {
-            if (error == nil) {
-                token = [response objectForKey:@"token"];
-                nextPage = [[response valueForKey:@"next"] longValue];
-                NSArray *users = (NSArray *)[response objectForKey:@"users"];
-                for (NSDictionary *userDic in users) {
-                    SendBirdAppUser *user = [[SendBirdAppUser alloc] initWithDic:userDic];
-                    if ([[user guestId] isEqualToString:[SendBird getUserId]]) {
-                        continue;
-                    }
-                    [membersInChannel addObject:user];
+
+        userListQuery = [SendBird queryUserList];
+        [userListQuery nextWithResultBlock:^(NSMutableArray *queryResult) {
+            for (SendBirdAppUser *user in queryResult) {
+                if ([[user guestId] isEqualToString:[SendBird getUserId]]) {
+                    continue;
                 }
-                [self.channelMemberListTableView reloadData];
+                [membersInChannel addObject:user];
             }
-            isLoadingUser = NO;
+            [self.channelMemberListTableView reloadData];
+        } endBlock:^(NSInteger code) {
+            
         }];
     }
     else if (viewMode == kMessagingChannelListViewMode) {
@@ -587,30 +576,16 @@
 
 - (void)loadNextUserList
 {
-    if (nextPage == 0) {
-        return;
-    }
-    
-    if (isLoadingUser) {
-        return;
-    }
-    isLoadingUser = YES;
-    
-    [SendBird userListWithToken:token page:nextPage withLimit:20 resultBlock:^(NSDictionary *response, NSError *error) {
-        if (error == nil) {
-            token = [response objectForKey:@"token"];
-            nextPage = [[response valueForKey:@"next"] longValue];
-            NSArray *users = (NSArray *)[response objectForKey:@"users"];
-            for (NSDictionary *userDic in users) {
-                SendBirdAppUser *user = [[SendBirdAppUser alloc] initWithDic:userDic];
-                if ([[user guestId] isEqualToString:[SendBird getUserId]]) {
-                    continue;
-                }
-                [membersInChannel addObject:user];
+    [userListQuery nextWithResultBlock:^(NSMutableArray *queryResult) {
+        for (SendBirdAppUser *user in queryResult) {
+            if ([[user guestId] isEqualToString:[SendBird getUserId]]) {
+                continue;
             }
+            [membersInChannel addObject:user];
         }
         [self.channelMemberListTableView reloadData];
-        isLoadingUser = NO;
+    } endBlock:^(NSInteger code) {
+        
     }];
 }
 
@@ -647,30 +622,23 @@
     [self setNavigationButton];
     [self.channelMemberListTableView setHidden:NO];
 
-    token = @"";
-    nextPage = 0;
-    isLoadingUser = NO;
     if (membersInChannel) {
         [membersInChannel removeAllObjects];
     }
     else {
         membersInChannel = [[NSMutableArray alloc] init];
     }
-    [SendBird userListWithToken:token page:1 withLimit:20 resultBlock:^(NSDictionary *response, NSError *error) {
-        if (error == nil) {
-            token = [response objectForKey:@"token"];
-            nextPage = [[response valueForKey:@"next"] longValue];
-            NSArray *users = (NSArray *)[response objectForKey:@"users"];
-            for (NSDictionary *userDic in users) {
-                SendBirdAppUser *user = [[SendBirdAppUser alloc] initWithDic:userDic];
-                if ([[user guestId] isEqualToString:[SendBird getUserId]]) {
-                    continue;
-                }
-                [membersInChannel addObject:user];
+    userListQuery = [SendBird queryUserList];
+    [userListQuery nextWithResultBlock:^(NSMutableArray *queryResult) {
+        for (SendBirdAppUser *user in queryResult) {
+            if ([[user guestId] isEqualToString:[SendBird getUserId]]) {
+                continue;
             }
-            [self.channelMemberListTableView reloadData];
+            [membersInChannel addObject:user];
         }
-        isLoadingUser = NO;
+        [self.channelMemberListTableView reloadData];
+    } endBlock:^(NSInteger code) {
+        
     }];
 }
 
@@ -1033,19 +1001,8 @@
     endDragging = NO;
 }
 
-//- (void) showTyping:(MessagingChannel *)channel
 - (void) showTyping
 {
-    //    MemberInMessagingChannel *member;
-    //    if ([[channel members] count] > 0) {
-    //        member = (MemberInMessagingChannel *)[[channel members] objectAtIndex:0];
-    //    }
-    //    for (int i = 0; i < [[channel members] count]; i++) {
-    //        if (![[[[channel members] objectAtIndex:i] guestId] isEqualToString:[SendBird getUserId]]) {
-    //            member = [[channel members] objectAtIndex:i];
-    //            break;
-    //        }
-    //    }
     if ([typeStatus count] == 0) {
         [self hideTyping];
     }
