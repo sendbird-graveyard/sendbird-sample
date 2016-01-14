@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Paths>
+  <Jars></Jars>
+  <ResolvedResourceDirectories>
+    <ResolvedResourceDirectory>/Users/jacob/projects/SendBird-SDK-dotNET/Sample.Droid/obj/Debug/__library_projects__/Xamarin.Android.Support.v4/library_project_imports/res</ResolvedResourceDirectory>
+    <ResolvedResourceDirectory>/Users/jacob/projects/SendBird-SDK-dotNET/Sample.Droid/obj/Debug/__library_projects__/SendBird.Droid/library_project_imports/res</ResolvedResourceDirectory>
+  </ResolvedResourceDirectories>
+  <ResolvedAssetDirectories>
+    <ResolvedAssetDirectory>/Users/jacob/projects/SendBird-SDK-dotNET/Sample.Droid/obj/Debug/__library_projects__/Xamarin.Android.Support.v4/library_project_imports/assets</ResolvedAssetDirectory>
+    <ResolvedAssetDirectory>/Users/jacob/projects/SendBird-SDK-dotNET/Sample.Droid/obj/Debug/__library_projects__/SendBird.Droid/library_project_imports/assets</ResolvedAssetDirectory>
+  </ResolvedAssetDirectories>
+  <ResolvedEnvironmentFiles />
+  <ResolvedResourceDirectoryStamps>
+    <ResolvedResourceDirectoryStamp>/Users/jacob/projects/SendBird-SDK-dotNET/Sample.Droid/obj/Debug/__library_projects__/Xamarin.Android.Support.v4.stamp</ResolvedResourceDirectoryStamp>
+    <ResolvedResourceDirectoryStamp>/Users/jacob/projects/SendBird-SDK-dotNET/Sample.Droid/obj/Debug/__library_projects__/SendBird.Droid.stamp</ResolvedResourceDirectoryStamp>
+  </ResolvedResourceDirectoryStamps>
+</Paths>
