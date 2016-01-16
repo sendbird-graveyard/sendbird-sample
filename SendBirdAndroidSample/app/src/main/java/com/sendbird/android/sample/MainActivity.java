@@ -16,9 +16,9 @@ public class MainActivity extends FragmentActivity {
     private static final int REQUEST_SENDBIRD_CHANNEL_LIST_ACTIVITY = 101;
     private static final int REQUEST_SENDBIRD_MESSAGING_ACTIVITY = 200;
     private static final int REQUEST_SENDBIRD_MESSAGING_CHANNEL_LIST_ACTIVITY = 201;
-    private static final int REQUEST_SENDBIRD_MEMBER_LIST_ACTIVITY = 300;
+    private static final int REQUEST_SENDBIRD_USER_LIST_ACTIVITY = 300;
 
-    public static String VERSION = "2.0.1.1";
+    public static String VERSION = "2.0.1.2";
 
     final String appId = "A7A2672C-AD11-11E4-8DAA-0A18B21C2D82"; /* Sample SendBird Application */
     final String channelUrl = "jia_test.Lobby"; /* Sample SendBird Channel */
@@ -75,7 +75,7 @@ public class MainActivity extends FragmentActivity {
         findViewById(R.id.btn_select_member).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startMemberList();
+                startUserList();
             }
         });
 
@@ -106,12 +106,12 @@ public class MainActivity extends FragmentActivity {
         startActivityForResult(intent, REQUEST_SENDBIRD_CHANNEL_LIST_ACTIVITY);
     }
 
-    private void startMemberList() {
+    private void startUserList() {
         Intent intent = new Intent(MainActivity.this, SendBirdUserListActivity.class);
-        Bundle args = SendBirdUserListActivity.makeSendBirdArgs(appId, userId, userName, channelUrl);
+        Bundle args = SendBirdUserListActivity.makeSendBirdArgs(appId, userId, userName);
         intent.putExtras(args);
 
-        startActivityForResult(intent, REQUEST_SENDBIRD_MEMBER_LIST_ACTIVITY);
+        startActivityForResult(intent, REQUEST_SENDBIRD_USER_LIST_ACTIVITY);
     }
 
     private void startMessaging(String [] targetUserIds) {
@@ -146,7 +146,7 @@ public class MainActivity extends FragmentActivity {
             joinMessaging(data.getStringExtra("channelUrl"));
         }
 
-        if(resultCode == RESULT_OK && requestCode == REQUEST_SENDBIRD_MEMBER_LIST_ACTIVITY && data != null) {
+        if(resultCode == RESULT_OK && requestCode == REQUEST_SENDBIRD_USER_LIST_ACTIVITY && data != null) {
             startMessaging(data.getStringArrayExtra("userIds"));
         }
 
