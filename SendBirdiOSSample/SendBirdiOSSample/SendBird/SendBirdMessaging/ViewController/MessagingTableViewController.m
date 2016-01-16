@@ -184,7 +184,13 @@
     }
     
     if ([userIds count] > 0) {
-        [SendBird inviteMessagingWithChannelUrl:channelUrl andUserIds:userIds];
+        if (self.currentMessagingChannel != nil && [self.currentMessagingChannel isGroupMessagingChannel]) {
+            [SendBird inviteMessagingWithChannelUrl:[self.currentMessagingChannel getUrl] andUserIds:userIds];
+        }
+        else {
+            [SendBird startMessagingWithUserIds:userIds];
+        }
+
     }
     viewMode = kMessagingViewMode;
     [self setNavigationButton];

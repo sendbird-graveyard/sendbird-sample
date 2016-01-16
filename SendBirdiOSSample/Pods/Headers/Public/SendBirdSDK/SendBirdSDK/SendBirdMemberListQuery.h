@@ -1,1 +1,1 @@
-../../../../SendBirdSDK/SendBirdSDK.framework/Headers/SendBirdMemberListQuery.h
+../../../../SendBirdSDK/SendBirdSDK.framework/Versions/A/Headers/SendBirdMemberListQuery.h

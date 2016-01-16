@@ -1,1 +1,1 @@
-../../../../SendBirdSDK/SendBirdSDK.framework/Headers/SendBirdMessagingUnreadCountQuery.h
+../../../../SendBirdSDK/SendBirdSDK.framework/Versions/A/Headers/SendBirdMessagingUnreadCountQuery.h

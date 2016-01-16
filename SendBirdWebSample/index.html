@@ -3,67 +3,55 @@
 <head>
   <meta charset="UTF-8">
 
-  <!-- Latest compiled and minified CSS -->
+  <link rel="shortcut icon" href="https://s3-ap-northeast-1.amazonaws.com/sendbird-logo/favicon.ico" type="image/x-icon">
+
+  <link href='https://fonts.googleapis.com/css?family=Exo+2:400,900italic,900,800italic,800,700italic,700,600italic,600,500italic,500,400italic,300italic,200italic,200,100italic,100,300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,900italic,900,800italic,800,700italic,700,600italic,600,500italic,500,400italic,300italic,200italic,200,100italic,100,300' rel='stylesheet' type='text/css'>
+
   <link rel="stylesheet" href="/static/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/css/sample-index.css">
 
-  <!-- for SendBird-SDK-Sample -->
-  <link rel="stylesheet" href="/static/css/SendBird-sample.css">
-
-  <title>Web SDK Sample | SendBird</title>
-  
+  <title>Web SDK Sample</title>
 </head>
-<body>
-
-  <nav class="navbar navbar-default navbar-static-top jiver-top-nav">
-    <div class="container">
-      <div class="navbar-header">
-        <a class="navbar-brand jiver-nav-logo" href="https://sendbird.com/" target="_blank"><img src="/static/img/jiver-logo.png" class="jiver-logo"></a>
-      </div>
-    </div>
-  </nav>
-
+<body class="sample-background">
   <div class="container">
     <div class="row">
 
-      <div class="col-md-12">
+      <!-- top -->
+      <div class="index-section index-top">
+        <div class="text-sort text-sort--right">
+          <img src="/static/img/logo_landing.svg">
+        </div>
+        <div class="text-sort text-sort--left">
+          <label class="index-title">Sample Chat</label>
+        </div>
+      </div>
 
-        <div class="col-md-offset-3 col-md-6">
-          <div class="form-group">
-            <input type="text" class="form-control" id="nick_name" placeholder="Enter User NickName">
-          </div>
-        </div>
+      <!-- nickname -->
+      <div class="index-section index-input">
+        <input type="text" class="index-nickname" maxlength="12" placeholder="Enter User nickname" id="user_nickname">
+        <button type="button" class="index-button" id="btn_start">DONE</button>
+      </div>
 
-        <div class="col-md-offset-3 col-md-6" style="margin-bottom: 10px;">
-          <button class="btn btn-default" id="btn_open_chat_list" style="width: 100%;">
-            <span class="glyphicon glyphicon-list" aria-hidden="true"> Open Chat List</span>
-          </button>
-        </div>
-        <div class="col-md-offset-3 col-md-6" style="margin-bottom: 10px;">
-          <button class="btn btn-default" id="btn_start_msg_chat" style="width: 100%;">
-            <span class="glyphicon glyphicon-user" aria-hidden="true"> Start Messaging</span>
-          </button>
-        </div>
-        <div class="col-md-offset-3 col-md-6" style="margin-bottom: 10px;">
-          <button class="btn btn-default" id="btn_Msg_Chat_List" style="width: 100%;">
-            <span class="glyphicon glyphicon-envelope" aria-hidden="true"> Messaging List</span>
-          </button>
-        </div>
+      <!-- description -->
+      <div class="index-section index-text">
+        Start chatting on SendBird by choosing your display name.<br>
+        This can be changed anytime and will be shown on 1-on-1 and group messaging.
+      </div>
 
+      <div class="index-section index-bottom">
+        <img src="/static/img/image-landing-01.svg">
       </div>
 
     </div>
   </div>
+  <div style="text-align: center;">
+    <img src="/static/img/image-landing-02.svg">
+  </div>
 
-
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="/static/js/jquery-1.11.3.min.js"></script>
-  <!-- Latest compiled and minified JavaScript -->
   <script src="/static/bootstrap/bootstrap.min.js"></script>
-
-  <!-- SDK -->
-  <script src="/static/libs/2.0.0/SendBird-sdk-2.0.0.min.js"></script>
-
-  <!-- for sample js -->
+  <script src="/static/js/util.js"></script>
   <script src="/static/js/index.js"></script>
 
 </body>

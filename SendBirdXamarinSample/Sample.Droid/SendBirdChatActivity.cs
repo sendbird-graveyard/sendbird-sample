@@ -518,6 +518,9 @@ namespace SendBirdSample.Droid
 
 			public void AddMessageModel (MessageModel model)
 			{
+                if (model == null)
+                    return;
+                
 				if (model.IsPast ()) {
 					mItemList.Insert (0, model);
 				} else {
