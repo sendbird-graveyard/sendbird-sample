@@ -1,0 +1,1 @@
+../../../../SendBirdSDK/SendBirdSDK.framework/Versions/A/Headers/SendBirdSystemMessage.h
