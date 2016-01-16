@@ -134,7 +134,6 @@ public class SendBirdUserListActivity extends FragmentActivity {
     private void initFragment() {
         mSelectedUsers = new ArrayList<User>();
         mSendBirdUserListFragment = new SendBirdUserListFragment();
-        mSendBirdUserListFragment.setChannelUrl(channelUrl);
 
         mSendBirdUserListFragment.setSendBirdUserListHandler(new SendBirdUserListFragment.SendBirdUserListHandler() {
             @Override

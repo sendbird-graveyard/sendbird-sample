@@ -458,7 +458,7 @@ public class SendBirdMessagingActivity extends FragmentActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SendBirdMessagingActivity.this, SendBirdUserListActivity.class);
                 Bundle args = null;
-                args = SendBirdUserListActivity.makeSendBirdArgs(SendBird.getAppId(), SendBird.getUserId(), SendBird.getUserName(), "jia_test.Lobby");
+                args = SendBirdUserListActivity.makeSendBirdArgs(SendBird.getAppId(), SendBird.getUserId(), SendBird.getUserName());
                 intent.putExtras(args);
                 startActivityForResult(intent, REQUEST_MEMBER_LIST);
                 mSettingsContainer.setVisibility(View.GONE);
