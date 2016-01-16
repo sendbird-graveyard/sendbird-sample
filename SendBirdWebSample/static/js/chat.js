@@ -192,9 +192,9 @@ function leaveChannel(channel, obj) {
   }
 
   if($('.chat-top__button-invite').is(':visible')) {
-    $('.modal-leave-channel-desc').html('Do you want to delete Messaging Channels?');
+    $('.modal-leave-channel-desc').html('Do you want to leave Messaging Channels?');
   } else {
-    $('.modal-leave-channel-desc').html('Do you want to delete Channels {}?'.format(channel['name']));
+    $('.modal-leave-channel-desc').html('Do you want to leave Channels {}?'.format(channel['name']));
   }
 
   $('.modal-leave-channel').show();
@@ -626,7 +626,7 @@ function endMessaging(channel, obj) {
     obj.addClass('left-nav-channel-leave--active');
   }
 
-  $('.modal-leave-channel-desc').html('Do you want to delete Messaging Channel?');
+  $('.modal-leave-channel-desc').html('Do you want to leave Messaging Channel?');
   $('.modal-leave-channel').show();
   return false;
 }
