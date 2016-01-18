@@ -56,12 +56,11 @@ public class SendBirdChannelListActivity extends FragmentActivity {
     private TextView mTxtChannelUrl;
     private View mTopBarContainer;
 
-    public static Bundle makeSendBirdArgs(String appKey, String uuid, String nickname, String channelUrl) {
+    public static Bundle makeSendBirdArgs(String appKey, String uuid, String nickname) {
         Bundle args = new Bundle();
         args.putString("appKey", appKey);
         args.putString("uuid", uuid);
         args.putString("nickname", nickname);
-        args.putString("channelUrl", channelUrl);
         return args;
     }
 
@@ -73,7 +72,7 @@ public class SendBirdChannelListActivity extends FragmentActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         initSendBird(getIntent().getExtras());
-        initFragment(getIntent().getExtras().getString("channelUrl"));
+        initFragment();
         initUIComponents();
     }
     private void initSendBird(Bundle extras) {
@@ -125,8 +124,8 @@ public class SendBirdChannelListActivity extends FragmentActivity {
     }
 
 
-    private void initFragment(String channelUrl) {
-        mSendBirdChannelListFragment = new SendBirdChannelListFragment(channelUrl);
+    private void initFragment() {
+        mSendBirdChannelListFragment = new SendBirdChannelListFragment();
         mSendBirdChannelListFragment.setSendBirdChannelListHandler(new SendBirdChannelListFragment.SendBirdChannelListHandler() {
             @Override
             public void onChannelSelected(Channel channel) {
@@ -174,7 +173,6 @@ public class SendBirdChannelListActivity extends FragmentActivity {
     }
 
     public static class SendBirdChannelListFragment extends Fragment {
-        private String mChannelUrl;
         private SendBirdChannelListHandler mHandler;
         private ListView mListView;
         private ChannelListQuery mChannelListQuery;
@@ -193,10 +191,6 @@ public class SendBirdChannelListActivity extends FragmentActivity {
         }
 
         public SendBirdChannelListFragment() {
-        }
-
-        public SendBirdChannelListFragment(String channelUrl) {
-            mChannelUrl = channelUrl;
         }
 
 

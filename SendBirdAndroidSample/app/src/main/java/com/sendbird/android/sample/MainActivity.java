@@ -21,7 +21,6 @@ public class MainActivity extends FragmentActivity {
     public static String VERSION = "2.0.1.2";
 
     final String appId = "A7A2672C-AD11-11E4-8DAA-0A18B21C2D82"; /* Sample SendBird Application */
-    final String channelUrl = "jia_test.Lobby"; /* Sample SendBird Channel */
     String userId = SendBirdChatActivity.Helper.generateDeviceUUID(MainActivity.this); /* Generate Device UUID */
     String userName = "User-" + userId.substring(0, 5); /* Generate User Nickname */
 
@@ -99,7 +98,7 @@ public class MainActivity extends FragmentActivity {
 
     private void startChannelList() {
         Intent intent = new Intent(MainActivity.this, SendBirdChannelListActivity.class);
-        Bundle args = SendBirdChannelListActivity.makeSendBirdArgs(appId, userId, userName, channelUrl);
+        Bundle args = SendBirdChannelListActivity.makeSendBirdArgs(appId, userId, userName);
 
         intent.putExtras(args);
 
