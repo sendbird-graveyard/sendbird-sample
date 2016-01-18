@@ -1,8 +1,8 @@
 
 var appId = 'A7A2672C-AD11-11E4-8DAA-0A18B21C2D82';
 var sendbird = null;
-var loadMoreScroll = false;
 var currScrollHeight = 0;
+var MESSAGE_TEXT_HEIGHT = 27;
 
 var nickname = null;
 var guestId = null;
@@ -192,9 +192,9 @@ function leaveChannel(channel, obj) {
   }
 
   if($('.chat-top__button-invite').is(':visible')) {
-    $('.modal-leave-channel-desc').html('Do you want to leave Messaging Channels?');
+    $('.modal-leave-channel-desc').html('Do you want to leave this messaging channel?');
   } else {
-    $('.modal-leave-channel-desc').html('Do you want to leave Channels {}?'.format(channel['name']));
+    $('.modal-leave-channel-desc').html('Do you want to leave this channel?');
   }
 
   $('.modal-leave-channel').show();
@@ -626,7 +626,7 @@ function endMessaging(channel, obj) {
     obj.addClass('left-nav-channel-leave--active');
   }
 
-  $('.modal-leave-channel-desc').html('Do you want to leave Messaging Channel?');
+  $('.modal-leave-channel-desc').html('Do you want to leave this messaging channel?');
   $('.modal-leave-channel').show();
   return false;
 }
@@ -918,37 +918,32 @@ function setChatMessage(obj) {
 }
 
 function loadMoreChatMessage(func) {
-  var scrollHeight = $('.chat-canvas')[0].scrollHeight;
-  if(!loadMoreScroll) {
-    loadMoreScroll = true;
-    sendbird.getMessageLoadMore({
-      "limit": 50,
-      "successFunc": function(data) {
-        var moreMessage = data["messages"];
-        var msgList = '';
-        $.each(moreMessage.reverse(), function(index, msg) {
-          var item = sendbird.commandSeparate(msg);
-          if (sendbird.isMessage(item.cmd)) {
-            msgList += messageList(item.payload);
-          } else if (sendbird.isFileMessage(item.cmd)) {
-            if (!sendbird.hasImage(item.payload)) {
-              msgList += fileMessageList(item.payload);
-            } else {
-              msgList += imageMessageList(item.payload);
-            }
+  sendbird.getMessageLoadMore({
+    "limit": 50,
+    "successFunc": function(data) {
+      var moreMessage = data["messages"];
+      var msgList = '';
+      $.each(moreMessage.reverse(), function(index, msg) {
+        var item = sendbird.commandSeparate(msg);
+        if (sendbird.isMessage(item.cmd)) {
+          msgList += messageList(item.payload);
+        } else if (sendbird.isFileMessage(item.cmd)) {
+          if (!sendbird.hasImage(item.payload)) {
+            msgList += fileMessageList(item.payload);
+          } else {
+            msgList += imageMessageList(item.payload);
           }
-        });
-        $('.chat-canvas').prepend(msgList);
-        if (func != undefined) func();
-      },
-      "errorFunc": function(xhr, status, error) {
-        console.log(xhr, status, error);
-      },
-      "async": true
-    });
-  }
-  loadMoreScroll = true;
-  $('.chat-canvas')[0].scrollTop = $('.chat-canvas')[0].scrollHeight - scrollHeight;
+        }
+      });
+      $('.chat-canvas').prepend(msgList);
+      $('.chat-canvas')[0].scrollTop = (moreMessage.length * MESSAGE_TEXT_HEIGHT);
+      if (func != undefined) func();
+    },
+    "errorFunc": function(xhr, status, error) {
+      console.log(xhr, status, error);
+    },
+    "async": true
+  });
 }
 
 function messageList(obj) {
@@ -1121,8 +1116,9 @@ function setFileMessage(obj) {
 $('.chat-canvas').on('scroll', function() {
   var currHeight = $('.chat-canvas').scrollTop();
   if (currHeight == 0) {
-    loadMoreScroll = false;
-    loadMoreChatMessage();
+    if ($('.chat-canvas')[0].scrollHeight > $('.chat-canvas').height()) {
+      loadMoreChatMessage();
+    }
   }
 });
 
