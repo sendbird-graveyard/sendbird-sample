@@ -1,8 +1,8 @@
 
 var appId = 'A7A2672C-AD11-11E4-8DAA-0A18B21C2D82';
 var sendbird = null;
-var loadMoreScroll = false;
 var currScrollHeight = 0;
+var MESSAGE_TEXT_HEIGHT = 27;
 
 var nickname = null;
 var guestId = null;
@@ -918,37 +918,32 @@ function setChatMessage(obj) {
 }
 
 function loadMoreChatMessage(func) {
-  var scrollHeight = $('.chat-canvas')[0].scrollHeight;
-  if(!loadMoreScroll) {
-    loadMoreScroll = true;
-    sendbird.getMessageLoadMore({
-      "limit": 50,
-      "successFunc": function(data) {
-        var moreMessage = data["messages"];
-        var msgList = '';
-        $.each(moreMessage.reverse(), function(index, msg) {
-          var item = sendbird.commandSeparate(msg);
-          if (sendbird.isMessage(item.cmd)) {
-            msgList += messageList(item.payload);
-          } else if (sendbird.isFileMessage(item.cmd)) {
-            if (!sendbird.hasImage(item.payload)) {
-              msgList += fileMessageList(item.payload);
-            } else {
-              msgList += imageMessageList(item.payload);
-            }
+  sendbird.getMessageLoadMore({
+    "limit": 50,
+    "successFunc": function(data) {
+      var moreMessage = data["messages"];
+      var msgList = '';
+      $.each(moreMessage.reverse(), function(index, msg) {
+        var item = sendbird.commandSeparate(msg);
+        if (sendbird.isMessage(item.cmd)) {
+          msgList += messageList(item.payload);
+        } else if (sendbird.isFileMessage(item.cmd)) {
+          if (!sendbird.hasImage(item.payload)) {
+            msgList += fileMessageList(item.payload);
+          } else {
+            msgList += imageMessageList(item.payload);
           }
-        });
-        $('.chat-canvas').prepend(msgList);
-        if (func != undefined) func();
-      },
-      "errorFunc": function(xhr, status, error) {
-        console.log(xhr, status, error);
-      },
-      "async": true
-    });
-  }
-  loadMoreScroll = true;
-  $('.chat-canvas')[0].scrollTop = $('.chat-canvas')[0].scrollHeight - scrollHeight;
+        }
+      });
+      $('.chat-canvas').prepend(msgList);
+      $('.chat-canvas')[0].scrollTop = (moreMessage.length * MESSAGE_TEXT_HEIGHT);
+      if (func != undefined) func();
+    },
+    "errorFunc": function(xhr, status, error) {
+      console.log(xhr, status, error);
+    },
+    "async": true
+  });
 }
 
 function messageList(obj) {
@@ -1121,8 +1116,9 @@ function setFileMessage(obj) {
 $('.chat-canvas').on('scroll', function() {
   var currHeight = $('.chat-canvas').scrollTop();
   if (currHeight == 0) {
-    loadMoreScroll = false;
-    loadMoreChatMessage();
+    if ($('.chat-canvas')[0].scrollHeight > $('.chat-canvas').height()) {
+      loadMoreChatMessage();
+    }
   }
 });
 
