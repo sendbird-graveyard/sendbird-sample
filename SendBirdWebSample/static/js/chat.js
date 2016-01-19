@@ -759,7 +759,11 @@ function startSendBird(guestId, nickName) {
     "access_token": '',
     "successFunc": function(data) {
       if (data.error) {
-        alert('please check your access code');
+        if (data.message == 'Request Domain is not authentication.') {
+          alert(data.message);
+        } else {
+          alert('please check your access code');
+        }
         window.location.href = '/';
       }
     },
