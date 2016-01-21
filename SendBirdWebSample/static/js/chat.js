@@ -20,6 +20,7 @@ var memberList = [];
 var isTyping = false;
 var typingUser = [];
 
+var TYPE_CHECK_TIME = 10000;
 
 $('#guide_create').click(function() {
   $('.modal-guide-create').hide();
@@ -135,6 +136,7 @@ function joinChannel(channelUrl) {
         loadMoreChatMessage(scrollPositionBottom);
         setWelcomeMessage(currChannelInfo['name']);
         addChannel();
+        $('.chat-input-text__field').attr('disabled', false);
       },
       "errorFunc": function(xhr, status, error) {
         console.log(xhr, status, error);
@@ -294,6 +296,7 @@ $('.modal-leave-channel-submit').click(function() {
           currChannelInfo = null;
           leaveChannelUrl = '';
 
+          $('.chat-input-text__field').attr('disabled', true);
           sendbird.disconnect();
           sendbird.connect();
         },
@@ -323,6 +326,7 @@ $('.modal-leave-channel-submit').click(function() {
           currChannelInfo = null;
           leaveMessagingChannelUrl = '';
 
+          $('.chat-input-text__field').attr('disabled', true);
           sendbird.disconnect();
           sendbird.connect();
         },
@@ -481,6 +485,7 @@ function startMessaging() {
         setWelcomeMessage('Messaging Channel');
         addMessagingChannel(isGroup, channelMemberList, currChannelInfo);
         sendbird.markAsRead(currChannelInfo['channel_url']);
+        $('.chat-input-text__field').attr('disabled', false);
       },
       "errorFunc": function(xhr, status, error) {
         console.log(xhr, status, error);
@@ -606,6 +611,7 @@ function joinMessagingChannel(channelUrl) {
         setWelcomeMessage('Messaging Channel');
         addMessagingChannel(isGroup, channelMemberList, currChannelInfo);
         sendbird.markAsRead(currChannelInfo['channel_url']);
+        $('.chat-input-text__field').attr('disabled', false);
       },
       "errorFunc": function(xhr, status, error) {
         console.log(xhr, status, error);
@@ -685,6 +691,7 @@ function inviteMember() {
         setWelcomeMessage('Messaging Channel');
         addMessagingChannel(isGroup, channelMemberList, currChannelInfo);
         sendbird.markAsRead(currChannelInfo['channel_url']);
+        $('.chat-input-text__field').attr('disabled', false);
       },
       "errorFunc": function(xhr, status, error) {
         console.log(xhr, status, error);
@@ -804,12 +811,13 @@ function startSendBird(guestId, nickName) {
         isTyping = true;
 
         $.each(typingUser, function(index, user) {
-          if (user['id'] == userId) {
+          if (user['user']['id'] == userId) {
             isTyping = false;
           }
         });
+
         if (isTyping) {
-          typingUser.push(member);
+          typingUser.push(obj);
         }
       }
     });
@@ -817,7 +825,7 @@ function startSendBird(guestId, nickName) {
     if (isTyping) {
       var typingMember = '';
       $.each(typingUser, function(index, user) {
-        typingMember += user['name'] + ', ';
+        typingMember += user['user']['name'] + ', ';
       });
 
       if (typingMember.length > 2) {
@@ -837,42 +845,56 @@ function startSendBird(guestId, nickName) {
   };
 
   sendbird.events.onTypeEndReceived = function(obj) {
-    var userId = obj['user']['id'];
-    var temp = [];
-    $.each(typingUser, function(index, user) {
-      if (user['id'] != userId) {
-        temp.push(user);
-      }
-    });
-    typingUser = temp;
-
-    if (typingUser.length == 0) {
-      $('.chat-input-typing').html('');
-      $('.chat-input-typing').hide();
-    } else {
-      var typingMember = '';
-      $.each(typingUser, function(index, user) {
-        typingMember += user['name'] + ', ';
-      });
-
-      if (typingMember.length > 2) {
-        if (typingUser.length > 2) {
-          typingMember = 'someone are';
-        } else if (typingUser.length == 2) {
-          typingMember = '{} are'.format(typingMember.slice(0, -2));
-        } else {
-          typingMember = '{} is'.format(typingMember.slice(0, -2));
-        }
-      }
-
-      $('.chat-input-typing').html('{} typing...'.format(typingMember));
-      $('.chat-input-typing').show();
-    }
+    endTyping(obj['user']['id']);
   };
 
   sendbird.setDebugMessage(false);
   sendbird.connect();
 }
+
+var checkTyping = setInterval(function() {
+  var now = new Date().getTime();
+  $.each(typingUser, function(index, user) {
+    var typingTime = user["ts"];
+    if (now - typingTime > TYPE_CHECK_TIME) {
+      endTyping(user['user']['id']);
+    }
+  });
+}, TYPE_CHECK_TIME);
+
+function endTyping(userId) {
+  var temp = [];
+  $.each(typingUser, function(index, user) {
+    if (user['user']['id'] != userId) {
+      temp.push(user);
+    }
+  });
+  typingUser = temp;
+
+  if (typingUser.length == 0) {
+    $('.chat-input-typing').html('');
+    $('.chat-input-typing').hide();
+  } else {
+    var typingMember = '';
+    $.each(typingUser, function(index, user) {
+      typingMember += user['user']['name'] + ', ';
+    });
+
+    if (typingMember.length > 2) {
+      if (typingUser.length > 2) {
+        typingMember = 'someone are';
+      } else if (typingUser.length == 2) {
+        typingMember = '{} are'.format(typingMember.slice(0, -2));
+      } else {
+        typingMember = '{} is'.format(typingMember.slice(0, -2));
+      }
+    }
+
+    $('.chat-input-typing').html('{} typing...'.format(typingMember));
+    $('.chat-input-typing').show();
+  }
+}
+
 /***********************************************
  *          // END SendBird Settings
  **********************************************/
@@ -1272,3 +1294,4 @@ window.onfocus = function() {
     }
   });
 };
+
