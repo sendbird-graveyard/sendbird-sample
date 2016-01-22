@@ -739,12 +739,14 @@ function getMessagingChannelList() {
 
 function makeMemberList(members) {
   var item = {};
+  //Clear memberList before updating it
+  memberList = [];
   $.each(members, function(index, member) {
     item = {};
     if (!isCurrentUser(member['guest_id'])) {
       item["id"] = member["id"];
       item["name"] = member["name"];
-      memberList.push(item);
+      memberList.pushUnique(item);
     }
   });
 }
