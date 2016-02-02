@@ -1,1 +1,1 @@
-../../../../SendBirdSDK/SendBirdSDK.framework/Versions/A/Headers/SendBirdSRWebSocket.h
+../../../../SendBirdSDK/SendBirdSDK.framework/Headers/SendBirdSRWebSocket.h

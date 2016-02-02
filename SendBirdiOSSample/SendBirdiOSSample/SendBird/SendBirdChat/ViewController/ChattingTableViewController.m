@@ -79,7 +79,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+
     [[self navigationController] setNavigationBarHidden:NO animated:NO];
     [[[self navigationController] navigationBar] setBarTintColor:UIColorFromRGB(0x824096)];
     [[[self navigationController] navigationBar] setTranslucent:NO];
@@ -136,6 +136,8 @@
     };
     
     [super viewDidLoad];
+    [self setNeedsStatusBarAppearanceUpdate];
+
     [ImageCache initImageCache];
     [[[SendBird sharedInstance] taskQueue] cancelAllOperations];
     
@@ -169,6 +171,11 @@
 //    else if (viewMode == kChannelListViewMode) {
 //        [self clickChannelListButton];
 //    }
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)setIndicatorHidden:(BOOL)hidden

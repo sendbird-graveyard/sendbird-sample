@@ -146,8 +146,8 @@ static ImageCache *_sharedInstance = nil;
     NSDate *today = [NSDate date];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     NSCalendar *todayCalendar = [NSCalendar currentCalendar];
-    NSDateComponents *todayComponents = [todayCalendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:today];
-    NSDateComponents *messageDateComponents = [todayCalendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:messageDate];
+    NSDateComponents *todayComponents = [todayCalendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:today];
+    NSDateComponents *messageDateComponents = [todayCalendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:messageDate];
     
     NSInteger dayOfNow = [todayComponents day];
     NSInteger monthOfNow = [todayComponents month];
@@ -294,6 +294,35 @@ static ImageCache *_sharedInstance = nil;
     }
 
     return maxMessageTs;
+}
+
++ (void)loadImage:(NSString *)imageUrl imageView:(UIImageView *)imageView width:(CGFloat)width height:(CGFloat)height
+{
+    __weak UIImageView *iv = imageView;
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setHTTPMethod:@"GET"];
+    [request setValue:[NSString stringWithFormat:@"Jios/%@", [SendBird VERSION]] forHTTPHeaderField:@"User-Agent"];
+    [request setURL:[NSURL URLWithString:imageUrl]];
+    
+    [iv setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
+        CGSize newSize = CGSizeMake(height * 2, width * 2);
+        float widthRatio = newSize.width / image.size.width;
+        float heightRatio = newSize.height / image.size.height;
+        
+        if(widthRatio > heightRatio) {
+            newSize = CGSizeMake(image.size.width * heightRatio, image.size.height * heightRatio);
+        }
+        else {
+            newSize = CGSizeMake(image.size.width * widthRatio, image.size.height * widthRatio);
+        }
+        
+        UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+        [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+        UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        [iv setImage:newImage];
+    } failure:nil];
 }
 
 @end

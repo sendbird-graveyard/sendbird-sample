@@ -67,10 +67,7 @@
     NSMutableDictionary *typeStatus;
     NSTimer *mTimer;
     
-    void (^updateMessageTs)(SendBirdMessageModel *model);
-    
-    long long mMaxMessageTs;
-    long long mMinMessageTs;
+    __block void (^updateMessageTs)(SendBirdMessageModel *model);
     
     SendBirdUserListQuery *userListQuery;
 }
@@ -87,14 +84,13 @@
 
 - (void) clearMessageTss
 {
-    mMaxMessageTs = [SendBirdUtils getMessagingMaxMessageTs];
-    mMinMessageTs = LLONG_MAX;
+    self.mMaxMessageTs = [SendBirdUtils getMessagingMaxMessageTs];
+    self.mMinMessageTs = LLONG_MAX;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[self navigationController] setNavigationBarHidden:NO animated:NO];
     [[[self navigationController] navigationBar] setBarTintColor:UIColorFromRGB(0x533a9c)];
     [[[self navigationController] navigationBar] setTranslucent:NO];
@@ -174,7 +170,6 @@
 
 - (void) inviteMember:(id)sender
 {
-    NSString *channelUrl = self.channelUrl;
     NSMutableArray *userIds = [[NSMutableArray alloc] init];
     for (int i = 0; i < [membersInChannel count]; i++) {
         if ([[self.channelMemberListTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]] isSelected]) {
@@ -294,18 +289,21 @@
 }
 
 - (void)viewDidLoad {
+    __weak typeof(self) weakSelf = self;
+    
     updateMessageTs = ^(SendBirdMessageModel *model) {
         if (![model hasMessageId]) {
             return;
         }
         
-        mMaxMessageTs = mMaxMessageTs < [model getMessageTimestamp] ? [model getMessageTimestamp] : mMaxMessageTs;
-        mMinMessageTs = mMinMessageTs > [model getMessageTimestamp] ? [model getMessageTimestamp] : mMinMessageTs;
+        weakSelf.mMaxMessageTs = weakSelf.mMaxMessageTs < [model getMessageTimestamp] ? [model getMessageTimestamp] : weakSelf.mMaxMessageTs;
+        weakSelf.mMinMessageTs = weakSelf.mMinMessageTs > [model getMessageTimestamp] ? [model getMessageTimestamp] : weakSelf.mMinMessageTs;
 
-        [SendBirdUtils setMessagingMaxMessageTs:mMaxMessageTs];
+        [SendBirdUtils setMessagingMaxMessageTs:weakSelf.mMaxMessageTs];
     };
     
     [super viewDidLoad];
+    [self setNeedsStatusBarAppearanceUpdate];
     
     [ImageCache initImageCache];
     [[[SendBird sharedInstance] taskQueue] cancelAllOperations];
@@ -334,6 +332,11 @@
     }
     
     [self startChatting];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)setIndicatorHidden:(BOOL)hidden
@@ -482,7 +485,7 @@
             }
             
             [SendBird joinChannel:[channel getUrl]];
-            [SendBird connectWithMessageTs:mMaxMessageTs];
+            [SendBird connectWithMessageTs:self.mMaxMessageTs];
         } endBlock:^(NSError *error) {
             
         }];
@@ -1134,7 +1137,7 @@
     }
     else if (scrollView == self.tableView) {
         if (scrollView.contentOffset.y < 0 && endDragging == YES) {
-            [[SendBird queryMessageListInChannel:[SendBird getChannelUrl]] prevWithMessageTs:mMinMessageTs andLimit:30 resultBlock:^(NSMutableArray *queryResult) {
+            [[SendBird queryMessageListInChannel:[SendBird getChannelUrl]] prevWithMessageTs:self.mMinMessageTs andLimit:30 resultBlock:^(NSMutableArray *queryResult) {
                 if ([queryResult count] <= 0) {
                     return;
                 }
@@ -1156,8 +1159,8 @@
             float y = offset.y + bounds.size.height - inset.bottom;
             float h = size.height;
             if (y > h - 5 && endDragging == YES) {
-                NSLog(@"scroll mMaxMessageTs: %lld", mMaxMessageTs);
-                [[SendBird queryMessageListInChannel:[SendBird getChannelUrl]] nextWithMessageTs:mMaxMessageTs andLimit:30 resultBlock:^(NSMutableArray *queryResult) {
+                NSLog(@"scroll mMaxMessageTs: %lld", self.mMaxMessageTs);
+                [[SendBird queryMessageListInChannel:[SendBird getChannelUrl]] nextWithMessageTs:self.mMaxMessageTs andLimit:30 resultBlock:^(NSMutableArray *queryResult) {
                     if ([queryResult count] <= 0) {
                         return;
                     }

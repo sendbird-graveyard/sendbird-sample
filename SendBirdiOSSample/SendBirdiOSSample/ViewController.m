@@ -23,8 +23,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setNeedsStatusBarAppearanceUpdate];
     
     [self initViews];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -209,13 +215,13 @@
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:nil
                                                           attribute:NSLayoutAttributeNotAnAttribute
-                                                         multiplier:1 constant:80]];
+                                                         multiplier:1 constant:90]];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdLogoImageView
                                                           attribute:NSLayoutAttributeHeight
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:nil
                                                           attribute:NSLayoutAttributeNotAnAttribute
-                                                         multiplier:1 constant:80]];
+                                                         multiplier:1 constant:90]];
     
     // SendBird Label
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.sendbirdLabel

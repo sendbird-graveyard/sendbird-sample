@@ -419,120 +419,11 @@
     [self.descLabel setText:[self.message structuredMessageDesc]];
     [self.structuredNameLabel setText:[self.message structuredMessageName]];
     
-#ifdef __WITH_AFNETWORKING__
-    [self.profileImageView setImageWithURL:[NSURL URLWithString:[sender imageUrl]]];
-#else
-#warning THIS IS SAMPLE CODE. Do not use ImageCache in your product. Use your own image loader or 3rd party image loader.
-    UIImage *image = [[ImageCache sharedInstance] getImage:[sender imageUrl]];
-    if (image) {
-        @try {
-            [self.profileImageView setImage:image];
-        }
-        @catch (NSException *exception) {
-            NSLog(@"FileLink Exception");
-        }
-        @finally {
-        }
-    }
-    else {
-        [SendBirdUtils imageDownload:[NSURL URLWithString:[sender imageUrl]] endBlock:^(NSData *response, NSError *error) {
-            UIImage *image = [[UIImage alloc] initWithData:response scale:1];
-            UIImage *newImage = [SendBirdUtils imageWithImage:image scaledToSize:kFileLinkProfileWidth];
-            
-            [[ImageCache sharedInstance] setImage:newImage withKey:[sender imageUrl]];
-            @try {
-                dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-                dispatch_async(queue, ^(void) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.profileImageView setImage:newImage];
-                    });
-                });
-            }
-            @catch (NSException *exception) {
-                NSLog(@"FileLink Exception");
-            }
-            @finally {
-            }
-        }];
-    }
-    [self setNeedsLayout];
-#endif
+    [SendBirdUtils loadImage:[sender imageUrl] imageView:self.profileImageView width:kFileLinkProfileWidth height:kFileLinkProfileHeight];
 
-#ifdef __WITH_AFNETWORKING__
-    [self.structuredIconImageView setImageWithURL:[NSURL URLWithString:[self.message structuredMessageIconUrl]]];
-#else
-#warning THIS IS SAMPLE CODE. Do not use ImageCache in your product. Use your own image loader or 3rd party image loader.
-    UIImage *iconImage = [[ImageCache sharedInstance] getImage:[self.message structuredMessageIconUrl]];
-    if (iconImage) {
-        @try {
-            [self.structuredIconImageView setImage:iconImage];
-        }
-        @catch (NSException *exception) {
-            NSLog(@"FileLink Exception");
-        }
-        @finally {
-        }
-    }
-    else {
-        [SendBirdUtils imageDownload:[NSURL URLWithString:[self.message structuredMessageIconUrl]] endBlock:^(NSData *response, NSError *error) {
-            UIImage *image = [[UIImage alloc] initWithData:response scale:1];
-            //            UIImage *newImage = [SendBirdUtils imageWithImage:image scaledToSize:198];
-            UIImage *newImage = image;
-            
-            [[ImageCache sharedInstance] setImage:newImage withKey:[self.message structuredMessageIconUrl]];
-            @try {
-                dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-                dispatch_async(queue, ^(void) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.structuredIconImageView setImage:newImage];
-                    });
-                });
-            }
-            @catch (NSException *exception) {
-                NSLog(@"FileLink Exception");
-            }
-            @finally {
-            }
-        }];
-    }
-    [self setNeedsLayout];
-#endif
-    
+    [SendBirdUtils loadImage:[self.message structuredMessageIconUrl] imageView:self.structuredIconImageView width:kStructuredMessageIconTopWidth height:kStructuredMessageIconTopHeight];
 
-#ifdef __WITH_AFNETWORKING__
-    [self.thumb setImageWithURL:[NSURL URLWithString:[message structuredMessageThumbUrl]]];
-#else
-#warning THIS IS SAMPLE CODE. Do not use ImageCache in your product. Use your own image loader or 3rd party image loader.
-    UIImage *thumbImage = [[ImageCache sharedInstance] getImage:[self.message structuredMessageThumbUrl]];
-    if (image) {
-        @try {
-            [self.thumbImageView setImage:thumbImage];
-        }
-        @catch (NSException *exception) {
-            NSLog(@"FileLink Exception");
-        }
-        @finally {
-        }
-    }
-    else {
-        [SendBirdUtils imageDownload:[NSURL URLWithString:[self.message structuredMessageThumbUrl]] endBlock:^(NSData *response, NSError *error) {
-            UIImage *image = [[UIImage alloc] initWithData:response scale:1];
-//            UIImage *newImage = [SendBirdUtils imageWithImage:image scaledToSize:kFileLinkWidth];
-            UIImage *newImage = image;
-            
-            [[ImageCache sharedInstance] setImage:newImage withKey:[self.message structuredMessageThumbUrl]];
-            @try {
-                [self.thumbImageView setImage:newImage];
-            }
-            @catch (NSException *exception) {
-                NSLog(@"FileLink Exception");
-            }
-            @finally {
-            }
-        }];
-    }
-    [self setNeedsLayout];
-#endif
+    [SendBirdUtils loadImage:[self.message structuredMessageThumbUrl] imageView:self.thumbImageView width:kStructuredMessageThumbnailWidth height:kStructuredMessageThumbnailHeight];
 }
 
 - (CGFloat)getHeightOfViewCell:(CGFloat)totalWidth
@@ -562,8 +453,7 @@
     CGSize nicknameRect = [self.nicknameLabel.text boundingRectWithSize:CGSizeMake(kStructuredMessageThumbnailWidth, CGFLOAT_MAX)  options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName:self.nicknameLabel.font} context:[[NSStringDrawingContext alloc] init]].size;
     CGSize titleRect = [self.titleLabel.text boundingRectWithSize:CGSizeMake(kStructuredMessageThumbnailWidth, CGFLOAT_MAX)  options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName:self.titleLabel.font} context:[[NSStringDrawingContext alloc] init]].size;
     CGSize descRect = [self.descLabel.text boundingRectWithSize:CGSizeMake(kStructuredMessageThumbnailWidth, CGFLOAT_MAX)  options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName:self.descLabel.font} context:[[NSStringDrawingContext alloc] init]].size;
-    
-//    return nicknameRect.size.height + kStructuredMessageCellBottomMargin + kFileLinkBalloonBottomPadding + kFileLinkHeight + kFileLinkBalloonTopPadding + kFileLinkCellTopMargin;
+
     return kStructuredBalloonTopPadding + nicknameRect.height + kStructuredMessageThumbnailHeight + titleRect.height + descRect.height + kStructuredMessageDividerTopMargin + kStructuredMessageDividerHeight + kStructuredMessageIconTopMargin + kStructuredMessageIconTopHeight;
 }
 

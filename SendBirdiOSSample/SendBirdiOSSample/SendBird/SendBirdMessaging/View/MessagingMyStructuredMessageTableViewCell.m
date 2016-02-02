@@ -395,6 +395,7 @@
         [self.unreadLabel setText:[NSString stringWithFormat:@"Unread %d", unreadCount]];
     }
     
+#define __WITH_AFNETWORKING__
 #ifdef __WITH_AFNETWORKING__
     [self.structuredIconImageView setImageWithURL:[NSURL URLWithString:[message structuredMessageIconUrl]]];
 #else

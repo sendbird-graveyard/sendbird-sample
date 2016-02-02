@@ -10,6 +10,7 @@
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <QuartzCore/QuartzCore.h>
 #import <SendBirdSDK/SendBirdSDK.h>
+#import <AFNetworking/UIImageView+AFNetworking.h>
 
 #define kChattingViewMode 0
 #define kChannelListViewMode 1
@@ -59,6 +60,7 @@ alpha:1.0]
 + (NSString *) getDisplayCoverImageUrl:(NSArray *)members;
 + (void) setMessagingMaxMessageTs:(long long)messageTs;
 + (long long) getMessagingMaxMessageTs;
++ (void)loadImage:(NSString *)imageUrl imageView:(UIImageView *)imageView width:(CGFloat)width height:(CGFloat)height;
 
 @end
 

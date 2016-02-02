@@ -1,1 +1,1 @@
-../../../../SendBirdSDK/SendBirdSDK.framework/Versions/A/Headers/SendBirdStructuredMessage.h
+../../../../SendBirdSDK/SendBirdSDK.framework/Headers/SendBirdStructuredMessage.h

@@ -17,6 +17,7 @@
   
 </head>
 <body>
+  <div class="init-check"></div>
 
   <div class="sample-body">
 
@@ -102,7 +103,7 @@
             <input type="file" name="file" id="chat_file_input" style="display: none;">
           </label>
           <div class="chat-input-text">
-            <textarea class="chat-input-text__field" placeholder="Write a chat"></textarea>
+            <textarea class="chat-input-text__field" placeholder="Write a chat" disabled="true"></textarea>
           </div>
         </div>
         <label class="chat-input-typing"></label>
@@ -184,10 +185,8 @@
         // END modal
   ------------------------>
 
+  <script src="/static/libs/2.1.0/SendBird-SDK-2.1.0.min.js"></script>
   <script src="/static/js/jquery-1.11.3.min.js"></script>
-  <script src="/static/bootstrap/bootstrap.min.js"></script>
-
-  <script src="/static/libs/2.0.1/SendBird-sdk-2.0.1.min.js"></script>
   <script src="/static/js/util.js"></script>
   <script src="/static/js/chat.js"></script>
 
