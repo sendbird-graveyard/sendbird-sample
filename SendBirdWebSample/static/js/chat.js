@@ -128,12 +128,18 @@ function joinChannel(channelUrl) {
         navInit();
         popupInit();
 
-        sendbird.connect();
-        isOpenChat = true;
-        loadMoreChatMessage(scrollPositionBottom);
-        setWelcomeMessage(currChannelInfo['name']);
-        addChannel();
-        $('.chat-input-text__field').attr('disabled', false);
+        sendbird.connect({
+          "successFunc": function(data) {
+            isOpenChat = true;
+            loadMoreChatMessage(scrollPositionBottom);
+            setWelcomeMessage(currChannelInfo['name']);
+            addChannel();
+            $('.chat-input-text__field').attr('disabled', false);
+          },
+          "errorFunc": function(status, error) {
+            console.log(status, error);
+          }
+        });
       },
       "errorFunc": function(status, error) {
         console.log(status, error);
@@ -472,12 +478,18 @@ function startMessaging() {
         popupInit();
         makeMemberList(members);
 
-        sendbird.connect();
-        loadMoreChatMessage(scrollPositionBottom);
-        setWelcomeMessage('Messaging Channel');
-        addMessagingChannel(isGroup, channelMemberList, currChannelInfo);
-        sendbird.markAsRead(currChannelInfo['channel_url']);
-        $('.chat-input-text__field').attr('disabled', false);
+        sendbird.connect({
+          "successFunc": function(data) {
+            loadMoreChatMessage(scrollPositionBottom);
+            setWelcomeMessage('Messaging Channel');
+            addMessagingChannel(isGroup, channelMemberList, currChannelInfo);
+            sendbird.markAsRead(currChannelInfo['channel_url']);
+            $('.chat-input-text__field').attr('disabled', false);
+          },
+          "errorFunc": function(status, error) {
+            console.log(status, error);
+          }
+        });
       },
       "errorFunc": function(status, error) {
         console.log(status, error);
@@ -597,11 +609,17 @@ function joinMessagingChannel(channelUrl) {
         popupInit();
         makeMemberList(members);
 
-        sendbird.connect();
-        loadMoreChatMessage(scrollPositionBottom);
-        setWelcomeMessage('Messaging Channel');
-        addMessagingChannel(isGroup, channelMemberList, currChannelInfo);
-        $('.chat-input-text__field').attr('disabled', false);
+        sendbird.connect({
+          "successFunc": function(data) {
+            loadMoreChatMessage(scrollPositionBottom);
+            setWelcomeMessage('Messaging Channel');
+            addMessagingChannel(isGroup, channelMemberList, currChannelInfo);
+            $('.chat-input-text__field').attr('disabled', false);
+          },
+          "errorFunc": function(status, error) {
+            console.log(status, error);
+          }
+        });
       },
       "errorFunc": function(status, error) {
         console.log(status, error);
@@ -675,12 +693,18 @@ function inviteMember() {
         popupInit();
         makeMemberList(members);
 
-        sendbird.connect();
-        loadMoreChatMessage(scrollPositionBottom);
-        setWelcomeMessage('Messaging Channel');
-        addMessagingChannel(isGroup, channelMemberList, currChannelInfo);
-        sendbird.markAsRead(currChannelInfo['channel_url']);
-        $('.chat-input-text__field').attr('disabled', false);
+        sendbird.connect({
+          "successFunc": function(data) {
+            loadMoreChatMessage(scrollPositionBottom);
+            setWelcomeMessage('Messaging Channel');
+            addMessagingChannel(isGroup, channelMemberList, currChannelInfo);
+            sendbird.markAsRead(currChannelInfo['channel_url']);
+            $('.chat-input-text__field').attr('disabled', false);
+          },
+          "errorFunc": function(status, error) {
+            console.log(status, error);
+          }
+        });
       },
       "errorFunc": function(status, error) {
         console.log(status, error);
@@ -754,6 +778,7 @@ function startSendBird(guestId, nickName) {
     "access_token": '',
     "successFunc": function(data) {
       $('.init-check').hide();
+      getMessagingChannelList();
     },
     "errorFunc": function(status, error) {
       console.log(status, error);
@@ -1257,8 +1282,6 @@ function init() {
   $('.init-check').show();
   startSendBird(guestId, nickname);
   $('.left-nav-user-nickname').html(nickname);
-
-  getMessagingChannelList();
 }
 
 $(document).ready(function() {
@@ -1267,7 +1290,7 @@ $(document).ready(function() {
 });
 
 window.onfocus = function() {
-  if (!isOpenChat) {
+  if (!isOpenChat && currChannelUrl != null) {
     sendbird.markAsRead(currChannelUrl);
   }
   $.each($('.left-nav-channel'), function(index, item) {
