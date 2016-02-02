@@ -41,6 +41,9 @@
 @property (retain) TypingNowView *typingNowView;
 @property (retain) NSString *targetUserId;
 
+@property long long mMaxMessageTs;
+@property long long mMinMessageTs;
+
 - (id) init;
 - (void) setViewMode:(int)mode;
 - (void) startChatting;

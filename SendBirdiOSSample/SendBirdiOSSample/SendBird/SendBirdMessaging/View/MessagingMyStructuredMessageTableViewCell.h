@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <SendBirdSDK/SendBirdSDK.h>
+#import <AFNetworking/UIImageView+AFNetworking.h>
 
 @interface MessagingMyStructuredMessageTableViewCell : UITableViewCell
 

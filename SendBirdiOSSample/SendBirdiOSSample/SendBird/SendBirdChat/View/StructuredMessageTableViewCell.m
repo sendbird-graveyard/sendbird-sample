@@ -256,89 +256,14 @@
     [self.structuredNameLabel setText:[model structuredMessageName]];
     
     if ([model structuredMessageThumbUrl] != nil && [[model structuredMessageThumbUrl] length] > 0) {
-#ifdef __WITH_AFNETWORKING__
-        [self.thumbImageView setImageWithURL:[NSURL URLWithString:[model structuredMessageThumbUrl]];
-#else
-#warning THIS IS SAMPLE CODE. Do not use ImageCache in your product. Use your own image loader or 3rd party image loader.
-        UIImage *image = [[ImageCache sharedInstance] getImage:[model structuredMessageThumbUrl]];
-        if (image) {
-            @try {
-                [self.thumbImageView setImage:image];
-            }
-            @catch (NSException *exception) {
-                NSLog(@"FileLink Exception");
-            }
-            @finally {
-            }
-        }
-        else {
-            [SendBirdUtils imageDownload:[NSURL URLWithString:[model structuredMessageThumbUrl]] endBlock:^(NSData *response, NSError *error) {
-                UIImage *image = [[UIImage alloc] initWithData:response scale:1];
-                UIImage *newImage = [SendBirdUtils imageWithImage:image scaledToSize:148];
-                newImage = image;
-                
-                [[ImageCache sharedInstance] setImage:newImage withKey:[model structuredMessageThumbUrl]];
-                @try {
-                    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-                    dispatch_async(queue, ^(void) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self.thumbImageView setImage:newImage];
-                        });
-                    });
-                }
-                @catch (NSException *exception) {
-                    NSLog(@"FileLink Exception");
-                }
-                @finally {
-                }
-            }];
-        }
-#endif
+        [SendBirdUtils loadImage:[model structuredMessageThumbUrl] imageView:self.thumbImageView width:74 height:74];
     }
     else {
         [self.thumbImageView setImage:nil];
     }
          
     if ([model structuredMessageIconUrl] != nil && [[model structuredMessageIconUrl] length] > 0) {
-#ifdef __WITH_AFNETWORKING__
-        [self.structuredIconImageView setImageWithURL:[NSURL URLWithString:[self.message structuredMessageIconUrl]]];
-#else
-#warning THIS IS SAMPLE CODE. Do not use ImageCache in your product. Use your own image loader or 3rd party image loader.
-        UIImage *iconImage = [[ImageCache sharedInstance] getImage:[self.structuredMessage structuredMessageIconUrl]];
-        if (iconImage) {
-         @try {
-             [self.structuredIconImageView setImage:iconImage];
-         }
-         @catch (NSException *exception) {
-             NSLog(@"FileLink Exception");
-         }
-         @finally {
-         }
-        }
-        else {
-         [SendBirdUtils imageDownload:[NSURL URLWithString:[self.structuredMessage structuredMessageIconUrl]] endBlock:^(NSData *response, NSError *error) {
-             UIImage *image = [[UIImage alloc] initWithData:response scale:1];
-             //            UIImage *newImage = [SendBirdUtils imageWithImage:image scaledToSize:198];
-             UIImage *newImage = image;
-             
-             [[ImageCache sharedInstance] setImage:newImage withKey:[self.structuredMessage structuredMessageIconUrl]];
-             @try {
-                 dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-                 dispatch_async(queue, ^(void) {
-                     dispatch_async(dispatch_get_main_queue(), ^{
-                         [self.structuredIconImageView setImage:newImage];
-                     });
-                 });
-             }
-             @catch (NSException *exception) {
-                 NSLog(@"FileLink Exception");
-             }
-             @finally {
-             }
-         }];
-        }
-        [self setNeedsLayout];
-#endif
+        [SendBirdUtils loadImage:[self.structuredMessage structuredMessageIconUrl] imageView:self.structuredIconImageView width:20 height:20];
     }
     else {
      [self.structuredIconImageView setImage:nil];

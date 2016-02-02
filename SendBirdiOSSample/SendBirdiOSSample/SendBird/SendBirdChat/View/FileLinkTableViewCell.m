@@ -194,43 +194,7 @@
     [self.filenameLabel setText:[[self.fileLink fileInfo] name]];
     
     if ([[[self.fileLink fileInfo] type] hasPrefix:@"image"]) {
-#ifdef __WITH_AFNETWORKING__
-        [self.fileImageView setImageWithURL:[NSURL URLWithString:[[model fileInfo] url]]];
-#else
-#warning THIS IS SAMPLE CODE. Do not use ImageCache in your product. Use your own image loader or 3rd party image loader.
-        UIImage *image = [[ImageCache sharedInstance] getImage:[[model fileInfo] url]];
-        if (image) {
-            @try {
-                [self.fileImageView setImage:image];
-            }
-            @catch (NSException *exception) {
-                NSLog(@"FileLink Exception");
-            }
-            @finally {
-            }
-        }
-        else {
-            [SendBirdUtils imageDownload:[NSURL URLWithString:[[model fileInfo] url]] endBlock:^(NSData *response, NSError *error) {
-                UIImage *image = [[UIImage alloc] initWithData:response scale:1];
-                UIImage *newImage = [SendBirdUtils imageWithImage:image scaledToSize:kFileLinkImageWidth];
-                
-                [[ImageCache sharedInstance] setImage:newImage withKey:[[model fileInfo] url]];
-                @try {
-                    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-                    dispatch_async(queue, ^(void) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self.fileImageView setImage:newImage];
-                        });
-                    });
-                }
-                @catch (NSException *exception) {
-                    NSLog(@"FileLink Exception");
-                }
-                @finally {
-                }
-            }];
-        }
-#endif
+        [SendBirdUtils loadImage:[[model fileInfo] url] imageView:self.fileImageView width:kFileLinkImageWidth height:kFileLinkImageHeight];
     }
 }
 

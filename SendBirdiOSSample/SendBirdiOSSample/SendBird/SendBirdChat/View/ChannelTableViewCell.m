@@ -204,44 +204,8 @@
         [self setBackgroundColor:[UIColor clearColor]];
         [self.checkImageView setHidden:YES];
     }
-    
-#ifdef __WITH_AFNETWORKING__
-    [self.coverImageView setImageWithURL:[NSURL URLWithString:[model coverUrl]]];
-#else
-#warning THIS IS SAMPLE CODE. Do not use ImageCache in your product. Use your own image loader or 3rd party image loader.
-    UIImage *image = [[ImageCache sharedInstance] getImage:[model coverUrl]];
-    if (image) {
-        @try {
-            [self.coverImageView setImage:image];
-        }
-        @catch (NSException *exception) {
-            NSLog(@"Channel Exception");
-        }
-        @finally {
-        }
-    }
-    else {
-        [SendBirdUtils imageDownload:[NSURL URLWithString:[model coverUrl]] endBlock:^(NSData *response, NSError *error) {
-            UIImage *image = [[UIImage alloc] initWithData:response scale:1];
-            UIImage *newImage = [SendBirdUtils imageWithImage:image scaledToSize:38];
-            
-            [[ImageCache sharedInstance] setImage:newImage withKey:[model coverUrl]];
-            @try {
-                dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-                dispatch_async(queue, ^(void) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.coverImageView setImage:newImage];
-                    });
-                });
-            }
-            @catch (NSException *exception) {
-                NSLog(@"Channel Exception");
-            }
-            @finally {
-            }
-        }];
-    }
-#endif
+
+    [SendBirdUtils loadImage:[model coverUrl] imageView:self.coverImageView width:38 height:38];
 }
 
 @end

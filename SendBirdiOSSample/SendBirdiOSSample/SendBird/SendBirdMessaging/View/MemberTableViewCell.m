@@ -161,44 +161,8 @@
     }
     
     [self.nicknameLabel setText:[model nickname]];
-#ifdef __WITH_AFNETWORKING__
-    [self.profileImageView setImageWithURL:[NSURL URLWithString:[model imageUrl]]];
-#else
-#warning THIS IS SAMPLE CODE. Do not use ImageCache in your product. Use your own image loader or 3rd party image loader.
-    UIImage *image = [[ImageCache sharedInstance] getImage:[model picture]];
-    if (image) {
-        @try {
-            [self.profileImageView setImage:image];
-        }
-        @catch (NSException *exception) {
-            NSLog(@"Channel Exception");
-        }
-        @finally {
-        }
-    }
-    else {
-        [SendBirdUtils imageDownload:[NSURL URLWithString:[model picture]] endBlock:^(NSData *response, NSError *error) {
-            UIImage *image = [[UIImage alloc] initWithData:response scale:1];
-            UIImage *newImage = [SendBirdUtils imageWithImage:image scaledToSize:40];
-            
-            [[ImageCache sharedInstance] setImage:newImage withKey:[model picture]];
-            @try {
-                dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-                dispatch_async(queue, ^(void) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.profileImageView setImage:newImage];
-                    });
-                });
-            }
-            @catch (NSException *exception) {
-                NSLog(@"Channel Exception");
-            }
-            @finally {
-            }
-        }];
-    }
-    [self setNeedsLayout];
-#endif
+
+    [SendBirdUtils loadImage:[model picture] imageView:self.profileImageView width:40 height:40];
 }
 
 @end

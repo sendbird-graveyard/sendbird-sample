@@ -202,6 +202,8 @@
     }
 }
 
+
+
 - (void) setModel:(SendBirdMessage *)message
 {
     self.message = message;
@@ -210,45 +212,8 @@
     long long ts = [self.message getMessageTimestamp] / 1000;
     [self.dateTimeLabel setText:[SendBirdUtils messageDateTime:ts]];
     [self.nicknameLabel setText:[sender name]];
-    
-#ifdef __WITH_AFNETWORKING__
-    [self.profileImageView setImageWithURL:[NSURL URLWithString:[sender imageUrl]]];
-#else
-#warning THIS IS SAMPLE CODE. Do not use ImageCache in your product. Use your own image loader or 3rd party image loader.
-    UIImage *image = [[ImageCache sharedInstance] getImage:[sender imageUrl]];
-    if (image) {
-        @try {
-            [self.profileImageView setImage:image];
-        }
-        @catch (NSException *exception) {
-            NSLog(@"FileLink Exception");
-        }
-        @finally {
-        }
-    }
-    else {
-        [SendBirdUtils imageDownload:[NSURL URLWithString:[sender imageUrl]] endBlock:^(NSData *response, NSError *error) {
-            UIImage *image = [[UIImage alloc] initWithData:response scale:1];
-            UIImage *newImage = [SendBirdUtils imageWithImage:image scaledToSize:kMessageProfileWidth];
-            
-            [[ImageCache sharedInstance] setImage:newImage withKey:[sender imageUrl]];
-            @try {
-                dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-                dispatch_async(queue, ^(void) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.profileImageView setImage:newImage];
-                    });
-                });
-            }
-            @catch (NSException *exception) {
-                NSLog(@"FileLink Exception");
-            }
-            @finally {
-            }
-        }];
-    }
-    [self setNeedsLayout];
-#endif
+
+    [SendBirdUtils loadImage:[sender imageUrl] imageView:self.profileImageView width:kMessageProfileWidth height:kMessageProfileHeight];
 }
 
 - (NSAttributedString *)buildMessage
