@@ -106,6 +106,8 @@ public class SendBirdMessagingActivity extends FragmentActivity {
     private MessagingChannel mMessagingChannel;
     private Bundle mSendBirdInfo;
 
+    private boolean isForeground;
+
 
     public static Bundle makeMessagingStartArgs(String appKey, String uuid, String nickname, String targetUserId) {
         return makeMessagingStartArgs(appKey, uuid, nickname, new String[]{targetUserId});
@@ -173,6 +175,9 @@ public class SendBirdMessagingActivity extends FragmentActivity {
     protected void onResume() {
         super.onResume();
 
+        isForeground = true;
+        SendBird.markAsRead();
+
         if(mTimer != null) {
             mTimer.cancel();
         }
@@ -197,6 +202,9 @@ public class SendBirdMessagingActivity extends FragmentActivity {
     @Override
     protected void onPause() {
         super.onPause();
+
+        isForeground = false;
+
         if (mTimer != null) {
             mTimer.cancel();
         }
@@ -312,7 +320,9 @@ public class SendBirdMessagingActivity extends FragmentActivity {
 
             @Override
             public void onMessageReceived(Message message) {
-                SendBird.markAsRead();
+                if(isForeground){
+                    SendBird.markAsRead();
+                }
                 mSendBirdMessagingAdapter.addMessageModel(message);
             }
 
