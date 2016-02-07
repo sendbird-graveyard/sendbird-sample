@@ -1,6 +1,5 @@
 
 var appId = 'A7A2672C-AD11-11E4-8DAA-0A18B21C2D82';
-var sendbird = null;
 var currScrollHeight = 0;
 var MESSAGE_TEXT_HEIGHT = 27;
 
@@ -68,10 +67,9 @@ function getChannelList(page) {
       }
       $('.modal-open-chat').show();
     },
-    "errorFunc": function(xhr, status, error) {
-      console.log(xhr, status, error);
-    },
-    "async": true
+    "errorFunc": function(status, error) {
+      console.log(status, error);
+    }
   });
 }
 
@@ -100,10 +98,9 @@ $('#modal_open_chat_search').keydown(function(event) {
           $('.modal-open-chat-more').hide();
         }
       },
-      "errorFunc": function(xhr, status, error) {
-        console.log(xhr, status, error);
-      },
-      "async": true
+      "errorFunc": function(status, error) {
+        console.log(status, error);
+      }
     });
   }
 });
@@ -131,17 +128,22 @@ function joinChannel(channelUrl) {
         navInit();
         popupInit();
 
-        sendbird.connect();
-        isOpenChat = true;
-        loadMoreChatMessage(scrollPositionBottom);
-        setWelcomeMessage(currChannelInfo['name']);
-        addChannel();
-        $('.chat-input-text__field').attr('disabled', false);
+        sendbird.connect({
+          "successFunc": function(data) {
+            isOpenChat = true;
+            loadMoreChatMessage(scrollPositionBottom);
+            setWelcomeMessage(currChannelInfo['name']);
+            addChannel();
+            $('.chat-input-text__field').attr('disabled', false);
+          },
+          "errorFunc": function(status, error) {
+            console.log(status, error);
+          }
+        });
       },
-      "errorFunc": function(xhr, status, error) {
-        console.log(xhr, status, error);
-      },
-      "async": false
+      "errorFunc": function(status, error) {
+        console.log(status, error);
+      }
     }
   );
 
@@ -253,10 +255,9 @@ function getMemberList(channelUrl) {
         });
         $('.modal-member-list').html(memberListHtml);
       },
-      "errorFunc": function(xhr, status, error) {
-        console.log(xhr, status, error);
-      },
-      "async": true
+      "errorFunc": function(status, error) {
+        console.log(status, error);
+      }
     }
   );
 }
@@ -300,10 +301,9 @@ $('.modal-leave-channel-submit').click(function() {
           sendbird.disconnect();
           sendbird.connect();
         },
-        "errorFunc": function(xhr, status, error) {
-          console.log(xhr, status, error);
-        },
-        "async": false
+        "errorFunc": function(status, error) {
+          console.log(status, error);
+        }
       }
     );
   } else if (!leaveMessagingChannelUrl.isEmpty()) {
@@ -330,10 +330,9 @@ $('.modal-leave-channel-submit').click(function() {
           sendbird.disconnect();
           sendbird.connect();
         },
-        "errorFunc": function(xhr, status, error) {
-          console.log(xhr, status, error);
-        },
-        "async": true
+        "errorFunc": function(status, error) {
+          console.log(status, error);
+        }
       }
     );
   }
@@ -404,10 +403,9 @@ function getUserList(options) {
         $('.modal-messaging-more').remove();
       }
     },
-    "errorFunc": function(xhr, status, error) {
-      console.log(xhr, status, error);
-    },
-    "async": true
+    "errorFunc": function(status, error) {
+      console.log(status, error);
+    }
   });
 }
 
@@ -480,17 +478,22 @@ function startMessaging() {
         popupInit();
         makeMemberList(members);
 
-        sendbird.connect();
-        loadMoreChatMessage(scrollPositionBottom);
-        setWelcomeMessage('Messaging Channel');
-        addMessagingChannel(isGroup, channelMemberList, currChannelInfo);
-        sendbird.markAsRead(currChannelInfo['channel_url']);
-        $('.chat-input-text__field').attr('disabled', false);
+        sendbird.connect({
+          "successFunc": function(data) {
+            loadMoreChatMessage(scrollPositionBottom);
+            setWelcomeMessage('Messaging Channel');
+            addMessagingChannel(isGroup, channelMemberList, currChannelInfo);
+            sendbird.markAsRead(currChannelInfo['channel_url']);
+            $('.chat-input-text__field').attr('disabled', false);
+          },
+          "errorFunc": function(status, error) {
+            console.log(status, error);
+          }
+        });
       },
-      "errorFunc": function(xhr, status, error) {
-        console.log(xhr, status, error);
-      },
-      "async": true
+      "errorFunc": function(status, error) {
+        console.log(status, error);
+      }
     }
   );
 }
@@ -606,17 +609,21 @@ function joinMessagingChannel(channelUrl) {
         popupInit();
         makeMemberList(members);
 
-        sendbird.connect();
-        loadMoreChatMessage(scrollPositionBottom);
-        setWelcomeMessage('Messaging Channel');
-        addMessagingChannel(isGroup, channelMemberList, currChannelInfo);
-        sendbird.markAsRead(currChannelInfo['channel_url']);
-        $('.chat-input-text__field').attr('disabled', false);
+        sendbird.connect({
+          "successFunc": function(data) {
+            loadMoreChatMessage(scrollPositionBottom);
+            setWelcomeMessage('Messaging Channel');
+            addMessagingChannel(isGroup, channelMemberList, currChannelInfo);
+            $('.chat-input-text__field').attr('disabled', false);
+          },
+          "errorFunc": function(status, error) {
+            console.log(status, error);
+          }
+        });
       },
-      "errorFunc": function(xhr, status, error) {
-        console.log(xhr, status, error);
-      },
-      "async": true
+      "errorFunc": function(status, error) {
+        console.log(status, error);
+      }
     }
   );
 }
@@ -686,17 +693,22 @@ function inviteMember() {
         popupInit();
         makeMemberList(members);
 
-        sendbird.connect();
-        loadMoreChatMessage(scrollPositionBottom);
-        setWelcomeMessage('Messaging Channel');
-        addMessagingChannel(isGroup, channelMemberList, currChannelInfo);
-        sendbird.markAsRead(currChannelInfo['channel_url']);
-        $('.chat-input-text__field').attr('disabled', false);
+        sendbird.connect({
+          "successFunc": function(data) {
+            loadMoreChatMessage(scrollPositionBottom);
+            setWelcomeMessage('Messaging Channel');
+            addMessagingChannel(isGroup, channelMemberList, currChannelInfo);
+            sendbird.markAsRead(currChannelInfo['channel_url']);
+            $('.chat-input-text__field').attr('disabled', false);
+          },
+          "errorFunc": function(status, error) {
+            console.log(status, error);
+          }
+        });
       },
-      "errorFunc": function(xhr, status, error) {
-        console.log(xhr, status, error);
-      },
-      "async": true
+      "errorFunc": function(status, error) {
+        console.log(status, error);
+      }
     }
   );
 }
@@ -730,10 +742,9 @@ function getMessagingChannelList() {
         }
       });
     },
-    "errorFunc": function(xhr, status, error) {
-      console.log(xhr, status, error);
-    },
-    "async": true
+    "errorFunc": function(status, error) {
+      console.log(status, error);
+    }
   });
 }
 
@@ -759,27 +770,26 @@ function makeMemberList(members) {
  *            SendBird Settings
  **********************************************/
 function startSendBird(guestId, nickName) {
-
-  sendbird = new SendBird({
+  sendbird.init({
     "app_id": appId,
     "guest_id": guestId,
     "user_name": nickName,
     "image_url": '',
     "access_token": '',
     "successFunc": function(data) {
-      if (data.error) {
-        if (data.message == 'Request Domain is not authentication.') {
-          alert(data.message);
-        } else {
-          alert('please check your access code');
-        }
-        window.location.href = '/';
+      $('.init-check').hide();
+      getMessagingChannelList();
+    },
+    "errorFunc": function(status, error) {
+      console.log(status, error);
+
+      if (error == 'Request Domain is not authentication.') {
+        alert(error);
+      } else {
+        alert('please check your access code');
       }
-    },
-    "errorFunc": function(xhr, status, error) {
-      console.log(xhr, status, error);
-    },
-    "async": false
+      window.location.href = '/';
+    }
   });
 
   sendbird.events.onMessageReceived = function(obj) {
@@ -848,6 +858,14 @@ function startSendBird(guestId, nickName) {
 
   sendbird.events.onTypeEndReceived = function(obj) {
     endTyping(obj['user']['id']);
+  };
+
+  sendbird.events.onReadReceived = function(obj) {
+    console.log(obj);
+  };
+
+  sendbird.events.onMessageDelivery = function(obj) {
+    console.log(obj);
   };
 
   sendbird.setDebugMessage(false);
@@ -967,10 +985,9 @@ function loadMoreChatMessage(func) {
       $('.chat-canvas')[0].scrollTop = (moreMessage.length * MESSAGE_TEXT_HEIGHT);
       if (func != undefined) func();
     },
-    "errorFunc": function(xhr, status, error) {
-      console.log(xhr, status, error);
-    },
-    "async": true
+    "errorFunc": function(status, error) {
+      console.log(status, error);
+    }
   });
 }
 
@@ -1114,18 +1131,14 @@ $('#chat_file_input').change(function() {
       "successFunc" : function(data) {
         $('.chat-input-file').removeClass('file-upload');
         $('#chat_file_input').val('');
-        if(data.error) {
-          alert('file size too large.\nplease select less than 25MB.');
-        } else {
-          console.log(data.url);
-        }
+        console.log(data.url);
       },
-      "errorFunc": function(xhr, status, error) {
+      "errorFunc": function(status, error) {
         $('.chat-input-file').removeClass('file-upload');
         $('#chat_file_input').val('');
-        console.log(xhr, status, error);
-      },
-      "async": true
+        console.log(status, error);
+        alert('file size too large.\nplease select less than 25MB.');
+      }
     }
   );
 
@@ -1142,12 +1155,14 @@ function setFileMessage(obj) {
 }
 
 $('.chat-canvas').on('scroll', function() {
-  var currHeight = $('.chat-canvas').scrollTop();
-  if (currHeight == 0) {
-    if ($('.chat-canvas')[0].scrollHeight > $('.chat-canvas').height()) {
-      loadMoreChatMessage();
+  setTimeout(function() {
+    var currHeight = $('.chat-canvas').scrollTop();
+    if (currHeight == 0) {
+      if ($('.chat-canvas')[0].scrollHeight > $('.chat-canvas').height()) {
+        loadMoreChatMessage();
+      }
     }
-  }
+  }, 200);
 });
 
 function setSysMessage(obj) {
@@ -1172,37 +1187,25 @@ function setBroadcastMessage(obj) {
   scrollPositionBottom();
 }
 
-function unreadCountUpdate(obj) {
-  sendbird.getMessagingChannelInfo(
-    obj['channel_id'],
-    {
-      "successFunc" : function(data) {
-        var targetUrl = data['channel']['channel_url'];
+function unreadCountUpdate(data) {
+  var targetUrl = data['channel']['channel_url'];
 
-        var callAdd = true;
-        var unread = data['unread_message_count'] > 9 ? '9+' : data['unread_message_count'];
-        if (unread > 0 || unread == '9+') {
-          $.each($('.left-nav-channel'), function(index, item) {
-            if ($(item).data("channel-url") == targetUrl) {
-              addUnreadCount(item, unread, targetUrl);
-              callAdd = false;
-            }
-          });
+  var callAdd = true;
+  var unread = data['unread_message_count'] > 9 ? '9+' : data['unread_message_count'];
+  if (unread > 0 || unread == '9+') {
+    $.each($('.left-nav-channel'), function(index, item) {
+      if ($(item).data("channel-url") == targetUrl) {
+        addUnreadCount(item, unread, targetUrl);
+        callAdd = false;
+      }
+    });
 
-          if (callAdd) {
-            showChannel(data, unread, targetUrl);
-          }
-        } else {
-          showChannel(data, unread, targetUrl);
-        }
-
-      },
-      "errorFunc": function(xhr, status, error) {
-        console.log(xhr, status, error);
-      },
-      "async": true
+    if (callAdd) {
+      showChannel(data, unread, targetUrl);
     }
-  );
+  } else {
+    showChannel(data, unread, targetUrl);
+  }
 }
 
 function addUnreadCount(item, unread, targetUrl) {
@@ -1276,10 +1279,9 @@ function popupInit() {
 function init() {
   guestId = checkGuestId();
   nickname = decodeURI(decodeURIComponent(getUrlVars()['nickname']));
+  $('.init-check').show();
   startSendBird(guestId, nickname);
   $('.left-nav-user-nickname').html(nickname);
-
-  getMessagingChannelList();
 }
 
 $(document).ready(function() {
@@ -1288,7 +1290,9 @@ $(document).ready(function() {
 });
 
 window.onfocus = function() {
-  sendbird.markAsRead(currChannelUrl);
+  if (!isOpenChat && currChannelUrl != null) {
+    sendbird.markAsRead(currChannelUrl);
+  }
   $.each($('.left-nav-channel'), function(index, item) {
     if ($(item).data("channel-url") == currChannelUrl) {
       $(item).find('div[class="left-nav-channe__unread"]').remove();
