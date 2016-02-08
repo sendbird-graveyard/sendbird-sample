@@ -1,15 +1,15 @@
 //
-//  SystemMessageTableViewCell.swift
+//  MessagingSystemMessageTableViewCell.swift
 //  SendBirdSwiftSample
 //
-//  Created by Jed Kyung on 2/4/16.
+//  Created by Jed Kyung on 2/7/16.
 //  Copyright © 2016 SENDBIRD.COM. All rights reserved.
 //
 
 import UIKit
 import SendBirdSDK
 
-class SystemMessageTableViewCell: UITableViewCell {
+class MessagingSystemMessageTableViewCell: UITableViewCell {
     let kSystemMessageCellLeftMargin: CGFloat = 16
     let kSystemMessageCellRightMargin: CGFloat = 16
     let kSystemMessageCellGapMargin: CGFloat = 10
@@ -29,6 +29,7 @@ class SystemMessageTableViewCell: UITableViewCell {
     
     private func initViews() {
         self.backgroundColor = UIColor.clearColor()
+        
         self.leftLineView = UIView()
         self.leftLineView?.translatesAutoresizingMaskIntoConstraints = false
         self.leftLineView?.backgroundColor = SendBirdUtils.UIColorFromRGB(0xa6b0ba)
@@ -54,9 +55,10 @@ class SystemMessageTableViewCell: UITableViewCell {
         self.addConstraint(NSLayoutConstraint.init(item: self.messageLabel!, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
         self.addConstraint(NSLayoutConstraint.init(item: self.messageLabel!, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
         self.addConstraint(NSLayoutConstraint.init(item: self.leftLineView!, attribute: NSLayoutAttribute.Leading, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Leading, multiplier: 1, constant: kSystemMessageCellLeftMargin))
-        self.addConstraint(NSLayoutConstraint.init(item: self.leftLineView!, attribute: NSLayoutAttribute.Trailing, relatedBy: NSLayoutRelation.Equal, toItem: self.messageLabel!, attribute: NSLayoutAttribute.Leading, multiplier: 1, constant: -kSystemMessageCellGapMargin))
+        self.addConstraint(NSLayoutConstraint.init(item: self.leftLineView!, attribute: NSLayoutAttribute.Trailing, relatedBy: .Equal, toItem: self.messageLabel!, attribute: NSLayoutAttribute.Leading, multiplier: 1, constant: -kSystemMessageCellGapMargin))
         self.addConstraint(NSLayoutConstraint.init(item: self.leftLineView!, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
         self.addConstraint(NSLayoutConstraint.init(item: self.leftLineView!, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 0.5))
+        
         self.addConstraint(NSLayoutConstraint.init(item: self.rightLineView!, attribute: NSLayoutAttribute.Trailing, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Trailing, multiplier: 1, constant: -kSystemMessageCellRightMargin))
         self.addConstraint(NSLayoutConstraint.init(item: self.rightLineView!, attribute: NSLayoutAttribute.Leading, relatedBy: NSLayoutRelation.Equal, toItem: self.messageLabel!, attribute: NSLayoutAttribute.Trailing, multiplier: 1, constant: kSystemMessageCellGapMargin))
         self.addConstraint(NSLayoutConstraint.init(item: self.rightLineView!, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
@@ -65,7 +67,7 @@ class SystemMessageTableViewCell: UITableViewCell {
     
     func setModel(model: SendBirdSystemMessage) {
         var s: NSString = NSString.init(string: model.message)
-
+        
         while s.rangeOfString("<[^>]+>", options: NSStringCompareOptions.RegularExpressionSearch).location != NSNotFound {
             let r: NSRange = s.rangeOfString("<[^>]+>", options: NSStringCompareOptions.RegularExpressionSearch)
             s = s.stringByReplacingCharactersInRange(r, withString: "")

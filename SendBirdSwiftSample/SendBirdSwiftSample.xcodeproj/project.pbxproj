@@ -24,6 +24,19 @@
 		5AA5C2241C633710008C93EE /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA5C2231C633710008C93EE /* IndicatorView.swift */; };
 		5AA5C2261C63D442008C93EE /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA5C2251C63D442008C93EE /* MessageTableViewCell.swift */; };
 		5AA5C2281C641B9A008C93EE /* SystemMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA5C2271C641B9A008C93EE /* SystemMessageTableViewCell.swift */; };
+		5AA5C22D1C670AEF008C93EE /* MemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA5C22C1C670AEF008C93EE /* MemberTableViewCell.swift */; };
+		5AA5C22F1C6720B3008C93EE /* MessageInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA5C22E1C6720B3008C93EE /* MessageInputView.swift */; };
+		5AA5C2311C673423008C93EE /* MessagingBroadcastMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA5C2301C673423008C93EE /* MessagingBroadcastMessageTableViewCell.swift */; };
+		5AA5C2331C67CAE9008C93EE /* MessagingChannelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA5C2321C67CAE9008C93EE /* MessagingChannelTableViewCell.swift */; };
+		5AA5C2351C67F200008C93EE /* MessagingFileLinkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA5C2341C67F200008C93EE /* MessagingFileLinkTableViewCell.swift */; };
+		5AA5C2371C680EFD008C93EE /* MessagingFileMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA5C2361C680EFD008C93EE /* MessagingFileMessageTableViewCell.swift */; };
+		5AA5C2391C68251D008C93EE /* MessagingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA5C2381C68251D008C93EE /* MessagingIndicatorView.swift */; };
+		5AA5C23B1C68266C008C93EE /* MessagingMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA5C23A1C68266C008C93EE /* MessagingMessageTableViewCell.swift */; };
+		5AA5C23D1C6834B8008C93EE /* MessagingMyFileLinkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA5C23C1C6834B8008C93EE /* MessagingMyFileLinkTableViewCell.swift */; };
+		5AA5C23F1C685415008C93EE /* MessagingMyMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA5C23E1C685415008C93EE /* MessagingMyMessageTableViewCell.swift */; };
+		5AA5C2411C685E95008C93EE /* MessagingSystemMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA5C2401C685E95008C93EE /* MessagingSystemMessageTableViewCell.swift */; };
+		5AA5C2431C6861A1008C93EE /* TypingNowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA5C2421C6861A1008C93EE /* TypingNowView.swift */; };
+		5AA5C2451C6868A7008C93EE /* MessagingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA5C2441C6868A7008C93EE /* MessagingTableViewController.swift */; };
 		5AA775D01C5DDE7A008CE6B1 /* SendBirdCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA775CF1C5DDE7A008CE6B1 /* SendBirdCommon.swift */; };
 		EA398C6ED048A451C292F821 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D156F7AA676956CBBF9A092 /* Pods.framework */; };
 /* End PBXBuildFile section */
@@ -69,6 +82,19 @@
 		5AA5C2231C633710008C93EE /* IndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
 		5AA5C2251C63D442008C93EE /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		5AA5C2271C641B9A008C93EE /* SystemMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemMessageTableViewCell.swift; sourceTree = "<group>"; };
+		5AA5C22C1C670AEF008C93EE /* MemberTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberTableViewCell.swift; sourceTree = "<group>"; };
+		5AA5C22E1C6720B3008C93EE /* MessageInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageInputView.swift; sourceTree = "<group>"; };
+		5AA5C2301C673423008C93EE /* MessagingBroadcastMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagingBroadcastMessageTableViewCell.swift; sourceTree = "<group>"; };
+		5AA5C2321C67CAE9008C93EE /* MessagingChannelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagingChannelTableViewCell.swift; sourceTree = "<group>"; };
+		5AA5C2341C67F200008C93EE /* MessagingFileLinkTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagingFileLinkTableViewCell.swift; sourceTree = "<group>"; };
+		5AA5C2361C680EFD008C93EE /* MessagingFileMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagingFileMessageTableViewCell.swift; sourceTree = "<group>"; };
+		5AA5C2381C68251D008C93EE /* MessagingIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagingIndicatorView.swift; sourceTree = "<group>"; };
+		5AA5C23A1C68266C008C93EE /* MessagingMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagingMessageTableViewCell.swift; sourceTree = "<group>"; };
+		5AA5C23C1C6834B8008C93EE /* MessagingMyFileLinkTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagingMyFileLinkTableViewCell.swift; sourceTree = "<group>"; };
+		5AA5C23E1C685415008C93EE /* MessagingMyMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagingMyMessageTableViewCell.swift; sourceTree = "<group>"; };
+		5AA5C2401C685E95008C93EE /* MessagingSystemMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagingSystemMessageTableViewCell.swift; sourceTree = "<group>"; };
+		5AA5C2421C6861A1008C93EE /* TypingNowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypingNowView.swift; sourceTree = "<group>"; };
+		5AA5C2441C6868A7008C93EE /* MessagingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagingTableViewController.swift; sourceTree = "<group>"; };
 		5AA775CF1C5DDE7A008CE6B1 /* SendBirdCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendBirdCommon.swift; sourceTree = "<group>"; };
 		7C848461548E00D85708A7A9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8D156F7AA676956CBBF9A092 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,22 +205,59 @@
 			path = SendBirdSwiftSampleUITests;
 			sourceTree = "<group>";
 		};
+		5AA5C2291C6708BA008C93EE /* SendBirdMessaging */ = {
+			isa = PBXGroup;
+			children = (
+				5AA5C22B1C6708D7008C93EE /* ViewController */,
+				5AA5C22A1C6708D2008C93EE /* View */,
+			);
+			name = SendBirdMessaging;
+			sourceTree = "<group>";
+		};
+		5AA5C22A1C6708D2008C93EE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5AA5C22C1C670AEF008C93EE /* MemberTableViewCell.swift */,
+				5AA5C22E1C6720B3008C93EE /* MessageInputView.swift */,
+				5AA5C2301C673423008C93EE /* MessagingBroadcastMessageTableViewCell.swift */,
+				5AA5C2321C67CAE9008C93EE /* MessagingChannelTableViewCell.swift */,
+				5AA5C2341C67F200008C93EE /* MessagingFileLinkTableViewCell.swift */,
+				5AA5C2361C680EFD008C93EE /* MessagingFileMessageTableViewCell.swift */,
+				5AA5C2381C68251D008C93EE /* MessagingIndicatorView.swift */,
+				5AA5C23A1C68266C008C93EE /* MessagingMessageTableViewCell.swift */,
+				5AA5C23C1C6834B8008C93EE /* MessagingMyFileLinkTableViewCell.swift */,
+				5AA5C23E1C685415008C93EE /* MessagingMyMessageTableViewCell.swift */,
+				5AA5C2401C685E95008C93EE /* MessagingSystemMessageTableViewCell.swift */,
+				5AA5C2421C6861A1008C93EE /* TypingNowView.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		5AA5C22B1C6708D7008C93EE /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5AA5C2441C6868A7008C93EE /* MessagingTableViewController.swift */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
 		5AA775CD1C5D776D008CE6B1 /* SendBird */ = {
 			isa = PBXGroup;
 			children = (
-				5AA775CE1C5DD77A008CE6B1 /* OpenChat */,
+				5AA5C2291C6708BA008C93EE /* SendBirdMessaging */,
+				5AA775CE1C5DD77A008CE6B1 /* SendBirdChat */,
 				5AA775CF1C5DDE7A008CE6B1 /* SendBirdCommon.swift */,
 			);
 			name = SendBird;
 			sourceTree = "<group>";
 		};
-		5AA775CE1C5DD77A008CE6B1 /* OpenChat */ = {
+		5AA775CE1C5DD77A008CE6B1 /* SendBirdChat */ = {
 			isa = PBXGroup;
 			children = (
 				5A0790EF1C5FC2C400833A70 /* ViewController */,
 				5A0790EE1C5FC2BF00833A70 /* View */,
 			);
-			name = OpenChat;
+			name = SendBirdChat;
 			sourceTree = "<group>";
 		};
 		8874F2095A43998A04600896 /* Pods */ = {
@@ -396,18 +459,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AA5C2311C673423008C93EE /* MessagingBroadcastMessageTableViewCell.swift in Sources */,
+				5AA5C2371C680EFD008C93EE /* MessagingFileMessageTableViewCell.swift in Sources */,
 				5AA775D01C5DDE7A008CE6B1 /* SendBirdCommon.swift in Sources */,
+				5AA5C23B1C68266C008C93EE /* MessagingMessageTableViewCell.swift in Sources */,
 				5A8D9BEC1C5D1C9E004751E5 /* ViewController.swift in Sources */,
 				5A2005821C61B27B00D057BE /* BroadcastMessageTableViewCell.swift in Sources */,
+				5AA5C2391C68251D008C93EE /* MessagingIndicatorView.swift in Sources */,
+				5AA5C22D1C670AEF008C93EE /* MemberTableViewCell.swift in Sources */,
+				5AA5C2451C6868A7008C93EE /* MessagingTableViewController.swift in Sources */,
 				5AA5C2221C631B86008C93EE /* FileMessageTableViewCell.swift in Sources */,
 				5AA5C2241C633710008C93EE /* IndicatorView.swift in Sources */,
+				5AA5C23F1C685415008C93EE /* MessagingMyMessageTableViewCell.swift in Sources */,
+				5AA5C23D1C6834B8008C93EE /* MessagingMyFileLinkTableViewCell.swift in Sources */,
 				5AA5C2261C63D442008C93EE /* MessageTableViewCell.swift in Sources */,
+				5AA5C2331C67CAE9008C93EE /* MessagingChannelTableViewCell.swift in Sources */,
 				5A2005881C61EA6E00D057BE /* ChannelTableViewCell.swift in Sources */,
+				5AA5C2411C685E95008C93EE /* MessagingSystemMessageTableViewCell.swift in Sources */,
 				5A8D9BEA1C5D1C9E004751E5 /* AppDelegate.swift in Sources */,
+				5AA5C2431C6861A1008C93EE /* TypingNowView.swift in Sources */,
 				5A20058A1C628BC700D057BE /* ChatMessageInputView.swift in Sources */,
 				5A0790F11C5FC2EB00833A70 /* ChattingTableViewController.swift in Sources */,
+				5AA5C22F1C6720B3008C93EE /* MessageInputView.swift in Sources */,
 				5A2005861C61CF8600D057BE /* ChannelListTableView.swift in Sources */,
 				5AA5C2201C62D6E7008C93EE /* FileLinkTableViewCell.swift in Sources */,
+				5AA5C2351C67F200008C93EE /* MessagingFileLinkTableViewCell.swift in Sources */,
 				5AA5C2281C641B9A008C93EE /* SystemMessageTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

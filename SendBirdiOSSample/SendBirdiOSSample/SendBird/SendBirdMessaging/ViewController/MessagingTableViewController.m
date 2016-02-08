@@ -679,7 +679,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+    [super viewWillDisappear:animated];
     [[self navigationController] setNavigationBarHidden:YES animated:NO];
     if (!self.openImagePicker) {
         [SendBird disconnect];
@@ -1572,7 +1572,7 @@
         else {
             [tableView setHidden:YES];
             [self.tableView setHidden:NO];
-            SendBirdMember *member = (SendBirdMember *)[membersInChannel objectAtIndex:indexPath.row];
+            SendBirdAppUser *member = (SendBirdAppUser *)[membersInChannel objectAtIndex:indexPath.row];
             [SendBird startMessagingWithUserId:[member guestId]];
         }
     }

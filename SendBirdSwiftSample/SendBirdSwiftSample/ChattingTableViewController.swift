@@ -353,6 +353,7 @@ class ChattingTableViewController: UIViewController, ChatMessageInputViewDelegat
         self.messageInputView = ChatMessageInputView()
         self.messageInputView?.translatesAutoresizingMaskIntoConstraints = false
         self.messageInputView?.delegate = self
+        self.messageInputView?.textFieldDelegate = self
         self.view.addSubview(self.messageInputView!)
         
         self.channelListTableView = ChannelListTableView()

@@ -1,21 +1,21 @@
 //
-//  ChatMessageInputView.swift
+//  MessageInputView.swift
 //  SendBirdSwiftSample
 //
-//  Created by SendBird Developers on 2/3/16.
+//  Created by Jed Kyung on 2/6/16.
 //  Copyright © 2016 SENDBIRD.COM. All rights reserved.
 //
 
 import UIKit
 import SendBirdSDK
 
-protocol ChatMessageInputViewDelegate {
+protocol MessageInputViewDelegate {
     func clickSendButton(message: String)
     func clickFileAttachButton()
     func clickChannelListButton()
 }
 
-class ChatMessageInputView: UIView, UITextFieldDelegate {
+class MessageInputView: UIView {
     let kMessageFontSize: CGFloat = 14.0
     let kMessageSendButtonFontSize: CGFloat = 11.0
     
@@ -24,23 +24,23 @@ class ChatMessageInputView: UIView, UITextFieldDelegate {
     var sendButton: UIButton?
     var fileAttachButton: UIButton?
     var openChannelListButton: UIButton?
-    var delegate: ChatMessageInputViewDelegate?
+    
+    var messageInputViewDelegate: MessageInputViewDelegate?
     var textFieldDelegate: UITextFieldDelegate?
-
-    private var inputEnabled: Bool = false
+    
+    private var inputEnabled: Bool = true
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        initView()
+        self.initView()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    private func initView()
-    {
-        self.inputEnabled = true;
+    
+    private func initView() {
+        self.inputEnabled = true
         
         self.backgroundColor = SendBirdUtils.UIColorFromRGB(0xffffff)
         
@@ -52,16 +52,16 @@ class ChatMessageInputView: UIView, UITextFieldDelegate {
         self.openChannelListButton?.translatesAutoresizingMaskIntoConstraints = false
         self.openChannelListButton?.setImage(UIImage.init(named: "_btn_channel_list"), forState: UIControlState.Normal)
         self.openChannelListButton?.addTarget(nil, action: "clickChannelListButton", forControlEvents: UIControlEvents.TouchUpInside)
-
+        
         self.messageTextField = UITextField()
         self.messageTextField?.translatesAutoresizingMaskIntoConstraints = false
         self.messageTextField?.returnKeyType = UIReturnKeyType.Done
         self.messageTextField?.placeholder = "What\'s on your mind?"
         self.messageTextField?.textColor = SendBirdUtils.UIColorFromRGB(0x37434f)
-        self.messageTextField?.attributedPlaceholder = NSAttributedString.init(string: "What\'s on your mind?", attributes: [NSForegroundColorAttributeName: SendBirdUtils.UIColorFromRGB(0xbbc3c9),])
+        self.messageTextField?.attributedPlaceholder = NSAttributedString.init(string: "What\'s on your mind?", attributes: [NSForegroundColorAttributeName : SendBirdUtils.UIColorFromRGB(0xbbc3c9)])
         self.messageTextField?.font = UIFont.systemFontOfSize(kMessageFontSize)
         let paddingLeftView: UIView = UIView.init(frame: CGRectMake(0, 0, 8, 8))
-        let paddingRightView: UIView = UIView.init(frame: CGRectMake(0, 0, 48, 0))
+        let paddingRightView: UIView = UIView.init(frame: CGRectMake(0, 0, 48, 8))
         self.messageTextField?.leftView = paddingLeftView
         self.messageTextField?.rightView = paddingRightView
         self.messageTextField?.leftViewMode = UITextFieldViewMode.Always
@@ -69,7 +69,6 @@ class ChatMessageInputView: UIView, UITextFieldDelegate {
         self.messageTextField?.layer.borderWidth = 1.0
         self.messageTextField?.layer.borderColor = SendBirdUtils.UIColorFromRGB(0xbbc3c9).CGColor
         self.messageTextField?.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
-        self.messageTextField?.delegate = self
         
         self.fileAttachButton = UIButton()
         self.fileAttachButton?.backgroundColor = UIColor.clearColor()
@@ -93,11 +92,11 @@ class ChatMessageInputView: UIView, UITextFieldDelegate {
         self.sendButton?.alpha = 0
         self.sendButton?.enabled = false
         
-        addSubview(self.openChannelListButton!)
-        addSubview(self.messageTextField!)
-        addSubview(self.fileAttachButton!)
-        addSubview(self.sendButton!)
-        addSubview(self.topLineView!)
+        self.addSubview(self.openChannelListButton!)
+        self.addSubview(self.messageTextField!)
+        self.addSubview(self.fileAttachButton!)
+        self.addSubview(self.sendButton!)
+        self.addSubview(self.topLineView!)
         
         self.applyConstraints()
     }
@@ -132,12 +131,13 @@ class ChatMessageInputView: UIView, UITextFieldDelegate {
         self.addConstraint(NSLayoutConstraint.init(item: self.sendButton!, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 40))
         self.addConstraint(NSLayoutConstraint.init(item: self.sendButton!, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 30))
     }
-
+    
     func clickSendButton(sender: AnyObject) {
         if self.messageTextField?.text?.characters.count == 0 {
-            return;
+            return
         }
-        self.delegate?.clickSendButton(self.messageTextField!.text!)
+        self.messageInputViewDelegate?.clickSendButton((self.messageTextField?.text)!)
+        SendBird.typeEnd()
     }
     
     func hideSendButton() {
@@ -154,16 +154,20 @@ class ChatMessageInputView: UIView, UITextFieldDelegate {
     }
     
     func clickFileAttachButton() {
-        self.delegate?.clickFileAttachButton()
+        self.messageInputViewDelegate?.clickFileAttachButton()
     }
-
+    
+    func clickChannelListButton() {
+        self.messageInputViewDelegate?.clickChannelListButton()
+    }
+    
     func hideKeyboard() {
         self.messageTextField?.endEditing(true)
     }
     
-    func setDelegate(chatMessageInputViewDelegate: ChatMessageInputViewDelegate, textFieldDelegate: UITextFieldDelegate) {
-        self.delegate = chatMessageInputViewDelegate
-        self.messageTextField?.delegate = textFieldDelegate
+    func setDelegate(delegate: UITextFieldDelegate) {
+        self.textFieldDelegate = delegate
+        self.messageTextField?.delegate = delegate
     }
     
     func textFieldDidChange(textView: UITextView) {
@@ -175,6 +179,7 @@ class ChatMessageInputView: UIView, UITextFieldDelegate {
                 UILabel.commitAnimations()
                 self.sendButton?.enabled = true
             }
+            SendBird.typeStart()
         }
         else {
             UILabel.beginAnimations(nil, context: nil)
@@ -182,22 +187,17 @@ class ChatMessageInputView: UIView, UITextFieldDelegate {
             self.sendButton?.alpha = 0
             UILabel.commitAnimations()
             self.sendButton?.enabled = false
+            SendBird.typeEnd()
         }
     }
     
     func setInputEnable(enable: Bool) {
-        self.inputEnabled = enable
         self.fileAttachButton?.enabled = enable
         self.messageTextField?.enabled = enable
         self.sendButton?.enabled = enable
     }
-
+    
     func isInputEnable() -> Bool {
         return self.inputEnabled
-    }
-    
-    // MARK: UITextFieldDelegate
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        return (self.textFieldDelegate?.textFieldShouldReturn!(textField))!
     }
 }
