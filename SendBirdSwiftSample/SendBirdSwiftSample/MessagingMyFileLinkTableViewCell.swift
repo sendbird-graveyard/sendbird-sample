@@ -77,7 +77,7 @@ class MessagingMyFileLinkTableViewCell: UITableViewCell {
         
         // File Image View
         self.addConstraint(NSLayoutConstraint.init(item: self.fileImageView!, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self.messageBackgroundImageView!, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: -kMyFileLinkBalloonBottomPadding))
-        self.addConstraint(NSLayoutConstraint.init(item: self.fileImageView!, attribute: NSLayoutAttribute.Trailing, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Trailing, multiplier: 1, constant: kMyFileLinkCellRightMargin))
+        self.addConstraint(NSLayoutConstraint.init(item: self.fileImageView!, attribute: NSLayoutAttribute.Trailing, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Trailing, multiplier: 1, constant: -kMyFileLinkCellRightMargin))
         self.addConstraint(NSLayoutConstraint.init(item: self.fileImageView!, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: kMyFileLinkWidth))
         self.addConstraint(NSLayoutConstraint.init(item: self.fileImageView!, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: kMyFileLinkHeight))
         

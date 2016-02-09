@@ -711,6 +711,7 @@ class MessagingTableViewController: UIViewController, UITableViewDataSource, UIT
         self.messageInputView = MessageInputView()
         self.messageInputView?.translatesAutoresizingMaskIntoConstraints = false
         self.messageInputView?.setDelegate(self)
+        self.messageInputView?.messageInputViewDelegate = self
         self.view.addSubview(self.messageInputView!)
         
         self.indicatorView = MessagingIndicatorView()
@@ -1187,7 +1188,7 @@ class MessagingTableViewController: UIViewController, UITableViewDataSource, UIT
                         }
                         else {
                             cell = MessagingFileLinkTableViewCell.init(style: UITableViewCellStyle.Default, reuseIdentifier: kFileLinkCellIdentifier)
-                            (cell as! MessagingFileMessageTableViewCell).setModel(fileLink)
+                            (cell as! MessagingFileLinkTableViewCell).setModel(fileLink)
                         }
                     }
                     else {
