@@ -411,6 +411,7 @@ class MessagingTableViewController: UIViewController, UITableViewDataSource, UIT
         SendBird.setEventHandlerConnectBlock({ (channel) -> Void in
             self.setIndicatorHidden(true)
             self.messageInputView!.setInputEnable(true)
+            SendBird.markAsRead()
             }, errorBlock: { (code) -> Void in
                 self.setIndicatorHidden(true)
             }, channelLeftBlock: { (channel) -> Void in
@@ -432,6 +433,7 @@ class MessagingTableViewController: UIViewController, UITableViewDataSource, UIT
                 self.messageArray?.addSendBirdMessage(fileLink, updateMessageTs: self.updateMessageTs)
                 self.scrollToBottomWithReloading(true, force: false, animated: false)
                 self.setIndicatorHidden(true)
+                SendBird.markAsRead()
             }, messagingStartedBlock: { (channel) -> Void in
                 self.currentMessagingChannel = channel
                 self.channelUrl = channel.channel.url
