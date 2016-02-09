@@ -779,6 +779,7 @@ function startSendBird(guestId, nickName) {
     "successFunc": function(data) {
       $('.init-check').hide();
       getMessagingChannelList();
+      sendbird.connect();
     },
     "errorFunc": function(status, error) {
       console.log(status, error);
@@ -869,7 +870,6 @@ function startSendBird(guestId, nickName) {
   };
 
   sendbird.setDebugMessage(false);
-  sendbird.connect();
 }
 
 var checkTyping = setInterval(function() {
