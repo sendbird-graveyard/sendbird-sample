@@ -33,7 +33,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        initView()
+        self.initView()
     }
 
     override func didReceiveMemoryWarning() {

@@ -140,7 +140,7 @@
 				5AA5C2251C63D442008C93EE /* MessageTableViewCell.swift */,
 				5AA5C2271C641B9A008C93EE /* SystemMessageTableViewCell.swift */,
 			);
-			name = View;
+			path = View;
 			sourceTree = "<group>";
 		};
 		5A0790EF1C5FC2C400833A70 /* ViewController */ = {
@@ -148,18 +148,18 @@
 			children = (
 				5A0790F01C5FC2EB00833A70 /* ChattingTableViewController.swift */,
 			);
-			name = ViewController;
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		5A8D9BDD1C5D1C9E004751E5 = {
 			isa = PBXGroup;
 			children = (
+				B23C36F4EF358D1CF9E65555 /* Frameworks */,
+				8874F2095A43998A04600896 /* Pods */,
+				5A8D9BE71C5D1C9E004751E5 /* Products */,
 				5A8D9BE81C5D1C9E004751E5 /* SendBirdSwiftSample */,
 				5A8D9BFD1C5D1C9E004751E5 /* SendBirdSwiftSampleTests */,
 				5A8D9C081C5D1C9E004751E5 /* SendBirdSwiftSampleUITests */,
-				5A8D9BE71C5D1C9E004751E5 /* Products */,
-				8874F2095A43998A04600896 /* Pods */,
-				B23C36F4EF358D1CF9E65555 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -178,11 +178,11 @@
 			children = (
 				5AA775CD1C5D776D008CE6B1 /* SendBird */,
 				5A8D9BE91C5D1C9E004751E5 /* AppDelegate.swift */,
-				5A8D9BEB1C5D1C9E004751E5 /* ViewController.swift */,
-				5A8D9BED1C5D1C9E004751E5 /* Main.storyboard */,
 				5A8D9BF01C5D1C9E004751E5 /* Assets.xcassets */,
-				5A8D9BF21C5D1C9E004751E5 /* LaunchScreen.storyboard */,
 				5A8D9BF51C5D1C9E004751E5 /* Info.plist */,
+				5A8D9BF21C5D1C9E004751E5 /* LaunchScreen.storyboard */,
+				5A8D9BED1C5D1C9E004751E5 /* Main.storyboard */,
+				5A8D9BEB1C5D1C9E004751E5 /* ViewController.swift */,
 			);
 			path = SendBirdSwiftSample;
 			sourceTree = "<group>";
@@ -190,8 +190,8 @@
 		5A8D9BFD1C5D1C9E004751E5 /* SendBirdSwiftSampleTests */ = {
 			isa = PBXGroup;
 			children = (
-				5A8D9BFE1C5D1C9E004751E5 /* SendBirdSwiftSampleTests.swift */,
 				5A8D9C001C5D1C9E004751E5 /* Info.plist */,
+				5A8D9BFE1C5D1C9E004751E5 /* SendBirdSwiftSampleTests.swift */,
 			);
 			path = SendBirdSwiftSampleTests;
 			sourceTree = "<group>";
@@ -199,8 +199,8 @@
 		5A8D9C081C5D1C9E004751E5 /* SendBirdSwiftSampleUITests */ = {
 			isa = PBXGroup;
 			children = (
-				5A8D9C091C5D1C9E004751E5 /* SendBirdSwiftSampleUITests.swift */,
 				5A8D9C0B1C5D1C9E004751E5 /* Info.plist */,
+				5A8D9C091C5D1C9E004751E5 /* SendBirdSwiftSampleUITests.swift */,
 			);
 			path = SendBirdSwiftSampleUITests;
 			sourceTree = "<group>";
@@ -208,10 +208,10 @@
 		5AA5C2291C6708BA008C93EE /* SendBirdMessaging */ = {
 			isa = PBXGroup;
 			children = (
-				5AA5C22B1C6708D7008C93EE /* ViewController */,
 				5AA5C22A1C6708D2008C93EE /* View */,
+				5AA5C22B1C6708D7008C93EE /* ViewController */,
 			);
-			name = SendBirdMessaging;
+			path = SendBirdMessaging;
 			sourceTree = "<group>";
 		};
 		5AA5C22A1C6708D2008C93EE /* View */ = {
@@ -230,7 +230,7 @@
 				5AA5C2401C685E95008C93EE /* MessagingSystemMessageTableViewCell.swift */,
 				5AA5C2421C6861A1008C93EE /* TypingNowView.swift */,
 			);
-			name = View;
+			path = View;
 			sourceTree = "<group>";
 		};
 		5AA5C22B1C6708D7008C93EE /* ViewController */ = {
@@ -238,26 +238,26 @@
 			children = (
 				5AA5C2441C6868A7008C93EE /* MessagingTableViewController.swift */,
 			);
-			name = ViewController;
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		5AA775CD1C5D776D008CE6B1 /* SendBird */ = {
 			isa = PBXGroup;
 			children = (
-				5AA5C2291C6708BA008C93EE /* SendBirdMessaging */,
 				5AA775CE1C5DD77A008CE6B1 /* SendBirdChat */,
+				5AA5C2291C6708BA008C93EE /* SendBirdMessaging */,
 				5AA775CF1C5DDE7A008CE6B1 /* SendBirdCommon.swift */,
 			);
-			name = SendBird;
+			path = SendBird;
 			sourceTree = "<group>";
 		};
 		5AA775CE1C5DD77A008CE6B1 /* SendBirdChat */ = {
 			isa = PBXGroup;
 			children = (
-				5A0790EF1C5FC2C400833A70 /* ViewController */,
 				5A0790EE1C5FC2BF00833A70 /* View */,
+				5A0790EF1C5FC2C400833A70 /* ViewController */,
 			);
-			name = SendBirdChat;
+			path = SendBirdChat;
 			sourceTree = "<group>";
 		};
 		8874F2095A43998A04600896 /* Pods */ = {
@@ -526,6 +526,7 @@
 				5A8D9BEE1C5D1C9E004751E5 /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		5A8D9BF21C5D1C9E004751E5 /* LaunchScreen.storyboard */ = {
@@ -534,6 +535,7 @@
 				5A8D9BF31C5D1C9E004751E5 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
