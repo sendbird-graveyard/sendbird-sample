@@ -234,7 +234,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
         if self.startMessagingFromOpenChat == true {
             let viewController: MessagingTableViewController = MessagingTableViewController()
             viewController.setViewMode(kMessagingViewMode)

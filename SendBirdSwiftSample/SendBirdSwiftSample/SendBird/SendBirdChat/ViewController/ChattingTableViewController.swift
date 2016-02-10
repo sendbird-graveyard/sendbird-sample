@@ -10,7 +10,7 @@ import UIKit
 import MobileCoreServices
 import SendBirdSDK
 
-class ChattingTableViewController: UIViewController, ChatMessageInputViewDelegate, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIActionSheetDelegate {
+class ChattingTableViewController: UIViewController, ChatMessageInputViewDelegate, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     let kMessageCellIdentifier: String = "MessageReuseIdentifier"
     let kFileLinkCellIdentifier: String = "FileLinkReuseIdentifier"
     let kSystemMessageCellIdentifier: String = "SystemMessageReuseIdentifier"
@@ -108,8 +108,14 @@ class ChattingTableViewController: UIViewController, ChatMessageInputViewDelegat
     }
     
     func aboutSendBird(sender: AnyObject) {
-        let alert: UIAlertView = UIAlertView.init(title: "SendBird", message: SENDBIRD_SAMPLE_UI_VER, delegate: nil, cancelButtonTitle: "Close")
-        alert.show()
+        let title: String = "SendBird"
+        let message: String = SENDBIRD_SAMPLE_UI_VER
+        let closeButtonText: String = "Close"
+
+        let alert: UIAlertController = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let closeAction: UIAlertAction = UIAlertAction.init(title: closeButtonText, style: UIAlertActionStyle.Cancel, handler: nil)
+        alert.addAction(closeAction)
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     func setViewMode(mode: Int) {
@@ -167,16 +173,14 @@ class ChattingTableViewController: UIViewController, ChatMessageInputViewDelegat
     }
 
     private func startMessagingWithUser(targetUserId: String) {
-//        MessagingTableViewController *viewController = [[MessagingTableViewController alloc] init];
-//
-//        [viewController setViewMode:kMessagingViewMode];
-//        [viewController initChannelTitle];
-//        [viewController setChannelUrl:@""];
-//        [viewController setUserName:self.userName];
-//        [viewController setUserId:self.userId];
-//        [viewController setTargetUserId:targetUserId];
-//
-//        [self.navigationController pushViewController:viewController animated:NO];
+        let viewController: MessagingTableViewController = MessagingTableViewController()
+        viewController.setViewMode(kMessagingViewMode)
+        viewController.initChannelTitle()
+        viewController.channelUrl = ""
+        viewController.userName = self.userName
+        viewController.userId = self.userId
+        viewController.targetUserId = targetUserId
+        self.navigationController?.pushViewController(viewController, animated: false)
     }
     
     func startChatting() {
@@ -623,49 +627,64 @@ class ChattingTableViewController: UIViewController, ChatMessageInputViewDelegat
     
     private func clickMessage(sender: SendBirdSender) {
         let openMessaging: String = String.init(format: "Open Messaging with %@", sender.name)
-        let actionSheet: UIActionSheet = UIActionSheet.init(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: openMessaging)
         self.messageSender = sender
-        actionSheet.tag = kActionSheetTagMessage
-        actionSheet.showInView(self.view)
+        let closeButtonText: String = "Close"
+        let alert: UIAlertController = UIAlertController.init(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let openMessagingAction: UIAlertAction = UIAlertAction.init(title: openMessaging, style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+            self.startMessagingWithUser((self.messageSender?.guestId)!)
+        }
+        let closeAction: UIAlertAction = UIAlertAction.init(title: closeButtonText, style: UIAlertActionStyle.Cancel, handler: nil)
+        alert.addAction(openMessagingAction)
+        alert.addAction(closeAction)
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     private func clickURL(url: String, sender: SendBirdSender) {
-        let openMessaging: String = String.init(format: "Open Messaging with %@", sender.name)
-        let actionSheet: UIActionSheet = UIActionSheet.init(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Open Link in Safari", openMessaging)
         self.messageSender = sender
-        actionSheet.tag = kActionSheetTagUrl
-        actionSheet.showInView(self.view)
+        let closeButtonText: String = "Close"
+        let openMessaging: String = String.init(format: "Open Messaging with %@", sender.name)
+        let alert: UIAlertController = UIAlertController.init(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let openLinkAction: UIAlertAction = UIAlertAction.init(title: "Open Link in Safari", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+            let encodedUrl: String = url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet())!
+            UIApplication.sharedApplication().openURL(NSURL.init(string: encodedUrl)!)
+        }
+        let closeAction: UIAlertAction = UIAlertAction.init(title: closeButtonText, style: UIAlertActionStyle.Cancel, handler: nil)
+        
+        if self.messageSender?.guestId != SendBird.getUserId() {
+            let openMessagingAction: UIAlertAction = UIAlertAction.init(title: openMessaging, style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+                self.startMessagingWithUser((self.messageSender?.guestId)!)
+            }
+            alert.addAction(openMessagingAction)
+        }
+        
+        alert.addAction(openLinkAction)
+        alert.addAction(closeAction)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     private func clickImage(url: String, sender: SendBirdSender) {
-        let actionSheet: UIActionSheet = UIActionSheet.init(title: url, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "See Image in Safari")
         self.messageSender = sender
-        actionSheet.tag = kActionSheetTagImage
-        actionSheet.showInView(self.view)
-    }
-    
-    // MARK: UIActionSheetDelegate
-    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
-        if buttonIndex == actionSheet.cancelButtonIndex {
-            return;
+        let closeButtonText: String = "Close"
+        let openMessaging: String = String.init(format: "Open Messaging with %@", sender.name)
+        let alert: UIAlertController = UIAlertController.init(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let openLinkAction: UIAlertAction = UIAlertAction.init(title: "See Image in Safari", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+            let encodedUrl: String = url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet())!
+            UIApplication.sharedApplication().openURL(NSURL.init(string: encodedUrl)!)
+        }
+        let closeAction: UIAlertAction = UIAlertAction.init(title: closeButtonText, style: UIAlertActionStyle.Cancel, handler: nil)
+        
+        if self.messageSender?.guestId != SendBird.getUserId() {
+            let openMessagingAction: UIAlertAction = UIAlertAction.init(title: openMessaging, style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+                self.startMessagingWithUser((self.messageSender?.guestId)!)
+            }
+            alert.addAction(openMessagingAction)
         }
         
-        if (actionSheet.tag == kActionSheetTagMessage) {
-            if (buttonIndex == 0) {
-                self.startMessagingWithUser((self.messageSender?.guestId)!)
-            }
-        }
-        else if actionSheet.tag == kActionSheetTagUrl || actionSheet.tag == kActionSheetTagImage || actionSheet.tag == kActionSheetTagStructuredMessage {
-            if buttonIndex == 0 {
-                let encodedUrl: String = actionSheet.title.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
-                UIApplication.sharedApplication().openURL(NSURL.init(string: encodedUrl)!)
-            }
-            else if buttonIndex == 1 {
-                NSLog("User ID: %@", (self.messageSender?.guestId)!)
-                self.startMessagingWithUser((self.messageSender?.guestId)!)
-            }
-        }
-        self.messageSender = nil;
+        alert.addAction(openLinkAction)
+        alert.addAction(closeAction)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     // MARK: ChatMessageInputViewDelegate

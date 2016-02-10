@@ -127,14 +127,27 @@ class MessagingTableViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     func aboutSendBird(sender: AnyObject) {
-        let alert: UIAlertView = UIAlertView.init(title: "SendBird", message: SENDBIRD_SAMPLE_UI_VER, delegate: nil, cancelButtonTitle: "Close")
-        alert.show()
+        let title: String = "SendBird"
+        let message: String = SENDBIRD_SAMPLE_UI_VER
+        let closeButtonText: String = "Close"
+        
+        let alert: UIAlertController = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let closeAction: UIAlertAction = UIAlertAction.init(title: closeButtonText, style: UIAlertActionStyle.Cancel, handler: nil)
+        alert.addAction(closeAction)
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     func openMenuActionSheet(sender: AnyObject) {
-        let actionSheet: UIActionSheet = UIActionSheet.init(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Invite Member")
-        actionSheet.tag = kActionSheetTagLobbyMember
-        actionSheet.showInView(self.view)
+        let closeButtonText: String = "Close"
+        let alert: UIAlertController = UIAlertController.init(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let inviteAction: UIAlertAction = UIAlertAction.init(title: "Invite Member", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+            self.openLobbyMemberListForInvite()
+        }
+        
+        let closeAction: UIAlertAction = UIAlertAction.init(title: closeButtonText, style: UIAlertActionStyle.Cancel, handler: nil)
+        alert.addAction(inviteAction)
+        alert.addAction(closeAction)
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     func dismissLobbyMemberListForInvite(sender: AnyObject) {
@@ -860,12 +873,12 @@ class MessagingTableViewController: UIViewController, UITableViewDataSource, UIT
     func setMessagingChannelTitle(channel: SendBirdMessagingChannel) {
         var member: SendBirdMemberInMessagingChannel?
         if channel.members.count > 0 {
-            member = channel.members.objectAtIndex(0) as! SendBirdMemberInMessagingChannel
+            member = channel.members.objectAtIndex(0) as? SendBirdMemberInMessagingChannel
         }
         
         for var i = 0; i < channel.members.count; i++ {
             if channel.members.objectAtIndex(i).guestId == SendBird.getUserId() {
-                member = channel.members.objectAtIndex(i) as! SendBirdMemberInMessagingChannel
+                member = channel.members.objectAtIndex(i) as? SendBirdMemberInMessagingChannel
                 break;
             }
         }
@@ -1364,13 +1377,13 @@ class MessagingTableViewController: UIViewController, UITableViewDataSource, UIT
                 let msgString: String = message.message
                 let url: String = SendBirdUtils.getUrlFromstring(msgString)
                 if msgString.characters.count > 0 {
-                    self.clickURL(NSURL.init(string: url)!)
+                    self.clickURL(url)
                 }
             }
             else if self.messageArray![indexPath.row].isKindOfClass(SendBirdFileLink.self) {
                 let fileLink: SendBirdFileLink = self.messageArray![indexPath.row] as! SendBirdFileLink
                 if fileLink.fileInfo.type.hasPrefix("image") == true {
-                    self.clickImage(NSURL.init(string: fileLink.fileInfo.url)!)
+                    self.clickImage(fileLink.fileInfo.url)
                 }
             }
         }
@@ -1401,34 +1414,34 @@ class MessagingTableViewController: UIViewController, UITableViewDataSource, UIT
         }
     }
     
-    func clickURL(url: NSURL) {
-        let actionSheet: UIActionSheet = UIActionSheet.init(title: url.absoluteString, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Open Link in Safari")
-        actionSheet.tag = kActionSheetTagUrl
-        actionSheet.showInView(self.view)
-    }
-    
-    func clickImage(url: NSURL) {
-        let actionSheet: UIActionSheet = UIActionSheet.init(title: url.absoluteString, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "See Image In Safari")
-        actionSheet.tag = kActionSheetTagImage
-        actionSheet.showInView(self.view)
-    }
-    
-    // MARK: UIActionSheetDelegate
-    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
-        if actionSheet.tag == kActionSheetTagUrl || actionSheet.tag == kActionSheetTagImage || actionSheet.tag == kActionSheetTagStructuredMessage
-        {
-            if buttonIndex == actionSheet.cancelButtonIndex {
-                return;
-            }
-            let encodedUrl: String = actionSheet.title.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+    func clickURL(url: String) {
+        let closeButtonText: String = "Close"
+        let alert: UIAlertController = UIAlertController.init(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let openLinkAction: UIAlertAction = UIAlertAction.init(title: "Open Link in Safari", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+            let encodedUrl: String = url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet())!
             UIApplication.sharedApplication().openURL(NSURL.init(string: encodedUrl)!)
         }
-        else if actionSheet.tag == kActionSheetTagLobbyMember {
-            if buttonIndex == actionSheet.cancelButtonIndex {
-                return;
-            }
-            self.openLobbyMemberListForInvite()
+        let closeAction: UIAlertAction = UIAlertAction.init(title: closeButtonText, style: UIAlertActionStyle.Cancel, handler: nil)
+
+        alert.addAction(openLinkAction)
+        alert.addAction(closeAction)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func clickImage(url: String) {
+        let closeButtonText: String = "Close"
+        let alert: UIAlertController = UIAlertController.init(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let openLinkAction: UIAlertAction = UIAlertAction.init(title: "See Image in Safari", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+            let encodedUrl: String = url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet())!
+            UIApplication.sharedApplication().openURL(NSURL.init(string: encodedUrl)!)
         }
+        let closeAction: UIAlertAction = UIAlertAction.init(title: closeButtonText, style: UIAlertActionStyle.Cancel, handler: nil)
+        
+        alert.addAction(openLinkAction)
+        alert.addAction(closeAction)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     // MARK: MessageInputViewDelegate
