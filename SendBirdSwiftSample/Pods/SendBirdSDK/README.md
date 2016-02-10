@@ -1,5 +1,5 @@
-# [SendBird](http://sendbird.com) - The Simplest Solution for Chat and Messaging
-[SendBird](http://sendbird.com) enables your app to engage and retain your users in real-time.
+# [SendBird](https://sendbird.com) - Messaging and Chat API for Mobile Apps and Websites
+[SendBird](https://sendbird.com) provides the chat API and SDK for your app enabling real-time communication among your users.
 
 ## Documentation
 https://sendbird.gitbooks.io/sendbird-ios-sdk/content/en/
