@@ -23,11 +23,7 @@ class MessagingTableViewController: UIViewController, UITableViewDataSource, UIT
     
     let kMemberCellIdentifier: String = "MemberReuseIdentifier"
     let kMessagingChannelCellIdentifier: String = "MessagingChannelReuseIdentifier"
-    
-    let kActionSheetTagUrl: Int = 0
-    let kActionSheetTagImage: Int = 1
-    let kActionSheetTagLobbyMember: Int = 2
-    let kActionSheetTagStructuredMessage: Int = 3
+
     let kTypingViewHeight: CGFloat = 36.0
     
     var container: UIView?
