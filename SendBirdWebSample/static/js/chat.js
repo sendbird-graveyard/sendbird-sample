@@ -755,7 +755,7 @@ function makeMemberList(members) {
   $.each(members, function(index, member) {
     item = {};
     if (!isCurrentUser(member['guest_id'])) {
-      item["id"] = member["id"];
+      item["guest_id"] = member["guest_id"];
       item["name"] = member["name"];
       memberList.pushUnique(item);
     }
@@ -818,13 +818,13 @@ function startSendBird(guestId, nickName) {
   };
 
   sendbird.events.onTypeStartReceived = function(obj) {
-    var userId = obj['user']['id'];
+    var userId = obj['user']['guest_id'];
     $.each(memberList, function(index, member) {
-      if (member['id'] == userId) {
+      if (member['guest_id'] == userId) {
         isTyping = true;
 
         $.each(typingUser, function(index, user) {
-          if (user['user']['id'] == userId) {
+          if (user['user']['guest_id'] == userId) {
             isTyping = false;
           }
         });
@@ -858,7 +858,7 @@ function startSendBird(guestId, nickName) {
   };
 
   sendbird.events.onTypeEndReceived = function(obj) {
-    endTyping(obj['user']['id']);
+    endTyping(obj['user']['guest_id']);
   };
 
   sendbird.events.onReadReceived = function(obj) {
@@ -877,7 +877,7 @@ var checkTyping = setInterval(function() {
   $.each(typingUser, function(index, user) {
     var typingTime = user["ts"];
     if (now - typingTime > TYPE_CHECK_TIME) {
-      endTyping(user['user']['id']);
+      endTyping(user['user']['guest_id']);
     }
   });
 }, TYPE_CHECK_TIME);
@@ -885,7 +885,7 @@ var checkTyping = setInterval(function() {
 function endTyping(userId) {
   var temp = [];
   $.each(typingUser, function(index, user) {
-    if (user['user']['id'] != userId) {
+    if (user['user']['guest_id'] != userId) {
       temp.push(user);
     }
   });
@@ -970,14 +970,13 @@ function loadMoreChatMessage(func) {
       var moreMessage = data["messages"];
       var msgList = '';
       $.each(moreMessage.reverse(), function(index, msg) {
-        var item = sendbird.commandSeparate(msg);
-        if (sendbird.isMessage(item.cmd)) {
-          msgList += messageList(item.payload);
-        } else if (sendbird.isFileMessage(item.cmd)) {
-          if (!sendbird.hasImage(item.payload)) {
-            msgList += fileMessageList(item.payload);
+        if (sendbird.isMessage(msg.cmd)) {
+          msgList += messageList(msg.payload);
+        } else if (sendbird.isFileMessage(msg.cmd)) {
+          if (!sendbird.hasImage(msg.payload)) {
+            msgList += fileMessageList(msg.payload);
           } else {
-            msgList += imageMessageList(item.payload);
+            msgList += imageMessageList(msg.payload);
           }
         }
       });
