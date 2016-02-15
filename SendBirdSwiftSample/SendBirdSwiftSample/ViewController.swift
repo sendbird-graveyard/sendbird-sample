@@ -295,7 +295,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func startSendBird(userName: String, chatMode: Int, viewMode: Int) {
-        let APP_ID: String = "A7A2672C-AD11-11E4-8DAA-0A18B21C2D82"
         let USER_ID: String = SendBird.deviceUniqueID()
         let USER_NAME: String = userName
         
@@ -304,7 +303,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         if chatMode == kChatModeChatting {
             let viewController: ChattingTableViewController = ChattingTableViewController()
-            SendBird.initAppId(APP_ID, withDeviceId: SendBird.deviceUniqueID())
             
             viewController.setViewMode(viewMode)
             viewController.initChannelTitle()
@@ -315,7 +313,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         else {
             let viewController: MessagingTableViewController = MessagingTableViewController()
-            SendBird.initAppId(APP_ID, withDeviceId: SendBird.deviceUniqueID())
             
             viewController.setViewMode(viewMode)
             viewController.initChannelTitle()

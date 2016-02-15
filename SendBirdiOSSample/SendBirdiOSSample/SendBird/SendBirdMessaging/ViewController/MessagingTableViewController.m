@@ -437,6 +437,7 @@
     [SendBird setEventHandlerConnectBlock:^(SendBirdChannel *channel) {
         [self setIndicatorHidden:YES];
         [self.messageInputView setInputEnable:YES];
+        [SendBird markAsRead];
     } errorBlock:^(NSInteger code) {
         [self setIndicatorHidden:YES];
     } channelLeftBlock:^(SendBirdChannel *channel) {
@@ -458,6 +459,7 @@
         [messageArray addSendBirdMessage:fileLink updateMessageTsBlock:updateMessageTs];
         [self scrollToBottomWithReloading:YES force:NO animated:NO];
         [self setIndicatorHidden:YES];
+        [SendBird markAsRead];
     // TODO
 //    } structuredMessageReceivedBlock:^(SendBirdStructuredMessage *message) {
 //        NSLog(@"structuredMessageReceivedBlock: updateMessageTs=%lld", [message getMessageTimestamp]);

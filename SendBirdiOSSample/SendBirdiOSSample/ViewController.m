@@ -494,7 +494,6 @@
 
 - (void) startSendBirdWithUserName:(NSString *)userName andChatMode:(int)chatMode andViewMode:(int)viewMode
 {
-    NSString *APP_ID = @"A7A2672C-AD11-11E4-8DAA-0A18B21C2D82";
     NSString *USER_ID = [SendBirdUtils deviceUniqueID];
     NSString *USER_NAME = userName;
     NSString *CHANNEL_URL = @"jia_test.Lobby";
@@ -504,9 +503,7 @@
     
     if (chatMode == kChatModeChatting) {
         ChattingTableViewController *viewController = [[ChattingTableViewController alloc] init];
-        
-        [SendBird initAppId:APP_ID withDeviceId:[SendBird deviceUniqueID]];
-        
+
         [viewController setViewMode:viewMode];
         [viewController initChannelTitle];
         [viewController setChannelUrl:CHANNEL_URL];
@@ -517,8 +514,6 @@
     }
     else if (chatMode == kChatModeMessaging) {
         MessagingTableViewController *viewController = [[MessagingTableViewController alloc] init];
-        
-        [SendBird initAppId:APP_ID withDeviceId:[SendBird deviceUniqueID]];
         
         [viewController setViewMode:viewMode];
         [viewController initChannelTitle];

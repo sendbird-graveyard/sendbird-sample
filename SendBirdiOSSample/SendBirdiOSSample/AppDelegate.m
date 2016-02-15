@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <SendBirdSDK/SendBirdSDK.h>
 
 @interface AppDelegate ()
 
@@ -25,6 +26,9 @@
     [self.window setRootViewController:self.navController];
     
     [self.window makeKeyAndVisible];
+    
+    NSString *APP_ID = @"A7A2672C-AD11-11E4-8DAA-0A18B21C2D82";
+    [SendBird initAppId:APP_ID];
     
     return YES;
 }

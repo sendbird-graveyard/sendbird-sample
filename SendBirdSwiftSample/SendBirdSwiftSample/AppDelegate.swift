@@ -28,6 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = navController
         
         window?.makeKeyAndVisible()
+        
+        let APP_ID: String = "A7A2672C-AD11-11E4-8DAA-0A18B21C2D82"
+        SendBird.initAppId(APP_ID)
 
         return true
     }
