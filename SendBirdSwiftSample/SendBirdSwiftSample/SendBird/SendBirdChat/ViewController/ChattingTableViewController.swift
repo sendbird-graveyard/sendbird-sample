@@ -294,6 +294,10 @@ class ChattingTableViewController: UIViewController, ChatMessageInputViewDelegat
             return
         }
         
+        if self.messageArray == nil {
+            return
+        }
+        
         if self.pastMessageLoading || self.isScrollBottom() || force {
             let msgCount: Int = (self.messageArray?.count)!
             if msgCount > 0 {

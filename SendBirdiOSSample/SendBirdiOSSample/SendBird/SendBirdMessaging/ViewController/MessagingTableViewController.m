@@ -183,6 +183,14 @@
             [SendBird inviteMessagingWithChannelUrl:[self.currentMessagingChannel getUrl] andUserIds:userIds];
         }
         else {
+            for (SendBirdMemberInMessagingChannel *member in self.currentMessagingChannel.members) {
+                if ([member.guestId isEqualToString:self.userId]) {
+                    continue;
+                }
+                else {
+                    [userIds addObject:member.guestId];
+                }
+            }
             [SendBird startMessagingWithUserIds:userIds];
         }
 
