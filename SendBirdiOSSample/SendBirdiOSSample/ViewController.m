@@ -496,7 +496,6 @@
 {
     NSString *USER_ID = [SendBirdUtils deviceUniqueID];
     NSString *USER_NAME = userName;
-    NSString *CHANNEL_URL = @"jia_test.Lobby";
     
     messagingUserName = USER_NAME;
     messagingUserId = USER_ID;
@@ -506,7 +505,6 @@
 
         [viewController setViewMode:viewMode];
         [viewController initChannelTitle];
-        [viewController setChannelUrl:CHANNEL_URL];
         [viewController setUserName:USER_NAME];
         [viewController setUserId:USER_ID];
         
@@ -517,7 +515,6 @@
         
         [viewController setViewMode:viewMode];
         [viewController initChannelTitle];
-        [viewController setChannelUrl:CHANNEL_URL];
         [viewController setUserName:USER_NAME];
         [viewController setUserId:USER_ID];
         
