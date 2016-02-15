@@ -80,8 +80,8 @@ public class SendBirdChannelListActivity extends FragmentActivity {
         String uuid = extras.getString("uuid");
         String nickname = extras.getString("nickname");
 
-        SendBird.init(appKey);
-        SendBird.login(uuid, nickname);
+        SendBird.init(this, appKey);
+        SendBird.login(SendBird.LoginOption.build(uuid).setUserName(nickname));
     }
 
     @Override

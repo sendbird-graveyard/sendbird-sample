@@ -227,8 +227,8 @@ public class SendBirdChatActivity extends FragmentActivity {
         String nickname = extras.getString("nickname");
         mChannelUrl = extras.getString("channelUrl");
 
-        SendBird.init(appKey);
-        SendBird.login(uuid, nickname);
+        SendBird.init(this, appKey);
+        SendBird.login(SendBird.LoginOption.build(uuid).setUserName(nickname));
         SendBird.setEventHandler(new SendBirdEventHandler() {
             @Override
             public void onConnect(Channel channel) {

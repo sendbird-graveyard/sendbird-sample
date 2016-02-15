@@ -1,3 +1,6 @@
+- 2.0.3 (Feb, 14, 2016)
+Introduce new LoginOption class. All old login methods have been deprecated.
+
 - 2.0.2 (Jan, 28, 2016)
 Added OnlineMemberCountQuery which returns a number of online users for given channel.
 
